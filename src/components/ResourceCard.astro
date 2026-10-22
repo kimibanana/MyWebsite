@@ -16,7 +16,7 @@ const { r, featured = false } = Astro.props;
 <style>
   .rc { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); transition: border-color .15s ease; }
   .rc:hover { border-color: var(--brand); }
-  .rc__cat { align-self: flex-start; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text); text-decoration: none; background: var(--brand-tint); padding: 4px 10px; border-radius: 999px; position: relative; z-index: 1; }
+  .rc__cat { align-self: flex-start; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text); text-decoration: none; background: var(--brand-tint); padding: 4px 10px; border-radius: 6px; position: relative; z-index: 1; }
   .rc h3 { margin: 0; font-size: 1.15rem; line-height: 1.35; }
   .rc h3 a { color: var(--ink); text-decoration: none; }
   .rc h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }

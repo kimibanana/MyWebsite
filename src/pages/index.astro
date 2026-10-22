@@ -57,7 +57,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- Empathy -->
   <section class="section">
     <div class="wrap">
-      <div class="head head--center reveal">
+      <div class="head reveal">
         <span class="eyebrow">We understand</span>
         <h2>Your days are full of patients. Marketing shouldn’t add to the load.</h2>
         <p class="lead">Most clinics we meet are doing great work that patients simply can’t find. We fix that, calmly and clearly.</p>
@@ -77,14 +77,14 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- How we help -->
   <section class="section section--surface">
     <div class="wrap">
-      <div class="head head--center">
+      <div class="head">
         <span class="eyebrow">How we help</span>
         <h2>One simple path from search to booking</h2>
       </div>
       <ol class="path">
         {framework.map((f, i) => (
           <li class="reveal">
-            <span class="path__n">{i + 1}</span>
+            <span class="path__n">{String(i + 1).padStart(2, '0')}</span>
             <h3>{f.title}</h3>
             <p>{f.body}</p>
             <a href={f.href} aria-label={`Learn more: ${f.title}`}>Learn more <Icon name="arrow" /></a>
@@ -117,7 +117,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- Results -->
   <section class="section section--surface">
     <div class="wrap">
-      <div class="head head--center">
+      <div class="head">
         <span class="eyebrow">Results</span>
         <h2>Measured in patients, not page views</h2>
       </div>
@@ -129,7 +129,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- How we work -->
   <section class="section">
     <div class="wrap">
-      <div class="head head--center">
+      <div class="head">
         <span class="eyebrow">How we work</span>
         <h2>Calm, clear 30-day sprints</h2>
         <p class="lead" set:html={priceHtml('Start with a Foundation Sprint, then add monthly sprints from $650. No long contracts.')} />
@@ -155,7 +155,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- Guides -->
   <section class="section">
     <div class="wrap">
-      <div class="head head--center">
+      <div class="head">
         <span class="eyebrow">Free guides</span>
         <h2>Learn at your own pace</h2>
       </div>
@@ -167,7 +167,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <!-- FAQ -->
   <section class="section section--surface">
     <div class="wrap">
-      <div class="head head--center">
+      <div class="head">
         <span class="eyebrow">Questions</span>
         <h2>Good to know</h2>
       </div>
@@ -195,33 +195,33 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
 </Base>
 
 <style>
-  .hero { padding: clamp(40px, 6vw, 88px) 0 clamp(56px, 7vw, 104px); background: radial-gradient(70% 90% at 100% 0%, var(--sage) 0%, transparent 70%), var(--bg); }
+  .hero { padding: clamp(40px, 6vw, 88px) 0 clamp(56px, 7vw, 104px); background: linear-gradient(180deg, var(--sage), var(--bg) 85%); }
   .hero__in { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
-  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); max-width: 15ch; }
+  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); max-width: 14ch; }
   .hero .lead { max-width: 46ch; }
   .hero__ctas { margin: 30px 0 26px; }
-  .hero__points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
-  .hero__points li { display: inline-flex; gap: 8px; align-items: center; padding: 7px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+  .hero__points { list-style: none; padding: 22px 0 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; border-top: 1px solid var(--line); }
+  .hero__points li { display: inline-flex; gap: 8px; align-items: center; font-size: 0.95rem; font-weight: 500; color: var(--ink); }
   .hero__points :global(svg) { width: 16px; height: 16px; color: var(--brand-text); flex: none; }
   @media (max-width: 960px) { .hero__in { grid-template-columns: 1fr; } .hero h1 { max-width: none; } }
 
   .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-  .strip__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 28px; padding-top: 22px; padding-bottom: 22px; }
-  .strip span { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-2); }
-  .strip ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 26px; margin: 0; padding: 0; }
+  .strip__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 28px; padding-top: 22px; padding-bottom: 22px; }
+  .strip span { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+  .strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0; padding: 0; }
   .strip li { font-family: var(--font-display); font-weight: 600; color: var(--muted); }
 
-  .soft { text-align: center; padding: 8px 12px; }
+  .soft { padding: 24px 0 0; border-top: 2px solid var(--brand); }
   .soft h3 { margin: 18px 0 6px; }
-  .soft p { color: var(--muted); margin: 0 auto; max-width: 30ch; }
-  .soft__icon { width: 60px; height: 60px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-text); display: inline-grid; place-items: center; flex: none; }
-  .soft__icon :global(svg) { width: 26px; height: 26px; }
+  .soft p { color: var(--muted); margin: 0; max-width: 34ch; }
+  .soft__icon { width: 44px; height: 44px; border-radius: var(--radius); background: var(--brand-tint); color: var(--brand-text); display: inline-grid; place-items: center; flex: none; }
+  .soft__icon :global(svg) { width: 22px; height: 22px; }
 
   .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: p; }
   @media (max-width: 960px) { .path { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .path { grid-template-columns: 1fr; } }
-  .path li { background: var(--card); border-radius: var(--radius-lg); padding: 30px 26px; display: flex; flex-direction: column; }
-  .path__n { width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 18px; }
+  .path li { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px 24px; display: flex; flex-direction: column; }
+  .path__n { font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: var(--brand-text); margin-bottom: 14px; font-variant-numeric: tabular-nums; }
   .path h3 { margin-bottom: 6px; }
   .path p { color: var(--muted); font-size: 0.98rem; flex: 1; }
   .path a { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
@@ -241,8 +241,8 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   .center { text-align: center; margin-top: 44px; }
 
   .founder { display: grid; grid-template-columns: 160px 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; max-width: 900px; }
-  .founder__photo { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), #5fa9a0); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; font-weight: 700; }
-  .founder blockquote { margin: 0 0 16px; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.4; color: var(--ink); }
+  .founder__photo { width: 160px; height: 160px; border-radius: var(--radius-lg); background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; font-weight: 700; }
+  .founder blockquote { margin: 0 0 16px; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.4; color: var(--ink); }
   .founder__sign { color: var(--muted); margin: 0; }
   .founder__sign strong { color: var(--ink); }
   @media (max-width: 640px) { .founder { grid-template-columns: 1fr; text-align: center; } .founder__photo { width: 110px; height: 110px; font-size: 2rem; margin: 0 auto; } }
@@ -252,7 +252,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   #growth-audit { scroll-margin-top: 70px; }
   .benefits { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 12px; }
   .benefits li { display: flex; gap: 12px; align-items: center; color: var(--ink); font-weight: 500; }
-  .benefits :global(svg) { width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-text); flex: none; }
+  .benefits :global(svg) { width: 22px; height: 22px; padding: 4px; border-radius: 4px; background: var(--brand-tint); color: var(--brand-text); flex: none; }
   .together__note { display: flex; align-items: center; gap: 8px; color: var(--muted); }
   .together__note :global(svg) { width: 18px; height: 18px; color: var(--brand-text); }
 </style>
