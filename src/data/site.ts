@@ -8,13 +8,13 @@ export const site = {
   tagline: 'SEO, websites & ads that fill your calendar',
   description:
     'Web Frontier helps local businesses in the US, UK, Canada and Australia get more calls and booked jobs from Google, with SEO, websites, Google Ads and Local Services Ads delivered in fixed-price 30-day sprints.',
-  url: 'https://webfrontier.co', // TODO: real domain
-  email: 'hello@webfrontier.co', // TODO
+  url: 'https://webfrontierco.netlify.app', // TODO: custom domain
+  email: '', // TODO: business email. Email links stay hidden while this is empty.
   whatsappDisplay: '+63 906 381 3194',
   whatsapp: `https://wa.me/${whatsappNumber}`,
   phoneHref: `tel:+${whatsappNumber}`,
   bookingUrl: '/contact', // TODO: Calendly or Google Calendar booking link
-  hours: 'Mon–Fri, working in US, UK & AU hours',
+  hours: 'Mon–Fri, working in US, Canada, UK & AU hours',
   markets: ['United States', 'United Kingdom', 'Canada', 'Australia'],
   marketCodes: ['US', 'GB', 'CA', 'AU'],
   founded: '2024', // TODO

@@ -13,7 +13,7 @@ const year = new Date().getFullYear();
         <p>{site.tagline}. Local SEO, websites and ads for service businesses, delivered in fixed-price 30-day sprints.</p>
         <ul class="ftr__contact">
           <li><Icon name="whatsapp" /><a href={site.whatsapp} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
-          <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          {site.email && <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>}
           <li><Icon name="globe" />Serving the US, UK, Canada & Australia</li>
           <li><Icon name="clock" />{site.hours}</li>
         </ul>
@@ -36,7 +36,7 @@ const year = new Date().getFullYear();
         <h3>Talk to us</h3>
         <ul>
           <li><a href={site.whatsapp} rel="noopener" target="_blank">WhatsApp</a></li>
-          <li><a href={`mailto:${site.email}`}>Email</a></li>
+          {site.email && <li><a href={`mailto:${site.email}`}>Email</a></li>}
           <li><a href={site.bookingUrl}>Book a call</a></li>
           {site.social.facebook && <li><a href={site.social.facebook} rel="noopener" target="_blank">Facebook</a></li>}
           {site.social.linkedin && <li><a href={site.social.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>}
