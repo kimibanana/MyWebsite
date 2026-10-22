@@ -26,6 +26,7 @@ const orgSchema = {
   image: `${site.url}/og-image.png`,
   description: site.description,
   ...(site.email ? { email: site.email } : {}),
+  founder: { '@type': 'Person', name: site.founder.name, jobTitle: site.founder.role },
   telephone: site.whatsappDisplay,
   priceRange: '$$',
   areaServed: site.markets.map((name) => ({ '@type': 'Country', name })),

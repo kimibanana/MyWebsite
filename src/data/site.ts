@@ -10,7 +10,12 @@ export const site = {
   description:
     'Web Frontier is a medical marketing agency helping practices and local businesses in the US, UK, Canada and Australia get more patients and customers from Google with SEO, websites, Google Ads and Local Services Ads, delivered in fixed-price 30-day sprints.',
   url: 'https://webfrontierco.netlify.app', // TODO: custom domain
-  email: '', // TODO: business email. Email links stay hidden while this is empty.
+  email: 'info@webfrontier.co',
+  founder: {
+    name: 'Kimberly Anne Lamsen',
+    initials: 'KL',
+    role: 'Founder & Senior SEO Strategist',
+  },
   whatsappDisplay: '+63 906 381 3194',
   whatsapp: `https://wa.me/${whatsappNumber}`,
   phoneHref: `tel:+${whatsappNumber}`,
