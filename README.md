@@ -1,6 +1,6 @@
 # Web Frontier website
 
-Marketing site for Web Frontier, a medical marketing agency (SEO, websites, Google Ads, Local Services Ads, maintenance) that also serves other local businesses in the US, UK, Canada and Australia. The homepage follows a WEBRIS-style flow, and services are sold as fixed-price 30-day sprints.
+Marketing site for Web Frontier, a marketing agency that specializes in healthcare and medical businesses (SEO, websites, Google Ads, Local Services Ads, maintenance), serving clinics worldwide. The homepage follows a WEBRIS-style flow, and services are sold as fixed-price 30-day sprints.
 Built with [Astro](https://astro.build) as a static site: fast, secure, and SEO-friendly, with no database or plugins to maintain.
 
 ## Pages

@@ -1,0 +1,60 @@
+---
+// Hero visual: the real Foundation Sprint scope, shown as the one-page plan a clinic signs off.
+// The sprint promise sits beside it in the hero points, so it is not repeated here.
+import Icon from './Icon.astro';
+import { foundationSprint as s, sprintCycle } from '../data/content';
+import { priceHtml } from '../lib/price';
+---
+<figure class="scope" aria-labelledby="scope-title">
+  <header class="scope__head">
+    <div>
+      <p class="scope__kicker">Your first sprint</p>
+      <h2 id="scope-title" class="scope__title">{s.name}</h2>
+    </div>
+    <p class="scope__price"><span set:html={priceHtml(s.price)} /><small>{s.cadence}</small></p>
+  </header>
+
+  <ol class="scope__weeks" aria-label="30-day timeline">
+    {sprintCycle.map((w) => (
+      <li><span>{w.week}</span>{w.title}</li>
+    ))}
+  </ol>
+
+  <p class="scope__label">Written scope</p>
+  <ul class="scope__list">
+    {s.deliverables.map((d) => (
+      <li><Icon name="check" />{d}</li>
+    ))}
+  </ul>
+  <a class="scope__more" href="/pricing">See every sprint and price <Icon name="arrow" /></a>
+</figure>
+
+<style>
+  .scope { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: clamp(22px, 3vw, 32px); }
+  .scope__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+  .scope__kicker { margin: 0 0 2px; font-size: 0.9rem; font-weight: 600; color: var(--brand-text); }
+  .scope__title { margin: 0; font-size: clamp(1.35rem, 2.2vw, 1.6rem); }
+  .scope__price { margin: 0; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
+  .scope__price small { display: block; margin-top: 4px; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; color: var(--muted); }
+
+  .scope__weeks { list-style: none; margin: 18px 0 20px; padding: 0; display: grid; grid-template-columns: auto 1fr auto; gap: 4px; }
+  .scope__weeks li { white-space: nowrap; padding: 10px 12px; background: var(--surface); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .scope__weeks li:first-child { border-radius: var(--radius) 0 0 var(--radius); }
+  .scope__weeks li:last-child { border-radius: 0 var(--radius) var(--radius) 0; background: var(--brand-tint); }
+  .scope__weeks span { display: block; font-weight: 500; font-size: 0.82rem; color: var(--muted); }
+
+  .scope__label { margin: 0 0 10px; font-size: 0.9rem; font-weight: 600; color: var(--muted); }
+  .scope__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .scope__list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.98rem; color: var(--ink); }
+  .scope__list :global(svg) { width: 18px; height: 18px; margin-top: 3px; color: var(--brand-text); flex: none; }
+
+  .scope__more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 14px; font-weight: 600; text-decoration: none; }
+  .scope__more :global(svg) { width: 16px; height: 16px; }
+
+  @media (max-width: 420px) {
+    .scope__head { flex-direction: column; }
+    .scope__price { text-align: left; }
+    .scope__weeks { grid-template-columns: repeat(3, 1fr); }
+    .scope__weeks li { white-space: normal; padding: 8px 10px; font-size: 0.9rem; }
+  }
+</style>

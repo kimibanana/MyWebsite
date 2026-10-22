@@ -38,7 +38,7 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
     </nav>
 
     <div class="hdr__actions">
-      <a class="hdr__phone" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>WhatsApp</span></a>
+      <a class="hdr__phone" href={site.whatsapp} target="_blank" rel="noopener" aria-label="WhatsApp us"><Icon name="whatsapp" /><span>WhatsApp</span></a>
       <button class="theme-toggle" type="button" aria-label="Switch to dark mode" title="Toggle light/dark mode">
         <Icon name="moon" class="i-moon" /><Icon name="sun" class="i-sun" />
       </button>

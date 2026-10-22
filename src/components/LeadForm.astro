@@ -54,7 +54,8 @@ const action = site.formEndpoint || '/thank-you';
     </div>
     <div class="field">
       <label for={`${id}-country`}>Country</label>
-      <select id={`${id}-country`} name="country">
+      <select id={`${id}-country`} name="country" data-country>
+        <option value="">Select your country</option>
         {site.markets.map((m) => <option>{m}</option>)}
         <option>Other</option>
       </select>
@@ -76,6 +77,24 @@ const action = site.formEndpoint || '/thank-you';
   <button class="btn btn--primary btn--block" type="submit">{button}</button>
   <p class="form-note">We reply within 1 business day, in your time zone. Please don’t include any patient or medical information.</p>
 </form>
+
+<script>
+  // Preselect the visitor's country from their time zone; otherwise leave "Select your country".
+  const zones: [RegExp, string][] = [
+    [/^Asia\/Manila$/, 'Philippines'],
+    [/^America\/(Toronto|Vancouver|Edmonton|Winnipeg|Halifax|St_Johns|Regina|Montreal|Moncton|Whitehorse|Yellowknife)$/, 'Canada'],
+    [/^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Boise|Detroit|Indiana\/.+|Kentucky\/.+)|Pacific\/Honolulu)$/, 'United States'],
+    [/^Europe\/(London|Belfast)$/, 'United Kingdom'],
+    [/^Australia\//, 'Australia'],
+    [/^Asia\/Singapore$/, 'Singapore'],
+    [/^Asia\/Dubai$/, 'United Arab Emirates'],
+    [/^Pacific\/(Auckland|Chatham)$/, 'New Zealand'],
+  ];
+  let tz = '';
+  try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch {}
+  const guess = zones.find(([re]) => re.test(tz))?.[1];
+  if (guess) document.querySelectorAll<HTMLSelectElement>('select[data-country]').forEach((s) => { if (!s.value) s.value = guess; });
+</script>
 
 <style>
   .lead { background: var(--card); border-radius: var(--radius-lg); padding: clamp(22px, 3vw, 32px); box-shadow: var(--shadow-lg); border: 1px solid var(--line); color: var(--ink-2); }

@@ -6,8 +6,8 @@ import { site } from '../data/site';
 <div class="tb">
   <div class="wrap tb__in">
     <ul class="tb__contact">
-      <li><a href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>{site.whatsappDisplay}</span></a></li>
-      {site.email && <li><a href={`mailto:${site.email}`}><Icon name="mail" /><span>{site.email}</span></a></li>}
+      <li><a href={site.whatsapp} target="_blank" rel="noopener" aria-label={`WhatsApp ${site.whatsappDisplay}`}><Icon name="whatsapp" /><span>{site.whatsappDisplay}</span></a></li>
+      {site.email && <li><a href={`mailto:${site.email}`} aria-label={`Email ${site.email}`}><Icon name="mail" /><span>{site.email}</span></a></li>}
       <li class="tb__hours"><Icon name="clock" /><span>{site.hours}</span></li>
     </ul>
     <div class="tb__right">
@@ -40,5 +40,7 @@ import { site } from '../data/site';
   @media (max-width: 720px) {
     .tb__contact li:not(:first-child) { display: none; }
   }
-  @media (max-width: 420px) { .tb__contact span { display: none; } .tb__contact li:nth-child(2) { display: inline-flex; } }
+  @media (max-width: 420px) { .tb__contact span { display: none; } .tb__contact li:nth-child(2) { display: inline-flex; } .tb__contact { gap: 0; } .tb__contact a { min-width: 44px; min-height: 44px; justify-content: center; } }
+  /* Social links stay in the footer on phones, where there is room for full-size tap targets. */
+  @media (max-width: 720px) { .tb .tb__social { display: none; } }
 </style>

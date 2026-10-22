@@ -69,6 +69,7 @@ const year = new Date().getFullYear();
   .ftr__social a { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.08); color: #c7d2dc; }
   .ftr__social a:hover { background: var(--brand); color: #fff; }
   .ftr__social :global(svg) { width: 16px; height: 16px; }
+  @media (max-width: 720px) { .ftr__social a { width: 44px; height: 44px; } }
   .ftr__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgb(255 255 255 / 0.1); margin-top: 56px; padding-top: 24px; font-size: 0.85rem; }
   @media (max-width: 860px) { .ftr__grid { grid-template-columns: 1fr 1fr; } .ftr__brand { grid-column: 1 / -1; } }
   @media (max-width: 760px) { .ftr { padding-bottom: 100px; } }

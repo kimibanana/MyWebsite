@@ -5,15 +5,13 @@ import LeadForm from '../components/LeadForm.astro';
 import Faq from '../components/Faq.astro';
 import CaseStudies from '../components/CaseStudies.astro';
 import SprintCycle from '../components/SprintCycle.astro';
-import HeroSlideshow from '../components/HeroSlideshow.astro';
-import ResourceCard from '../components/ResourceCard.astro';
+import SprintScope from '../components/SprintScope.astro';
 import { site } from '../data/site';
 import { priceHtml } from '../lib/price';
-import { getResources } from '../lib/resources';
-import { homeFaqs, pains, framework, whyUs, consultation } from '../data/content';
+import { homeFaqs, pains, framework, whyUs, consultation, promises } from '../data/content';
 
-const faqs = homeFaqs.slice(0, 5);
-const latestGuides = (await getResources()).slice(0, 3);
+// The questions a buyer weighing an agency asks first: focus, where we work, how sprints work, compliance, contracts.
+const faqs = [0, 2, 3, 5, 6].map((i) => homeFaqs[i]);
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
@@ -22,28 +20,28 @@ const faqSchema = {
 const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health', 'Diagnostics', 'Fertility', 'Aged care'];
 ---
 <Base
-  title="Medical Marketing Agency Philippines & Worldwide | Healthcare SEO, Websites & Ads | Web Frontier"
+  title="Medical Marketing Agency for Clinics Worldwide | Healthcare SEO, Websites & Ads | Web Frontier"
   description={site.description}
   schema={[faqSchema]}
 >
   <!-- Hero -->
-  <section class="hero pattern">
+  <section class="hero">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">Healthcare marketing · Philippines & worldwide</span>
-        <h1>Helping more patients find the care they need</h1>
+        <span class="eyebrow">Healthcare marketing for clinics worldwide</span>
+        <h1>More patients, one fixed-price sprint at a time</h1>
         <p class="lead">We help clinics and hospitals get found, trusted and booked online, so you can spend your time on patients, not marketing.</p>
         <div class="btn-row hero__ctas">
           <a class="btn btn--primary" href="#growth-audit">Get a free growth audit <Icon name="arrow" /></a>
           <a class="btn btn--secondary" href="/services">How we help</a>
         </div>
         <ul class="hero__points">
-          <li><Icon name="heart" />100% healthcare</li>
-          <li><Icon name="shield" />Compliance built in</li>
-          <li><Icon name="unlock" />No long contracts</li>
+          <li><Icon name="heart" />Healthcare only, compliance checked</li>
+          <li><Icon name="shield" />Every scoped item delivered, or we keep working free</li>
+          <li><Icon name="unlock" />Month-to-month, no contracts</li>
         </ul>
       </div>
-      <HeroSlideshow />
+      <SprintScope />
     </div>
   </section>
 
@@ -65,7 +63,6 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
       <div class="grid grid-3">
         {pains.map((p) => (
           <div class="soft reveal">
-            <span class="soft__icon"><Icon name={p.icon} /></span>
             <h3>{p.title}</h3>
             <p>{p.body}</p>
           </div>
@@ -94,35 +91,16 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     </div>
   </section>
 
-  <!-- Why us -->
-  <section class="section">
-    <div class="wrap why">
-      <div class="reveal">
-        <span class="eyebrow">Why clinics choose us</span>
-        <h2>Specialists in healthcare, and only healthcare</h2>
-        <p class="lead">We work with {site.experience} of experience across clinics in the Philippines, the US, the UK, Australia and beyond.</p>
-        <a class="btn btn--secondary" href="/about">Meet the team <Icon name="arrow" /></a>
-      </div>
-      <ul class="why__list">
-        {whyUs.map((w) => (
-          <li class="reveal">
-            <span class="soft__icon"><Icon name={w.icon} /></span>
-            <div><h3>{w.title}</h3><p>{w.body}</p></div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </section>
-
   <!-- Results -->
   <section class="section section--surface">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Results</span>
-        <h2>Measured in patients, not page views</h2>
+        <span class="eyebrow">Example sprints</span>
+        <h2>What a sprint plan can look like</h2>
+        <p class="lead">Illustrative examples of how we scope work for different clinics. They are not client results; we’ll share real case studies as they come in.</p>
       </div>
-      <CaseStudies />
-      <div class="center"><a class="btn btn--secondary" href="/work">See more results <Icon name="arrow" /></a></div>
+      <CaseStudies illustrative />
+      <div class="center"><a class="btn btn--secondary" href="/work">See more examples <Icon name="arrow" /></a></div>
     </div>
   </section>
 
@@ -131,36 +109,40 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">How we work</span>
-        <h2>Calm, clear 30-day sprints</h2>
-        <p class="lead" set:html={priceHtml('Start with a Foundation Sprint, then add monthly sprints from $650. No long contracts.')} />
+        <h2>Fixed-price 30-day sprints</h2>
+        <p class="lead" set:html={priceHtml('Start with a Foundation Sprint, then add monthly sprints from $650. Each one has a written scope and a set price before we start.')} />
       </div>
       <SprintCycle />
+      <div class="promise reveal">
+        <Icon name="shield" />
+        <div>
+          <h3>The sprint promise</h3>
+          <p>If we don’t deliver every item in a sprint’s written scope by the end of the 30 days, we keep working on it at no extra cost until it’s done.</p>
+          <ul class="promise__list">
+            {promises.map((p) => <li><Icon name="check" />{p.title}</li>)}
+          </ul>
+        </div>
+      </div>
       <div class="center"><a class="btn btn--secondary" href="/pricing">See pricing <Icon name="arrow" /></a></div>
     </div>
   </section>
 
-  <!-- Founder -->
+  <!-- Founder and why us -->
   <section class="section section--surface">
     <div class="wrap founder">
       <div class="founder__photo" aria-hidden="true">{site.founder.initials}</div>
       <div class="reveal">
-        <span class="eyebrow">From our founder</span>
+        <h2 class="founder__h">Specialists in healthcare, and only healthcare</h2>
         <!-- TODO: founder photo -->
         <blockquote>“Clinics do some of the most important work there is. We’re here to make sure the patients who need you can find you.”</blockquote>
-        <p class="founder__sign"><strong>{site.founder.name}</strong> · {site.founder.role}</p>
+        <p class="founder__sign"><strong>{site.founder.name}</strong> · {site.founder.role}, {site.experience} in SEO, web and paid search</p>
+        <ul class="founder__why">
+          {whyUs.filter((w) => w.icon !== 'file').map((w) => (
+            <li><strong>{w.title}.</strong> {w.body}</li>
+          ))}
+        </ul>
+        <a class="founder__link" href="/about">Meet the team <Icon name="arrow" /></a>
       </div>
-    </div>
-  </section>
-
-  <!-- Guides -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Free guides</span>
-        <h2>Learn at your own pace</h2>
-      </div>
-      <div class="grid grid-3">{latestGuides.map((r) => <ResourceCard r={r} />)}</div>
-      <div class="center"><a class="btn btn--secondary" href="/resources">All guides <Icon name="arrow" /></a></div>
     </div>
   </section>
 
@@ -172,6 +154,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
         <h2>Good to know</h2>
       </div>
       <Faq items={faqs} />
+      <p class="faq__more">More questions? <a href="/resources">Read our free guides for clinics <Icon name="arrow" /></a></p>
     </div>
   </section>
 
@@ -212,10 +195,8 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   .strip li { font-family: var(--font-display); font-weight: 600; color: var(--muted); }
 
   .soft { padding: 24px 0 0; border-top: 2px solid var(--brand); }
-  .soft h3 { margin: 18px 0 6px; }
+  .soft h3 { margin: 0 0 6px; }
   .soft p { color: var(--muted); margin: 0; max-width: 34ch; }
-  .soft__icon { width: 44px; height: 44px; border-radius: var(--radius); background: var(--brand-tint); color: var(--brand-text); display: inline-grid; place-items: center; flex: none; }
-  .soft__icon :global(svg) { width: 22px; height: 22px; }
 
   .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: p; }
   @media (max-width: 960px) { .path { grid-template-columns: 1fr 1fr; } }
@@ -227,25 +208,31 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   .path a { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
   .path a :global(svg) { width: 16px; height: 16px; }
 
-  .why { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(36px, 6vw, 88px); align-items: center; }
-  @media (max-width: 960px) { .why { grid-template-columns: 1fr; } }
-  .why .btn { margin-top: 8px; }
-  .why__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; }
-  @media (max-width: 560px) { .why__list { grid-template-columns: 1fr; } }
-  .why__list li { display: flex; gap: 16px; align-items: flex-start; }
-  .why__list .soft__icon { width: 48px; height: 48px; }
-  .why__list .soft__icon :global(svg) { width: 22px; height: 22px; }
-  .why__list h3 { font-size: 1.1rem; margin-bottom: 4px; }
-  .why__list p { margin: 0; color: var(--muted); font-size: 0.98rem; }
-
   .center { text-align: center; margin-top: 44px; }
+
+  .promise { margin-top: 24px; display: flex; gap: 20px; padding: clamp(22px, 3vw, 32px); border-radius: var(--radius-lg); background: var(--brand-tint); }
+  .promise > :global(svg) { width: 40px; height: 40px; color: var(--brand-text); flex: none; }
+  .promise h3 { margin-bottom: 6px; }
+  .promise p { margin: 0; max-width: 62ch; color: var(--ink); }
+  .promise__list { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 24px; }
+  .promise__list li { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: var(--ink); font-size: 0.95rem; }
+  .promise__list :global(svg) { width: 16px; height: 16px; color: var(--brand-text); flex: none; }
+  @media (max-width: 520px) { .promise { flex-direction: column; gap: 14px; } }
 
   .founder { display: grid; grid-template-columns: 160px 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; max-width: 900px; }
   .founder__photo { width: 160px; height: 160px; border-radius: var(--radius-lg); background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; font-weight: 700; }
   .founder blockquote { margin: 0 0 16px; font-family: var(--font-display); font-weight: 500; font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.4; color: var(--ink); }
   .founder__sign { color: var(--muted); margin: 0; }
   .founder__sign strong { color: var(--ink); }
-  @media (max-width: 640px) { .founder { grid-template-columns: 1fr; text-align: center; } .founder__photo { width: 110px; height: 110px; font-size: 2rem; margin: 0 auto; } }
+  .founder__h { font-size: clamp(1.15rem, 1.8vw, 1.3rem); margin-bottom: 14px; color: var(--brand-text); }
+  .founder__why { list-style: none; margin: 22px 0 0; padding: 20px 0 0; border-top: 1px solid var(--line); display: grid; gap: 10px; }
+  .founder__why li { color: var(--muted); max-width: 62ch; }
+  .founder__why strong { color: var(--ink); }
+  .founder__link, .faq__more a { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; font-weight: 600; text-decoration: none; }
+  .founder__link { margin-top: 10px; }
+  .founder__link :global(svg), .faq__more :global(svg) { width: 16px; height: 16px; }
+  .faq__more { margin: 24px 0 0; color: var(--muted); text-align: center; }
+  @media (max-width: 640px) { .founder { grid-template-columns: 1fr; } .founder__photo { width: 110px; height: 110px; font-size: 2rem; } }
 
   .together { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
   @media (max-width: 960px) { .together { grid-template-columns: 1fr; } }
