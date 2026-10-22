@@ -276,7 +276,7 @@ export const homeFaqs = [
   },
   {
     q: 'Do you lock clients into contracts?',
-    a: 'No. The Foundation Sprint is a one-time project and monthly sprints are month-to-month. We keep clients by delivering, not with contracts.',
+    a: 'No. The Foundation Sprint is a one-time project and monthly sprints are month-to-month. We keep clients by delivering, not with contracts. If you’d like to commit, a 12-month partnership saves 15% on every monthly sprint and care plan.',
   },
   {
     q: 'Will we own our website and accounts?',

@@ -24,10 +24,24 @@ export const site = {
   markets: ['United States', 'United Kingdom', 'Canada', 'Australia'],
   marketCodes: ['US', 'GB', 'CA', 'AU'],
   founded: '2024', // TODO
-  social: {
-    linkedin: '', // TODO
-    facebook: '', // TODO
+  // TODO: accounts not created yet. These handles are placeholders; update
+  // each URL once the profile exists, then set socialLive to true so the
+  // profiles are also listed in search-engine structured data.
+  socialLive: false,
+  social: [
+    { name: 'Facebook', icon: 'facebook', url: 'https://www.facebook.com/webfrontierco' },
+    { name: 'Instagram', icon: 'instagram', url: 'https://www.instagram.com/webfrontierco' },
+    { name: 'LinkedIn', icon: 'linkedin', url: 'https://www.linkedin.com/company/webfrontierco' },
+    { name: 'X', icon: 'x', url: 'https://x.com/webfrontierco' },
+    { name: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/@webfrontierco' },
+    { name: 'TikTok', icon: 'tiktok', url: 'https://www.tiktok.com/@webfrontierco' },
+  ],
+  // Google Map on the contact page. TODO: confirm the address to show.
+  map: {
+    query: 'Laguna, Philippines',
+    label: 'Laguna, Philippines',
   },
+  annualDiscount: 0.15,
   // Form handling. Works out of the box on Netlify. For other hosts, set a
   // Formspree (or similar) endpoint here and it will be used instead.
   formEndpoint: '', // e.g. 'https://formspree.io/f/xxxxxxx'

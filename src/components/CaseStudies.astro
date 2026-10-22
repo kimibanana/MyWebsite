@@ -26,12 +26,12 @@ const list = limit ? caseStudies.slice(0, limit) : caseStudies;
 </div>
 
 <style>
-  .cs__card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; }
+  .cs__card { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; }
   .cs__top { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
   .cs__card h3 { font-size: 1.2rem; }
   .cs__label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 8px 0 4px; }
   .cs__card p { font-size: 0.97rem; }
   .cs__results { margin: auto 0 0; padding-top: 20px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
-  .cs__results dt { font-family: var(--font-display); font-weight: 800; font-size: 1.45rem; color: var(--brand); letter-spacing: -0.02em; }
+  .cs__results dt { font-family: var(--font-display); font-weight: 800; font-size: 1.45rem; color: var(--brand-text); letter-spacing: -0.02em; }
   .cs__results dd { margin: 0; font-size: 0.8rem; line-height: 1.35; color: var(--muted); }
 </style>

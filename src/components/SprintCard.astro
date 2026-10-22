@@ -1,8 +1,9 @@
 ---
 import Icon from './Icon.astro';
 import type { Sprint } from '../data/content';
-interface Props { sprint: Sprint; label?: string }
-const { sprint, label = 'Deliverables' } = Astro.props;
+import { annualPrice } from '../lib/price';
+interface Props { sprint: Sprint; label?: string; annual?: boolean }
+const { sprint, label = 'Deliverables', annual = false } = Astro.props;
 ---
 <article class:list={['sc', 'reveal', { 'sc--featured': sprint.featured }]}>
   {sprint.featured && <span class="sc__badge">Most popular</span>}
@@ -11,24 +12,34 @@ const { sprint, label = 'Deliverables' } = Astro.props;
     <h3>{sprint.name}</h3>
   </div>
   <p class="sc__blurb">{sprint.blurb}</p>
-  <p class="sc__price"><strong>{sprint.price}</strong><span>{sprint.cadence}</span></p>
+  {annual ? (
+    <p class="sc__price">
+      <strong class="monthly-only">{sprint.price}</strong>
+      <strong class="annual-only">{annualPrice(sprint.price)}</strong>
+      <span>{sprint.cadence}</span>
+      <s class="annual-only sc__was">{sprint.price}</s>
+    </p>
+  ) : (
+    <p class="sc__price"><strong>{sprint.price}</strong><span>{sprint.cadence}</span></p>
+  )}
   <p class="sc__label">{label}</p>
   <ul class="checks">{sprint.deliverables.map((d) => <li>{d}</li>)}</ul>
   <a class:list={['btn', 'btn--block', sprint.featured ? 'btn--primary' : 'btn--secondary']} href={`/contact?plan=${encodeURIComponent(sprint.name)}`}>{sprint.cta}</a>
 </article>
 
 <style>
-  .sc { position: relative; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px 26px; display: flex; flex-direction: column; }
+  .sc { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 30px 26px; display: flex; flex-direction: column; }
   .sc--featured { border: 2px solid var(--brand); box-shadow: var(--shadow-lg); }
   .sc__badge { position: absolute; top: -13px; left: 26px; background: var(--brand); color: #fff; font-size: 0.75rem; font-weight: 700; padding: 4px 12px; border-radius: 999px; letter-spacing: 0.03em; }
   .sc__head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .sc__head h3 { margin: 0; }
-  .sc__icon { width: 40px; height: 40px; border-radius: 10px; background: var(--brand-tint); color: var(--brand); display: grid; place-items: center; flex: none; }
+  .sc__icon { width: 40px; height: 40px; border-radius: 10px; background: var(--brand-tint); color: var(--brand-text); display: grid; place-items: center; flex: none; }
   .sc__icon :global(svg) { width: 20px; height: 20px; }
   .sc__blurb { color: var(--muted); font-size: 0.97rem; min-height: 3em; }
   .sc__price { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px; margin-bottom: 18px; }
   .sc__price strong { font-family: var(--font-display); font-size: 2.2rem; color: var(--ink); letter-spacing: -0.03em; line-height: 1; }
   .sc__price span { color: var(--muted); font-size: 0.95rem; }
+  .sc__was { color: var(--muted); font-size: 0.9rem; }
   .sc__label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 10px; }
   .sc .checks { margin-bottom: 26px; font-size: 0.95rem; }
   .sc .btn { margin-top: auto; }
