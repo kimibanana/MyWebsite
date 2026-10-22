@@ -10,6 +10,7 @@ target_fingerprint: "sha256:45ac07b68dcfa5f2235ebe951507a5682a0cbab49753b46044fe
 target_path: /home/user/mywebsite/src/pages/index.astro
 timestamp: 2026-10-22T19-02-11Z
 slug: src-pages-index-astro
+closed: true
 ---
 # Homepage critique (Impeccable), 22 Oct 2026
 

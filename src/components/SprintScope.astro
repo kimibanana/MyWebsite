@@ -1,5 +1,6 @@
 ---
 // Hero visual: the real Foundation Sprint scope, shown as the one-page plan a clinic signs off.
+// The sprint promise sits beside it in the hero points, so it is not repeated here.
 import Icon from './Icon.astro';
 import { foundationSprint as s, sprintCycle } from '../data/content';
 import { priceHtml } from '../lib/price';
@@ -21,15 +22,11 @@ import { priceHtml } from '../lib/price';
 
   <p class="scope__label">Written scope</p>
   <ul class="scope__list">
-    {s.deliverables.slice(0, 6).map((d) => (
+    {s.deliverables.map((d) => (
       <li><Icon name="check" />{d}</li>
     ))}
   </ul>
-
-  <figcaption class="scope__foot">
-    <Icon name="shield" />
-    <span>Every item delivered in 30 days, or we keep working at no extra cost.</span>
-  </figcaption>
+  <a class="scope__more" href="/pricing">See every sprint and price <Icon name="arrow" /></a>
 </figure>
 
 <style>
@@ -40,8 +37,8 @@ import { priceHtml } from '../lib/price';
   .scope__price { margin: 0; text-align: right; font-family: var(--font-display); font-weight: 700; font-size: 1.5rem; color: var(--ink); line-height: 1.1; font-variant-numeric: tabular-nums; }
   .scope__price small { display: block; margin-top: 4px; font-family: var(--font-body); font-weight: 500; font-size: 0.85rem; color: var(--muted); }
 
-  .scope__weeks { list-style: none; margin: 18px 0 20px; padding: 0; display: grid; grid-template-columns: 1fr 2fr 1fr; gap: 4px; }
-  .scope__weeks li { padding: 10px 12px; background: var(--surface); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
+  .scope__weeks { list-style: none; margin: 18px 0 20px; padding: 0; display: grid; grid-template-columns: auto 1fr auto; gap: 4px; }
+  .scope__weeks li { white-space: nowrap; padding: 10px 12px; background: var(--surface); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
   .scope__weeks li:first-child { border-radius: var(--radius) 0 0 var(--radius); }
   .scope__weeks li:last-child { border-radius: 0 var(--radius) var(--radius) 0; background: var(--brand-tint); }
   .scope__weeks span { display: block; font-weight: 500; font-size: 0.82rem; color: var(--muted); }
@@ -51,13 +48,13 @@ import { priceHtml } from '../lib/price';
   .scope__list li { display: flex; gap: 10px; align-items: flex-start; font-size: 0.98rem; color: var(--ink); }
   .scope__list :global(svg) { width: 18px; height: 18px; margin-top: 3px; color: var(--brand-text); flex: none; }
 
-  .scope__foot { display: flex; gap: 10px; align-items: center; margin-top: 20px; padding: 14px 16px; border-radius: var(--radius); background: var(--brand-tint); font-weight: 600; font-size: 0.95rem; color: var(--ink); }
-  .scope__foot :global(svg) { width: 22px; height: 22px; color: var(--brand-text); flex: none; }
+  .scope__more { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; margin-top: 14px; font-weight: 600; text-decoration: none; }
+  .scope__more :global(svg) { width: 16px; height: 16px; }
 
   @media (max-width: 420px) {
     .scope__head { flex-direction: column; }
     .scope__price { text-align: left; }
-    .scope__weeks { grid-template-columns: 1fr; }
-    .scope__weeks li, .scope__weeks li:first-child, .scope__weeks li:last-child { border-radius: var(--radius); }
+    .scope__weeks { grid-template-columns: repeat(3, 1fr); }
+    .scope__weeks li { white-space: normal; padding: 8px 10px; font-size: 0.9rem; }
   }
 </style>
