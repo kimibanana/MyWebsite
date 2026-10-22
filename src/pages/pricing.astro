@@ -6,19 +6,23 @@ import SprintCycle from '../components/SprintCycle.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
+import BillingToggle from '../components/BillingToggle.astro';
+import { priceHtml, discountLabel } from '../lib/price';
+import CurrencySelect from '../components/CurrencySelect.astro';
 import { foundationSprint, monthlySprints, bundles, webPackages, carePlans } from '../data/content';
 
 const faqs = [
   { q: 'Do I have to start with the Foundation Sprint?', a: 'For SEO, yes. It fixes the technical issues and sets up tracking so every sprint after it is measurable. Websites, ads and maintenance can start on their own.' },
   { q: 'Can I change sprints from month to month?', a: 'Yes. Add, pause or swap sprints before the next one starts. The price changes with the scope, and you always know both up front.' },
   { q: 'What does a sprint report include?', a: 'Every deliverable completed with links, ranking and traffic changes, calls and leads tracked, and what we recommend for the next sprint, in plain language.' },
-  { q: 'How do payments work?', a: 'Sprints are paid at the start of each 30-day cycle by card or bank transfer. Website projects are 50% to start and 50% at launch. All prices are in USD.' },
+  { q: 'How do payments work?', a: 'Sprints are paid at the start of each 30-day cycle by card or bank transfer. Website projects are 50% to start and 50% at launch. Prices show in your local currency (PHP, USD, GBP or AUD), and you’re billed in that currency.' },
+  { q: 'Is there a discount for a longer commitment?', a: `Yes. Partner with us for 12 months and every monthly sprint, bundle and care plan is ${discountLabel} off. Billing is still monthly, and the Foundation Sprint, website builds and ad spend are not discounted.` },
   { q: 'Is ad spend included?', a: 'No. Google Ads and Local Services Ads budgets are paid directly to Google from your own account, so you always control and see your spend.' },
 ];
 ---
 <Base
   title="Pricing | Medical Marketing Sprints | Web Frontier"
-  description="No vague retainers. Medical SEO, practice websites and Google Ads in fixed-price 30-day sprints. Foundation Sprint $997, monthly sprints from $650."
+  description="No vague retainers. Medical SEO, clinic websites and ads in fixed-price 30-day sprints, priced in PHP, USD, GBP or AUD. See every sprint, bundle and care plan."
 >
   <PageHero
     eyebrow="Sprints & pricing"
@@ -26,6 +30,7 @@ const faqs = [
     lead="Every sprint has a written list of deliverables, a fixed price and a delivery date. You see the plan before you pay and the results after. Stack the sprints you need and change them any month."
     crumbs={[{ label: 'Sprints & pricing' }]}
   >
+    <div class="cur-row"><CurrencySelect /></div>
     <nav class="jump" aria-label="Jump to">
       <a href="#seo">SEO sprints</a><a href="#bundles">Bundles</a><a href="#websites">Websites</a><a href="#care">Maintenance</a>
     </nav>
@@ -38,6 +43,7 @@ const faqs = [
     </div>
   </section>
 
+  <div data-billing="monthly">
   <section class="section section--surface" id="seo">
     <div class="wrap">
       <div class="head">
@@ -61,26 +67,30 @@ const faqs = [
       <div class="head head--step">
         <span class="eyebrow">Step 2</span>
         <h2>Stack monthly sprints</h2>
-        <p class="lead">Pick one or more. Month-to-month, no contract.</p>
+        <p class="lead">Pick one or more. Month-to-month with no contract, or partner with us for 12 months and save {discountLabel} on every monthly sprint.</p>
+        <BillingToggle />
       </div>
-      <div class="grid grid-4">{monthlySprints.map((s) => <SprintCard sprint={s} />)}</div>
+      <div class="grid grid-4">{monthlySprints.map((s) => <SprintCard sprint={s} annual />)}</div>
+      <p class="annual-note annual-only reveal"><Icon name="tag" />12-month partnership pricing: {discountLabel} off, still billed monthly. Ad spend is paid to Google separately.</p>
     </div>
   </section>
 
   <section class="section" id="bundles">
     <div class="wrap">
-      <div class="head head--center"><span class="eyebrow">Not sure what to pick?</span><h2>Popular sprint bundles</h2></div>
+      <div class="head head--center"><span class="eyebrow">Not sure what to pick?</span><h2>Popular sprint bundles</h2><BillingToggle /></div>
       <div class="grid grid-3">
         {bundles.map((b) => (
           <a href={`/contact?plan=${encodeURIComponent(b.name)}`} class:list={['card', 'bundle', 'reveal', { 'bundle--featured': b.featured }]}>
             <span class="bundle__name">{b.name}</span>
-            <strong>{b.price}</strong>
+            <strong class="monthly-only" set:html={priceHtml(b.price)} />
+            <strong class="annual-only" set:html={priceHtml(b.price, true)} />
+            <s class="annual-only bundle__was" set:html={priceHtml(b.price)} />
             <span class="bundle__sprints">{b.sprints}</span>
             <small>{b.note}</small>
           </a>
         ))}
       </div>
-      <p class="note">All bundles start after the Foundation Sprint. Add an Ads Sprint to any bundle for $750/mo.</p>
+      <p class="note">All bundles start after the Foundation Sprint. Add an Ads Sprint to any bundle for <span class="monthly-only" set:html={priceHtml('$750/mo')} /><span class="annual-only" set:html={priceHtml('$750/mo', true) + ' on a 12-month partnership'} />.</p>
     </div>
   </section>
 
@@ -93,12 +103,16 @@ const faqs = [
 
   <section class="section" id="care">
     <div class="wrap">
-      <div class="head"><span class="eyebrow">Maintenance</span><h2>Website care plans</h2><p class="lead">Month-to-month. Cancel anytime.</p></div>
+      <div class="head"><span class="eyebrow">Maintenance</span><h2>Website care plans</h2><p class="lead">Month-to-month and cancel anytime, or {discountLabel} off with a 12-month partnership.</p><BillingToggle /></div>
       <div class="grid grid-2">
         {carePlans.map((c) => (
           <div class="card care reveal">
             <div><h3>{c.name}</h3><ul class="checks">{c.features.map((f) => <li>{f}</li>)}</ul></div>
-            <strong>{c.price}</strong>
+            <div class="care__price">
+              <strong class="monthly-only" set:html={priceHtml(c.price)} />
+              <strong class="annual-only" set:html={priceHtml(c.price, true)} />
+              <s class="annual-only" set:html={priceHtml(c.price)} />
+            </div>
           </div>
         ))}
       </div>
@@ -113,6 +127,8 @@ const faqs = [
     </div>
   </section>
 
+  </div>
+
   <section class="section section--surface">
     <div class="wrap">
       <div class="head head--center"><span class="eyebrow">FAQ</span><h2>Sprint & pricing questions</h2></div>
@@ -123,8 +139,9 @@ const faqs = [
 </Base>
 
 <style>
+  .cur-row { margin-bottom: 16px; }
   .jump { display: flex; flex-wrap: wrap; gap: 8px; }
-  .jump a { padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .jump a { padding: 8px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
   .jump a:hover { border-color: var(--brand); }
   #seo, #bundles, #websites, #care { scroll-margin-top: 70px; }
   .foundation { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
@@ -136,12 +153,19 @@ const faqs = [
   .bundle--featured { border: 2px solid var(--brand); box-shadow: var(--shadow); }
   .bundle__name { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 1.1rem; }
   .bundle strong { font-family: var(--font-display); font-size: 2rem; color: var(--ink); letter-spacing: -0.03em; }
-  .bundle__sprints { color: var(--brand); font-weight: 600; }
+  .bundle__sprints { color: var(--brand-text); font-weight: 600; }
+  .head .bt { margin-top: 8px; }
+  .head--center .bt { margin-top: 18px; }
+  .annual-note { display: none; align-items: center; gap: 10px; margin: 24px 0 0; padding: 14px 18px; border-radius: var(--radius); background: var(--brand-tint); color: var(--ink); font-weight: 600; }
+  :global([data-billing='annual']) .annual-note { display: flex; }
+  .annual-note :global(svg) { width: 20px; height: 20px; color: var(--brand-text); flex: none; }
+  .bundle__was, .care__price s { color: var(--muted); font-size: 0.95rem; }
+  .care__price { text-align: right; display: grid; }
   .note { text-align: center; margin: 24px 0 0; color: var(--muted); }
   .care { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
   .care strong { font-family: var(--font-display); font-size: 1.6rem; color: var(--ink); white-space: nowrap; }
   .guarantee { margin-top: 32px; display: flex; gap: 20px; padding: 28px; border-radius: var(--radius-lg); background: var(--brand-tint); }
-  .guarantee > :global(svg) { width: 40px; height: 40px; color: var(--brand); flex: none; }
+  .guarantee > :global(svg) { width: 40px; height: 40px; color: var(--brand-text); flex: none; }
   .guarantee p { margin: 0; }
   @media (max-width: 520px) { .guarantee, .care { flex-direction: column; } }
 </style>

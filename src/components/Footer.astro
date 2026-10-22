@@ -10,12 +10,17 @@ const year = new Date().getFullYear();
     <div class="ftr__grid">
       <div class="ftr__brand">
         <Logo light />
-        <p>{site.tagline}. SEO, websites and ads for medical practices and local businesses, delivered in fixed-price 30-day sprints. {site.experience} in the industry.</p>
+        <p>{site.tagline}. SEO, websites and ads for clinics, hospitals and practices, delivered in fixed-price 30-day sprints. {site.experience} in the industry.</p>
         <ul class="ftr__contact">
           <li><Icon name="whatsapp" /><a href={site.whatsapp} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
           {site.email && <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>}
-          <li><Icon name="globe" />Serving the US, UK, Canada & Australia</li>
+          <li><Icon name="globe" />Based in the Philippines, serving clients worldwide</li>
           <li><Icon name="clock" />{site.hours}</li>
+        </ul>
+        <ul class="ftr__social" aria-label="Social media">
+          {site.social.map((s) => (
+            <li><a href={s.url} target="_blank" rel="noopener" aria-label={s.name} title={s.name}><Icon name={s.icon} /></a></li>
+          ))}
         </ul>
       </div>
       <div>
@@ -26,7 +31,7 @@ const year = new Date().getFullYear();
         <h3>Company</h3>
         <ul>
           <li><a href="/about">About us</a></li>
-          <li><a href="/who-we-serve">Who we serve</a></li>
+          <li><a href="/who-we-serve">Specialties</a></li>
           <li><a href="/work">Results</a></li>
           <li><a href="/pricing">Sprints & pricing</a></li>
           <li><a href="/contact">Contact</a></li>
@@ -39,8 +44,6 @@ const year = new Date().getFullYear();
           <li><a href={site.whatsapp} rel="noopener" target="_blank">WhatsApp</a></li>
           {site.email && <li><a href={`mailto:${site.email}`}>Email</a></li>}
           <li><a href={site.bookingUrl}>Book a call</a></li>
-          {site.social.facebook && <li><a href={site.social.facebook} rel="noopener" target="_blank">Facebook</a></li>}
-          {site.social.linkedin && <li><a href={site.social.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>}
         </ul>
       </div>
     </div>
@@ -61,6 +64,10 @@ const year = new Date().getFullYear();
   .ftr__brand p { margin: 18px 0 20px; max-width: 38ch; }
   .ftr__contact li { display: flex; gap: 10px; align-items: center; }
   .ftr__contact :global(svg) { width: 16px; height: 16px; color: #5fd3cf; flex: none; }
+  .ftr__social { display: flex !important; gap: 8px !important; margin-top: 22px !important; flex-wrap: wrap; }
+  .ftr__social a { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; background: rgb(255 255 255 / 0.08); color: #c7d2dc; }
+  .ftr__social a:hover { background: var(--brand); color: #fff; }
+  .ftr__social :global(svg) { width: 16px; height: 16px; }
   .ftr__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgb(255 255 255 / 0.1); margin-top: 56px; padding-top: 24px; font-size: 0.85rem; }
   @media (max-width: 860px) { .ftr__grid { grid-template-columns: 1fr 1fr; } .ftr__brand { grid-column: 1 / -1; } }
   @media (max-width: 760px) { .ftr { padding-bottom: 100px; } }

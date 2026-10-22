@@ -34,7 +34,7 @@ const max = Math.max(...d.channels.map((c) => c.share));
 </figure>
 
 <style>
-  .dash { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 22px; }
+  .dash { margin: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 22px; }
   .dash__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
   .dash__head strong { display: block; font-family: var(--font-display); color: var(--ink); }
   .dash__head small { color: var(--muted); font-size: 0.82rem; }
@@ -43,7 +43,7 @@ const max = Math.max(...d.channels.map((c) => c.share));
   .kpi dt { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
   .kpi dd { margin: 2px 0 0; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
   .kpi__v { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--ink); letter-spacing: -0.02em; }
-  .kpi__c { font-size: 0.78rem; font-weight: 700; color: var(--success); background: #e7f6ec; padding: 1px 7px; border-radius: 999px; }
+  .kpi__c { font-size: 0.78rem; font-weight: 700; color: var(--success); background: var(--success-bg); padding: 1px 7px; border-radius: 999px; }
   .dash__label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 10px; }
   .dash__table ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
   .dash__table li { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 12px; align-items: center; font-size: 0.88rem; color: var(--ink); }

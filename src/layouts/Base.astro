@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import TopBar from '../components/TopBar.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileBar from '../components/MobileBar.astro';
@@ -26,11 +27,12 @@ const orgSchema = {
   image: `${site.url}/og-image.png`,
   description: site.description,
   ...(site.email ? { email: site.email } : {}),
+  founder: { '@type': 'Person', name: site.founder.name, jobTitle: site.founder.role },
   telephone: site.whatsappDisplay,
   priceRange: '$$',
   areaServed: site.markets.map((name) => ({ '@type': 'Country', name })),
   knowsAbout: ['Medical marketing', 'Healthcare SEO', 'Local SEO', 'Medical website design', 'Google Ads', 'Local Services Ads', 'Website maintenance'],
-  sameAs: Object.values(site.social).filter(Boolean),
+  sameAs: site.socialLive ? site.social.map((s) => s.url) : [],
 };
 const allSchema = [orgSchema, ...schema];
 ---
@@ -44,6 +46,7 @@ const allSchema = [orgSchema, ...schema];
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <meta name="theme-color" content="#0E7C7B" />
+    <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
@@ -57,16 +60,59 @@ const allSchema = [orgSchema, ...schema];
     <meta name="twitter:card" content="summary_large_image" />
 
     {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}
-    <script is:inline>document.documentElement.classList.add('js');</script>
+    <script is:inline>
+      // Apply the saved or system theme before first paint to avoid a flash.
+      (function () {
+        var d = document.documentElement;
+        d.classList.add('js');
+        var t = null;
+        try { t = localStorage.getItem('theme'); } catch (e) {}
+        if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        d.dataset.theme = t;
+        // Currency: saved choice, else guess from the visitor's time zone.
+        var c = null;
+        try { c = localStorage.getItem('currency'); } catch (e) {}
+        if (!/^(USD|PHP|GBP|AUD)$/.test(c || '')) {
+          var tz = '';
+          try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+          c = tz === 'Asia/Manila' ? 'PHP'
+            : /^Europe\/(London|Belfast|Guernsey|Jersey|Isle_of_Man)$/.test(tz) ? 'GBP'
+            : /^Australia\//.test(tz) ? 'AUD' : 'USD';
+        }
+        d.dataset.currency = c;
+      })();
+    </script>
   </head>
   <body>
     <a class="skip" href="#main">Skip to content</a>
+    <TopBar />
     <Header />
     <main id="main">
       <slot />
     </main>
     <Footer />
     <MobileBar />
+    <script>
+      // Show every price in the chosen currency and keep all selectors in sync.
+      const root = document.documentElement;
+      const applyCurrency = (code: string) => {
+        root.dataset.currency = code;
+        const key = code.toLowerCase();
+        document.querySelectorAll<HTMLElement>('.price').forEach((el) => {
+          const v = el.dataset[key];
+          if (v) el.textContent = v;
+        });
+        document.querySelectorAll<HTMLSelectElement>('.cur__select').forEach((s) => (s.value = code));
+        root.classList.add('prices-ready');
+      };
+      document.querySelectorAll<HTMLSelectElement>('.cur__select').forEach((s) =>
+        s.addEventListener('change', () => {
+          try { localStorage.setItem('currency', s.value); } catch {}
+          applyCurrency(s.value);
+        }),
+      );
+      applyCurrency(root.dataset.currency || 'USD');
+    </script>
     <script>
       // Minimal scroll reveal. Respects reduced motion via CSS.
       const items = document.querySelectorAll('.reveal');

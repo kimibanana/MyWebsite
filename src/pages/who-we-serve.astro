@@ -4,68 +4,61 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
-import { specialties, otherBusinesses } from '../data/content';
+import { industryGroups, specialties } from '../data/content';
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-// What growth looks like in each specialty.
-const detail: Record<string, { focus: string; wins: string[] }> = {
-  'Dental & orthodontics': { focus: 'Fill the schedule with new patients and grow high-value treatments like implants, Invisalign and cosmetic dentistry.', wins: ['“Dentist near me” Map Pack rankings', 'Implant and Invisalign landing pages', 'Emergency dental ads'] },
-  'Med spas & aesthetics': { focus: 'Book more consultations for injectables, lasers and body treatments while staying inside ad platform policies.', wins: ['Treatment pages with before-and-after galleries', 'Policy-compliant Google Ads', 'Online consultation booking'] },
-  'Dermatology': { focus: 'Attract both medical and cosmetic patients with content patients and Google trust.', wins: ['Condition pages reviewed by your dermatologists', 'Cosmetic treatment campaigns', 'Multi-provider profiles'] },
-  'Plastic surgery': { focus: 'Reach high-intent patients researching procedures and turn them into consultations.', wins: ['Procedure pages and galleries', 'Surgeon credential and review signals', 'Consultation funnels'] },
-  'Chiropractic': { focus: 'Become the go-to chiropractor in your area for back pain, injuries and wellness care.', wins: ['Local SEO for each condition', 'Local Services Ads where eligible', 'New-patient offer pages'] },
-  'Physical therapy': { focus: 'Compete with national chains for local patients and physician referrals.', wins: ['Location and condition pages', 'Review generation across clinics', 'Direct-access patient campaigns'] },
-  'Primary & urgent care': { focus: 'Be the first clinic people find when they need care today.', wins: ['Map Pack visibility for every location', 'Wait-time and hours accuracy', 'Service and insurance pages'] },
-  'Mental health & therapy': { focus: 'Help people find the right therapist with sensitive, privacy-first marketing.', wins: ['Specialty and modality pages', 'Privacy-conscious tracking', 'Therapist profile optimization'] },
-};
 ---
 <Base
-  title="Who We Serve | Medical Practices & Local Businesses | Web Frontier"
-  description="Web Frontier markets dental, med spa, dermatology, plastic surgery, chiropractic, physical therapy and other practices, plus home services, law firms and other local businesses."
+  title="Healthcare Specialties We Serve | Philippines & Worldwide | Web Frontier"
+  description="Healthcare marketing for GP clinics, hospitals, allied health, NDIS and aged care, aesthetics, cosmetic surgery, dental, fertility, diagnostics, pharmacy, veterinary and more, in the Philippines and worldwide."
 >
   <PageHero
-    eyebrow="Who we serve"
-    title="Healthcare is our specialty. Local growth is our foundation."
-    lead={`We focus on medical practices, and the same ${site.experience} of fundamentals help home services, law firms and other local businesses grow too.`}
-    crumbs={[{ label: 'Who we serve' }]}
+    eyebrow="Specialties"
+    title="Built for every corner of healthcare"
+    lead={`We work only with healthcare: ${specialties.length} industries, from single-doctor clinics to hospitals, in the Philippines and around the world.`}
+    crumbs={[{ label: 'Specialties' }]}
   >
     <nav class="jump" aria-label="Jump to">
-      <a href="#specialties">Medical specialties</a><a href="#local-businesses">Other local businesses</a>
+      {industryGroups.map((g) => <a href={`#${slug(g.title)}`}>{g.title}</a>)}<a href="#locations">Philippines & worldwide</a>
     </nav>
   </PageHero>
 
-  <section class="section" id="specialties">
-    <div class="wrap">
-      <div class="head"><span class="eyebrow">Medical specialties</span><h2>Marketing for every kind of practice</h2></div>
-      <div class="grid grid-2">
-        {specialties.map((s) => (
-          <article class="card spec reveal" id={slug(s.name)}>
-            <div class="spec__head"><span class="icon-badge"><Icon name={s.icon} /></span><h3>{s.name}</h3></div>
-            <p>{detail[s.name]?.focus}</p>
-            <ul class="checks">{detail[s.name]?.wins.map((w) => <li>{w}</li>)}</ul>
-          </article>
-        ))}
+  {industryGroups.map((g, gi) => (
+    <section class:list={['section', { 'section--surface': gi % 2 === 1 }]} id={slug(g.title)}>
+      <div class="wrap">
+        <div class="head"><span class="eyebrow">Industries</span><h2>{g.title}</h2></div>
+        <div class="grid grid-3">
+          {g.items.map((s) => (
+            <article class="card spec reveal" id={slug(s.name)}>
+              <div class="spec__head"><span class="icon-badge"><Icon name={s.icon} /></span><h3>{s.name}</h3></div>
+              <p>{s.focus}</p>
+              {s.sub && <ul class="chips chips--sm">{s.sub.map((x) => <li>{x}</li>)}</ul>}
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
-  <section class="section section--surface" id="local-businesses">
+  <section class="section" id="locations">
     <div class="wrap locals">
       <div class="reveal">
-        <span class="eyebrow">Other local businesses</span>
-        <h2>Solid fundamentals work for every local business</h2>
-        <p class="lead">Healthcare is demanding: strict ad policies, privacy rules, and patients who check every review. A process that wins there wins everywhere. We bring the same {site.experience} of SEO, web and ads experience to businesses that serve a local area.</p>
+        <span class="eyebrow">Philippines & worldwide</span>
+        <h2>Local expertise at home, global reach abroad</h2>
+        <p class="lead">In the Philippines, we help clinics and hospitals win Google Maps in their city and follow FDA Philippines and DOH rules on health advertising. Abroad, we work in your time zone and follow your country’s rules, from HIPAA in the US to Ahpra in Australia.</p>
         <ul class="checks">
-          <li>Map Pack and local SEO for every service area</li>
-          <li>Fast websites with click-to-call and quote forms</li>
-          <li>Google Ads and Local Services Ads managed for cost per lead</li>
-          <li>Review systems and website maintenance</li>
+          <li>Google Maps and local SEO for every clinic location</li>
+          <li>Treatment pages written for how patients search in your market</li>
+          <li>Google Ads built to pass healthcare policies</li>
+          <li>Privacy-safe tracking and booking</li>
         </ul>
       </div>
       <div class="card reveal">
-        <h3>Businesses we also help</h3>
-        <ul class="chips">{otherBusinesses.map((b) => <li>{b}</li>)}</ul>
+        <h3>Philippines</h3>
+        <ul class="chips">{site.phCities.map((c) => <li>{c}</li>)}</ul>
+        <h3>International</h3>
+        <ul class="chips">{site.markets.filter((m) => m !== 'Philippines').map((m) => <li>{m}</li>)}</ul>
         <a class="btn btn--primary btn--block" href="/free-audit">Get a free growth audit <Icon name="arrow" /></a>
       </div>
     </div>
@@ -76,16 +69,19 @@ const detail: Record<string, { focus: string; wins: string[] }> = {
 
 <style>
   .jump { display: flex; flex-wrap: wrap; gap: 8px; }
-  .jump a { padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .jump a { padding: 8px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
   .jump a:hover { border-color: var(--brand); }
   .spec { scroll-margin-top: 90px; }
   .spec__head { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
   .spec__head .icon-badge { margin: 0; flex: none; }
   .spec__head h3 { margin: 0; }
   .spec .checks { font-size: 0.95rem; }
-  #specialties, #local-businesses { scroll-margin-top: 70px; }
+  section[id] { scroll-margin-top: 70px; }
   .locals { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   @media (max-width: 860px) { .locals { grid-template-columns: 1fr; } }
+  .locals .card h3 { font-size: 1.05rem; }
+  .chips--sm { margin: 4px 0 0 !important; }
+  .chips--sm li { padding: 4px 10px !important; font-size: 0.8rem !important; }
   .chips { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .chips li { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: 0.92rem; color: var(--ink); }
 </style>

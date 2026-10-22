@@ -83,9 +83,9 @@ export const monthlySprints: Sprint[] = [
     icon: 'target',
     price: '$750',
     cadence: '/month + ad spend',
-    blurb: 'Google Ads and Local Services Ads, managed for cost per lead.',
+    blurb: 'Google, Meta and other paid ads, managed for cost per patient.',
     deliverables: [
-      'Google Ads and/or LSA management',
+      'Google, Meta, TikTok, LinkedIn or LSA campaign management',
       'Conversion and call tracking',
       'Weekly search term cleanup',
       'Ad and landing page testing',
@@ -234,22 +234,136 @@ export const framework = [
   { icon: 'star', title: 'Get trusted', body: 'Reviews, reputation and content that make patients choose you.', href: '/services/medical-seo' },
 ];
 
-export const specialties = [
-  { name: 'Dental & orthodontics', icon: 'heart' },
-  { name: 'Med spas & aesthetics', icon: 'star' },
-  { name: 'Dermatology', icon: 'shield' },
-  { name: 'Plastic surgery', icon: 'users' },
-  { name: 'Chiropractic', icon: 'zap' },
-  { name: 'Physical therapy', icon: 'chart' },
-  { name: 'Primary & urgent care', icon: 'clipboard' },
-  { name: 'Mental health & therapy', icon: 'chat' },
+export type Industry = { name: string; icon: string; focus: string; sub?: string[] };
+
+// Every healthcare industry we serve, grouped the way patients and regulators see them.
+export const industryGroups: { title: string; items: Industry[] }[] = [
+  {
+    title: 'Medical & regulated healthcare',
+    items: [
+      { name: 'Medical practices & GP clinics', icon: 'heart', focus: 'Be the first clinic families find for check-ups, consultations and same-day care.' },
+      { name: 'Hospitals & medical centers', icon: 'clipboard', focus: 'Grow departments and specialty centers with visibility for every service and doctor.' },
+      { name: 'Telehealth clinics', icon: 'phone', focus: 'Win national searches and convert visitors into online consultations.' },
+      { name: 'Urgent care clinics', icon: 'clock', focus: 'Show up first, with accurate hours and wait times, when patients need care today.' },
+      { name: 'Weight management clinics', icon: 'zap', focus: 'Promote programs and treatments within strict health-claim and ad-policy rules.' },
+      { name: 'Peptide clinics', icon: 'plus', focus: 'Compliant education and campaigns for a closely watched treatment category.' },
+      { name: 'Pain management clinics', icon: 'heart', focus: 'Reach patients searching for relief from chronic and acute pain.' },
+    ],
+  },
+  {
+    title: 'Allied health & care',
+    items: [
+      { name: 'Allied health', icon: 'users', focus: 'Fill appointment books for every allied health discipline, practitioner by practitioner.', sub: ['Physiotherapy', 'Speech pathology', 'Occupational therapy', 'Psychologists', 'Counsellors', 'Dietitians', 'Nutritionists', 'Chiropractors', 'Osteopaths', 'Podiatrists', 'Exercise physiologists', 'Myotherapists', 'Audiologists', 'Optometrists', 'Positive behaviour support', 'Acupuncture'] },
+      { name: 'Disability & NDIS providers', icon: 'users', focus: 'Reach participants, families and coordinators with clear, accessible information.', sub: ['SIL providers', 'SDA housing', 'Support coordination', 'Plan management', 'Therapy services', 'Community access', 'Daily living support', 'Respite care'] },
+      { name: 'Aged care & home health care', icon: 'heart', focus: 'Build trust with families researching care for a parent or loved one.' },
+      { name: 'Mental health services', icon: 'chat', focus: 'Help people find the right therapist with sensitive, privacy-first marketing.' },
+      { name: 'Rehabilitation centers', icon: 'zap', focus: 'Reach patients and referrers for inpatient and outpatient rehab programs.' },
+      { name: 'Sports medicine', icon: 'target', focus: 'Attract athletes and active patients for injury care and performance.' },
+    ],
+  },
+  {
+    title: 'Aesthetics & cosmetic',
+    items: [
+      { name: 'Cosmetic & aesthetic clinics', icon: 'star', focus: 'Book more consultations for injectables, skin and body treatments.', sub: ['Cosmetic injectables', 'Medical spas', 'Non-surgical aesthetics', 'Laser & skin treatments'] },
+      { name: 'Dermatology & skin clinics', icon: 'shield', focus: 'Attract both medical and cosmetic skin patients with content Google trusts.' },
+      { name: 'Cosmetic surgery', icon: 'users', focus: 'Reach high-intent patients researching procedures and turn them into consultations.', sub: ['Plastic surgery', 'Breast surgery', 'Facial surgery', 'Body contouring', 'Hair transplants'] },
+    ],
+  },
+  {
+    title: 'Specialty, diagnostics & retail',
+    items: [
+      { name: 'Dental practices', icon: 'heart', focus: 'Fill the chair with new patients and grow implants, braces and cosmetic dentistry.' },
+      { name: 'Fertility & IVF', icon: 'star', focus: 'Support couples through a long, emotional research journey with trustworthy content.' },
+      { name: 'Eye care & ophthalmology', icon: 'eye', focus: 'Fill the schedule for eye exams, LASIK, cataract and specialist care.' },
+      { name: 'Hearing clinics', icon: 'chat', focus: 'Reach people and families researching hearing tests and hearing aids.' },
+      { name: 'Sleep clinics', icon: 'moon', focus: 'Turn searches about snoring and sleep apnea into booked sleep studies.' },
+      { name: 'Health screening', icon: 'clipboard', focus: 'Sell check-up packages and executive health screens online.' },
+      { name: 'Radiology, imaging & pathology labs', icon: 'chart', focus: 'Be the lab or imaging center patients and doctors find first.' },
+      { name: 'Functional medicine', icon: 'zap', focus: 'Explain your approach clearly and attract patients who want it.' },
+      { name: 'Pharmacies', icon: 'plus', focus: 'Drive foot traffic, services and online orders for retail pharmacies.' },
+      { name: 'Veterinary clinics & animal hospitals', icon: 'heart', focus: 'Win “vet near me” searches and keep pet owners coming back.' },
+      { name: 'Health e-commerce & supplement brands', icon: 'cart', focus: 'Grow online sales while staying inside health-product advertising rules.' },
+      { name: 'Medical device companies', icon: 'target', focus: 'Reach clinicians, buyers and patients with compliant campaigns.' },
+      { name: 'Corporate health', icon: 'users', focus: 'Win employer contracts for workplace health and wellness programs.' },
+    ],
+  },
 ];
 
-export const otherBusinesses = ['HVAC', 'Plumbing', 'Roofing', 'Electrical', 'Law firms', 'Contractors', 'Cleaning', 'Pest control', 'Real estate', 'Auto services'];
+// Flat list for the homepage grid and strip.
+export const specialties = industryGroups.flatMap((g) => g.items);
+
+export type Capability = { name: string; body: string; href?: string };
+
+// Full service catalog. Items with an href have their own service page.
+export const capabilityGroups: { title: string; icon: string; items: Capability[] }[] = [
+  {
+    title: 'Digital presence',
+    icon: 'layout',
+    items: [
+      { name: 'Medical website design', body: 'Fast, compliant clinic websites with clear booking paths.', href: '/services/medical-website-design' },
+      { name: 'Landing pages', body: 'Campaign pages that turn ad clicks into appointments.', href: '/services/landing-pages' },
+      { name: 'Medical SEO', body: 'Rank for the treatments patients search for in your area.', href: '/services/medical-seo' },
+      { name: 'Google Business Profile & local SEO', body: 'Win the map for every clinic location.', href: '/services/medical-seo' },
+      { name: 'AI search visibility', body: 'Get recommended in ChatGPT, Gemini and Google AI Overviews.' },
+      { name: 'Content marketing', body: 'Treatment, condition and blog content reviewed by your clinicians.' },
+      { name: 'Social media management', body: 'Consistent, compliant posting on the platforms your patients use.' },
+      { name: 'Accessible healthcare websites', body: 'Websites that work for patients with disabilities, built to WCAG standards.' },
+    ],
+  },
+  {
+    title: 'Paid advertising',
+    icon: 'target',
+    items: [
+      { name: 'Google Ads', body: 'Search and Maps ads planned around your services and appointment capacity.', href: '/services/google-ads' },
+      { name: 'Meta Ads', body: 'Facebook and Instagram campaigns for local patients.', href: '/services/meta-ads' },
+      { name: 'Local Services Ads', body: 'Pay-per-lead ads with Google’s trust badge, where available.', href: '/services/local-services-ads' },
+      { name: 'TikTok Ads', body: 'Short-form video ads for aesthetics, wellness and younger patients.' },
+      { name: 'LinkedIn Ads', body: 'Reach clinicians, referrers and corporate health buyers.' },
+      { name: 'ChatGPT Ads', body: 'Early access to ads in AI assistants as the format rolls out.' },
+    ],
+  },
+  {
+    title: 'Growth & retention',
+    icon: 'chart',
+    items: [
+      { name: 'Conversion rate optimization', body: 'Testing and booking-path fixes that turn visitors into patients.', href: '/services/conversion-rate-optimization' },
+      { name: 'Lead generation', body: 'Multi-channel campaigns that deliver qualified patient enquiries.' },
+      { name: 'Email marketing', body: 'Recall, reactivation and newsletters that bring patients back.' },
+      { name: 'Patient retention', body: 'Reminders, follow-ups and loyalty programs that reduce no-shows.' },
+      { name: 'Reputation management', body: 'More five-star reviews and professional responses to every one.' },
+      { name: 'Growth consultancy & strategy', body: 'A senior strategist to plan your marketing, budget and hiring.' },
+    ],
+  },
+  {
+    title: 'Data & systems',
+    icon: 'clipboard',
+    items: [
+      { name: 'Advanced conversion tracking', body: 'Privacy-safe tracking of calls, forms and bookings back to each channel.' },
+      { name: 'Clinic system integration', body: 'Connect your booking and practice management software to your marketing.' },
+      { name: 'Analytics & reporting', body: 'One dashboard for patients, cost per patient and revenue by channel.' },
+      { name: 'AI & automation', body: 'Chatbots, instant replies and workflows that answer patients faster.' },
+      { name: 'Website care & maintenance', body: 'Hosting, security, backups and edits, handled.', href: '/services/website-care' },
+    ],
+  },
+];
+
+// Rules our compliance review checks copy and campaigns against.
+export const complianceFrameworks = {
+  philippines: ['FDA Philippines advertising rules', 'DOH guidelines', 'Data Privacy Act of 2012', 'PRC & medical society codes of ethics'],
+  global: ['HIPAA (United States)', 'Ahpra & TGA (Australia)', 'ASA / CAP Code (United Kingdom)', 'Google & Meta healthcare ad policies'],
+};
+
+export const complianceSteps = [
+  { title: 'Regulatory mapping', body: 'We list the rules that apply to your specialty and country before we write a word.' },
+  { title: 'Claims & copy review', body: 'Treatment claims, before-and-after images and testimonials are checked against those rules.' },
+  { title: 'Platform policy check', body: 'Ads and landing pages are built to pass Google and Meta healthcare policies the first time.' },
+  { title: 'Privacy-safe tracking', body: 'Patient health information stays out of forms, analytics and ad platforms.' },
+  { title: 'Ongoing monitoring', body: 'Every sprint we re-check live ads and pages as rules and platform policies change.' },
+];
 
 export const whyUs = [
-  { icon: 'heart', title: 'Healthcare-first', body: 'Built around how patients choose providers, and the rules that come with medical marketing.' },
-  { icon: 'clock', title: 'A decade of experience', body: '10+ years of SEO, web and ads work. The fundamentals that grow a practice grow any local business.' },
+  { icon: 'heart', title: '100% healthcare', body: 'We only work with clinics, hospitals and practices, so we know how patients choose a provider and the rules that come with it.' },
+  { icon: 'clock', title: 'A decade of experience', body: '10+ years of SEO, web and ads work, with a team that already speaks your specialty’s language.' },
   { icon: 'file', title: 'Fixed-scope sprints', body: 'Every 30-day sprint has a written scope, fixed price and delivery report. No black-box retainers.' },
   { icon: 'users', title: 'Direct access', body: 'Talk to the specialists doing the work, with regular calls to review progress and results.' },
 ];
@@ -263,28 +377,36 @@ export const consultation = [
 
 export const homeFaqs = [
   {
-    q: 'Do you only work with medical practices?',
-    a: 'Healthcare is our focus, but not our limit. The same fundamentals (local SEO, fast websites, well-run ads, and reviews) work for any local business, and we also serve home services, law firms, contractors and other local companies.',
+    q: 'Do you only work with healthcare businesses?',
+    a: 'Yes. We work only with clinics, hospitals, practices and other healthcare providers. That focus is why we understand patient search behavior, medical advertising rules and the ad-platform policies that trip up generalist agencies.',
+  },
+  {
+    q: 'Do you work with clinics in the Philippines?',
+    a: 'Yes. We are based in Laguna and work with clinics and hospitals across Metro Manila, Calabarzon, Cebu, Davao and the rest of the country. We know local search behavior, Google Maps in Philippine cities, and the FDA Philippines and DOH rules on health advertising.',
+  },
+  {
+    q: 'Do you work with international clients?',
+    a: 'Yes. We serve practices in the US, UK, Canada, Australia, Singapore, the UAE and beyond. We schedule calls in your time zone, follow your country’s advertising and privacy rules, and reply within one business day.',
   },
   {
     q: 'What is a sprint?',
     a: 'A sprint is 30 days of focused work with a written scope, fixed price and delivery date. Week 1 we plan, weeks 2–3 we execute, and week 4 we deliver a report of exactly what was done and what moved.',
   },
   {
-    q: 'Is your marketing HIPAA-conscious?',
-    a: 'Yes. We keep protected health information out of marketing tools: forms collect only non-clinical contact details, and tracking is set up so patient health data isn’t shared with ad platforms. Where you need intake or booking, we connect the compliant tools your practice already uses.',
+    q: 'How quickly will we see results?',
+    a: 'Google Ads can bring enquiries within the first week or two once campaigns are live. SEO and Google Maps rankings usually show clear movement in 3 to 6 months, depending on your competition and your website’s starting point.',
+  },
+  {
+    q: 'Is your marketing compliant with healthcare rules?',
+    a: 'Every campaign goes through our compliance review against the rules for your country and specialty, such as FDA Philippines and DOH guidelines, HIPAA in the US, or Ahpra and TGA in Australia, plus Google and Meta healthcare policies. We keep patient health information out of marketing tools. Your practice still gives final approval on all claims.',
   },
   {
     q: 'Do you lock clients into contracts?',
-    a: 'No. The Foundation Sprint is a one-time project and monthly sprints are month-to-month. We keep clients by delivering, not with contracts.',
+    a: 'No. The Foundation Sprint is a one-time project and monthly sprints are month-to-month. We keep clients by delivering, not with contracts. If you’d like to commit, a 12-month partnership saves 15% on every monthly sprint and care plan.',
   },
   {
     q: 'Will we own our website and accounts?',
     a: 'Always. Your domain, website, Google Business Profile, Analytics and ad accounts stay in your practice’s name.',
-  },
-  {
-    q: 'Where is your team, and what hours do you work?',
-    a: 'We are a remote team serving practices and local businesses in the US, UK, Canada and Australia. We schedule calls in your time zone and reply within one business day.',
   },
 ];
 

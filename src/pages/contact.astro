@@ -13,7 +13,7 @@ const channels = [
 ---
 <Base
   title="Contact Us | Web Frontier"
-  description="Talk to Web Frontier about Local SEO, your website or Google Ads. Message us on WhatsApp, email, or send the form. We reply within 1 business day."
+  description="Talk to Web Frontier about medical SEO, your clinic website or Google Ads. Message us on WhatsApp, email, or send the form. We reply within 1 business day."
 >
   <PageHero
     eyebrow="Contact"
@@ -36,8 +36,18 @@ const channels = [
         </ul>
         <div class="card info">
           <p><Icon name="clock" /><span><strong>Office hours</strong><br />{site.hours}</span></p>
-          <p><Icon name="globe" /><span><strong>Where we work</strong><br />A remote team serving local businesses in the {site.markets.join(', ').replace(/, ([^,]*)$/, ' and $1')}.</span></p>
+          <p><Icon name="globe" /><span><strong>Where we work</strong><br />Based in the Philippines, working with clinics and practices across the country and in the {site.markets.filter((m) => m !== 'Philippines').join(', ').replace(/, ([^,]*)$/, ', and $1')}.</span></p>
         </div>
+        <figure class="map">
+          <iframe
+            src={`https://www.google.com/maps?q=${encodeURIComponent(site.map.query)}&output=embed`}
+            title={`Map of ${site.map.label}`}
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+          <figcaption><Icon name="map" />Based in {site.map.label}, working remotely with clients worldwide.</figcaption>
+        </figure>
       </div>
       <LeadForm id="contact" formName="contact" title="Send us a message" button="Send message" />
     </div>
@@ -55,12 +65,17 @@ const channels = [
   .contact { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
   @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
   .channels { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 12px; }
-  .channels a { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: #fff; }
+  .channels a { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: var(--card); }
   .channels a:hover { border-color: var(--brand); color: var(--ink); }
   .channels .icon-badge { margin: 0; flex: none; }
   .channels small { display: block; color: var(--muted); font-size: 0.82rem; }
   .channels strong { font-family: var(--font-display); }
   .info p { display: flex; gap: 12px; }
-  .info :global(svg) { width: 20px; height: 20px; color: var(--brand); flex: none; margin-top: 4px; }
+  .info :global(svg) { width: 20px; height: 20px; color: var(--brand-text); flex: none; margin-top: 4px; }
   .info strong { color: var(--ink); }
+  .map { margin: 20px 0 0; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; background: var(--card); }
+  .map iframe { display: block; width: 100%; height: 280px; border: 0; }
+  :global([data-theme='dark']) .map iframe { filter: invert(0.9) hue-rotate(180deg) saturate(0.8); }
+  .map figcaption { display: flex; align-items: center; gap: 10px; padding: 12px 16px; font-size: 0.9rem; color: var(--muted); }
+  .map figcaption :global(svg) { width: 18px; height: 18px; color: var(--brand-text); flex: none; }
 </style>

@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
 import LeadForm from '../../components/LeadForm.astro';
 import Faq from '../../components/Faq.astro';
+import { priceHtml } from '../../lib/price';
 import CtaBand from '../../components/CtaBand.astro';
 import CaseStudies from '../../components/CaseStudies.astro';
 import { services, type Service } from '../../data/services';
@@ -41,7 +42,7 @@ const schema = [
     lead={s.intro}
     crumbs={[{ label: 'Services', href: '/services' }, { label: s.name }]}
   >
-    <p class="price">Starts at <strong>{s.startingAt}</strong> <span>· {s.priceNote}</span></p>
+    <p class="price">Starts at <strong set:html={priceHtml(s.startingAt)} /> <span set:html={'· ' + priceHtml(s.priceNote)} /></p>
     <div class="btn-row">
       <a class="btn btn--primary" href="#quote">Get a free quote <Icon name="arrow" /></a>
       <a class="btn btn--secondary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />Ask on WhatsApp</a>
@@ -138,11 +139,11 @@ const schema = [
   .two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
   @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
   .pains { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
-  .pains li { display: flex; gap: 12px; padding: 16px 18px; background: #fff7f2; border: 1px solid #fde3d2; border-radius: 12px; color: var(--ink); }
-  .pains :global(svg) { width: 20px; height: 20px; color: #c2570c; flex: none; margin-top: 3px; }
+  .pains li { display: flex; gap: 12px; padding: 16px 18px; background: var(--warn-bg); border: 1px solid var(--warn-line); border-radius: 12px; color: var(--ink); }
+  .pains :global(svg) { width: 20px; height: 20px; color: var(--warn-fg); flex: none; margin-top: 3px; }
   .outcomes { display: grid; gap: 22px; }
   .outcome { display: flex; gap: 14px; }
-  .outcome > :global(svg) { width: 28px; height: 28px; padding: 5px; border-radius: 50%; background: var(--brand-tint); color: var(--brand); flex: none; }
+  .outcome > :global(svg) { width: 28px; height: 28px; padding: 5px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-text); flex: none; }
   .outcome h3 { font-size: 1.1rem; margin-bottom: 4px; }
   .outcome p { margin: 0; }
   .incl { margin-top: 8px; }
@@ -150,7 +151,7 @@ const schema = [
   .card hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
   .mini-steps { padding-left: 20px; margin: 0; display: grid; gap: 10px; font-size: 0.95rem; }
   .mini-steps strong { color: var(--ink); }
-  .sprint-note { font-size: 0.95rem; color: var(--brand-dark); font-weight: 600; }
+  .sprint-note { font-size: 0.95rem; color: var(--brand-text); font-weight: 600; }
   .sprint-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-weight: 700; }
   .sprint-link :global(svg) { width: 16px; height: 16px; }
   .quote { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; scroll-margin-top: 80px; }
