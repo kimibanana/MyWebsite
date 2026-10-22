@@ -5,28 +5,24 @@ import LeadForm from '../components/LeadForm.astro';
 import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import CaseStudies from '../components/CaseStudies.astro';
-import Testimonials from '../components/Testimonials.astro';
-import { site } from '../data/site';
-import { services } from '../data/services';
 import SprintCycle from '../components/SprintCycle.astro';
-import { homeFaqs, pains, process, promises, industries } from '../data/content';
+import Dashboard from '../components/Dashboard.astro';
+import { site } from '../data/site';
+import {
+  homeFaqs, pains, framework, specialties, otherBusinesses, whyUs, consultation, testimonials,
+} from '../data/content';
 
 const stats = site.stats.filter((s) => s.value);
+const featured = testimonials[0];
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
   mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
-const compare = [
-  ['Open-ended retainer, scope unclear', 'Fixed-scope 30-day sprints, written down'],
-  ['Vague monthly “activity” reports', 'Every deliverable listed, plus calls and leads'],
-  ['6–12 month lock-in contracts', 'Month-to-month. Pause or swap sprints anytime'],
-  ['Agency owns your site and accounts', 'Everything registered in your name'],
-  ['Shared leads sold to your competitors', 'Exclusive leads from your own site and profile'],
-];
+const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 ---
 <Base
-  title="Local SEO, Web Design & Google Ads for Service Businesses | Web Frontier"
+  title="Medical Marketing Agency | SEO, Websites & Ads for Practices | Web Frontier"
   description={site.description}
   schema={[faqSchema]}
 >
@@ -34,207 +30,231 @@ const compare = [
   <section class="hero">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">For local businesses in the US, UK, Canada & Australia</span>
-        <h1>More calls and booked jobs from Google, <span class="hl">one 30‑day sprint at a time</span></h1>
-        <p class="lead">Web Frontier gets local service businesses into the Map Pack, onto page one and in front of buyers with Local SEO, websites, Google Ads and Local Services Ads. No vague retainers: every sprint has a fixed scope, price and delivery date.</p>
-        <ul class="hero__points">
-          <li><Icon name="check" />Free growth audit with your 3 biggest fixes</li>
-          <li><Icon name="check" />Fixed-price sprints, no long contracts</li>
-          <li><Icon name="check" />You own your site and accounts</li>
-        </ul>
+        <span class="eyebrow">Medical marketing agency</span>
+        <h1>More patients. More calls. <span class="hl">More bookings.</span></h1>
+        <p class="lead">We help dental, aesthetic and medical practices, and the local businesses around them, win on Google with SEO, websites, Google Ads and Local Services Ads. {site.experience} of experience, delivered in fixed-price 30‑day sprints.</p>
         <div class="btn-row hero__ctas">
-          <a class="btn btn--primary" href="#hero-form">Get my free growth audit <Icon name="arrow" /></a>
-          <a class="btn btn--secondary" href="/pricing">See how sprints work</a>
+          <a class="btn btn--primary" href="#growth-audit">Get my free growth audit <Icon name="arrow" /></a>
+          <a class="btn btn--secondary" href="/pricing">What to expect</a>
         </div>
+        <ul class="hero__points">
+          <li><Icon name="check" />No long-term contracts</li>
+          <li><Icon name="check" />HIPAA-conscious marketing</li>
+          <li><Icon name="check" />You own every account</li>
+        </ul>
         {stats.length > 0 && (
           <dl class="hero__stats">
             {stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
           </dl>
         )}
       </div>
-      <div class="hero__form" id="hero-form">
-        <LeadForm id="hero" title="Get your free growth audit" compact />
-      </div>
+      <Dashboard />
     </div>
   </section>
 
-  <section class="strip" aria-label="Industries we work with">
+  <section class="strip" aria-label="Specialties we serve">
     <div class="wrap strip__in">
-      <span>Built for local service businesses</span>
-      <ul>{industries.map((p) => <li>{p}</li>)}</ul>
+      <span>Built for</span>
+      <ul>{specialties.map((s) => <li>{s.name}</li>)}</ul>
     </div>
   </section>
 
-  <!-- Pain points -->
+  <!-- Problem -->
   <section class="section">
-    <div class="wrap">
-      <div class="head head--center">
-        <span class="eyebrow">Sound familiar?</span>
-        <h2>Your competitors are getting the calls you should be getting</h2>
-        <p class="lead">Most local business owners we talk to are dealing with at least one of these.</p>
+    <div class="wrap problem">
+      <div class="reveal">
+        <span class="eyebrow">The landscape has changed</span>
+        <h2>Is your practice keeping up with how patients choose a provider?</h2>
+        <p>Patients don’t start with a referral list anymore. They search Google, compare the three practices on the map, read reviews, and book with whoever looks most trustworthy and easiest to reach.</p>
+        <p>Most agencies respond with a vague monthly retainer and a report full of numbers that never become patients. Healthcare adds another layer: ad policies, privacy rules and content standards most generalists don’t understand.</p>
+        <p>We built Web Frontier to fix that: one connected system for getting found, chosen, booked and trusted, delivered in sprints you can actually see.</p>
+        <a class="btn btn--primary" href="#growth-audit">Book a free consultation <Icon name="arrow" /></a>
       </div>
-      <div class="grid grid-4">
+      <div class="pains reveal">
         {pains.map((p) => (
-          <div class="card pain reveal">
-            <div class="icon-badge icon-badge--warn"><Icon name={p.icon} /></div>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
+          <div class="pain">
+            <span class="pain__icon"><Icon name={p.icon} /></span>
+            <div><h3>{p.title}</h3><p>{p.body}</p></div>
           </div>
         ))}
       </div>
-      <p class="bridge reveal">The good news: every one of these is fixable. <a href="#services">Here’s how we help <Icon name="arrow" /></a></p>
     </div>
   </section>
 
-  <!-- Services -->
-  <section class="section section--surface" id="services">
+  <!-- Featured testimonial -->
+  <section class="section--tight quote-band">
     <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">What we do</span>
-        <h2>Everything you need to win your local market</h2>
-        <p class="lead">Start with one service or stack them. Every sprint is built around one goal: more calls, booked jobs and revenue.</p>
-      </div>
-      <div class="grid grid-3">
-        {services.map((s) => (
-          <a href={`/services/${s.slug}`} class="card svc reveal">
-            <div class="icon-badge"><Icon name={s.icon} /></div>
-            <h3>{s.name}</h3>
-            <p>{s.short}</p>
-            <span class="svc__foot"><span>From <strong>{s.startingAt}</strong></span><span class="svc__more">Learn more <Icon name="arrow" /></span></span>
-          </a>
-        ))}
-        <a href="/free-audit" class="card svc svc--cta reveal">
-          <h3>Not sure where to start?</h3>
-          <p>Tell us about your business and market, and we’ll recommend the right sprints for free.</p>
-          <span class="svc__more">Get a free growth audit <Icon name="arrow" /></span>
-        </a>
-      </div>
+      <figure class="bigquote reveal">
+        <blockquote>“{featured.quote}”</blockquote>
+        <figcaption>
+          <strong>{featured.name}</strong>, {featured.role}
+          {featured.placeholder && <span class="tag tag--sample">Sample</span>}
+        </figcaption>
+      </figure>
     </div>
   </section>
 
-  <!-- Why us -->
+  <!-- Framework -->
   <section class="section section--night">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Why Web Frontier</span>
-        <h2>The marketing partner you wished you hired the first time</h2>
-        <p class="lead">Too many local business owners have paid agencies for months without knowing what they got. We built Web Frontier around sprints so you always see the plan, the work and the results.</p>
+        <span class="eyebrow">Our framework</span>
+        <h2>The Patient Growth Framework</h2>
+        <p class="lead"><strong>Four channels, one system.</strong> Most practices pay for one channel and wonder why it stalls. We connect all four so each makes the others work harder.</p>
       </div>
-      <div class="grid grid-4 promises">
-        {promises.map((p) => (
-          <div class="promise reveal">
-            <div class="icon-badge icon-badge--night"><Icon name={p.icon} /></div>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-          </div>
-        ))}
-      </div>
-      <div class="compare reveal" role="table" aria-label="Typical agency compared with Web Frontier">
-        <div class="compare__row compare__row--head" role="row">
-          <span role="columnheader">Typical agency</span><span role="columnheader">Web Frontier</span>
-        </div>
-        {compare.map(([them, us]) => (
-          <div class="compare__row" role="row">
-            <span role="cell" class="compare__them"><Icon name="close" />{them}</span>
-            <span role="cell" class="compare__us"><Icon name="check" />{us}</span>
-          </div>
+      <div class="grid grid-4">
+        {framework.map((f, i) => (
+          <a class="pillar reveal" href={f.href}>
+            <span class="pillar__n">0{i + 1}</span>
+            <span class="pillar__icon"><Icon name={f.icon} /></span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+            <span class="pillar__more">Learn more <Icon name="arrow" /></span>
+          </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Process -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head head--center">
-        <span class="eyebrow">How it works</span>
-        <h2>From free audit to more booked jobs in 4 steps</h2>
-      </div>
-      <ol class="steps">
-        {process.map((p, i) => (
-          <li class="step reveal">
-            <span class="step__num">{i + 1}</span>
-            <h3>{p.title}</h3>
-            <p>{p.body}</p>
-          </li>
-        ))}
-      </ol>
-      <div class="center"><a class="btn btn--primary" href="/free-audit">Start with step 1, it’s free <Icon name="arrow" /></a></div>
-    </div>
-  </section>
-
-  <!-- Proof -->
+  <!-- Results -->
   <section class="section section--surface">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Results</span>
-        <h2>Local businesses, measurable growth</h2>
-        <p class="lead">We measure success by calls, booked jobs and revenue, not just rankings.</p>
+        <span class="eyebrow">Real results</span>
+        <h2>Measured in patients, not page views</h2>
+        <p class="lead">We report on new-patient calls, bookings and cost per patient, because that’s what grows a practice.</p>
       </div>
       <CaseStudies />
       <div class="center"><a class="btn btn--secondary" href="/work">See more results <Icon name="arrow" /></a></div>
     </div>
   </section>
 
+  <!-- Specialties + other businesses -->
   <section class="section">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">Client reviews</span>
-        <h2>What our clients say</h2>
+        <span class="eyebrow">Who we serve</span>
+        <h2>Proven across medical specialties</h2>
+        <p class="lead">Every specialty has different patients, search behavior and rules. Our process adapts to yours.</p>
       </div>
-      <Testimonials />
+      <div class="specs">
+        {specialties.map((s) => (
+          <a class="spec reveal" href={`/who-we-serve#${slug(s.name)}`}>
+            <span class="spec__icon"><Icon name={s.icon} /></span>
+            {s.name}
+            <Icon name="arrow" class="spec__arrow" />
+          </a>
+        ))}
+      </div>
+      <div class="others reveal">
+        <div>
+          <span class="eyebrow">Not a medical practice?</span>
+          <h3>We help other local businesses too</h3>
+          <p>After {site.experience} in this industry, our fundamentals are solid: rank on Google, win the Map Pack, convert visitors and run ads that pay for themselves. That works for any business that serves a local area.</p>
+          <a class="btn btn--secondary" href="/who-we-serve#local-businesses">See local businesses we serve <Icon name="arrow" /></a>
+        </div>
+        <ul class="chips">{otherBusinesses.map((b) => <li>{b}</li>)}</ul>
+      </div>
+      <div class="center"><a class="btn btn--primary" href="#growth-audit">Help me get more patients <Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Why Web Frontier?</span>
+        <h2>Marketing built for practices, not for agency reports</h2>
+        <p class="lead">You’re busy treating patients. We focus on the one number that matters to you: new patients booked, at a cost that makes sense.</p>
+      </div>
+      <div class="grid grid-4">
+        {whyUs.map((w) => (
+          <div class="card reveal">
+            <div class="icon-badge"><Icon name={w.icon} /></div>
+            <h3>{w.title}</h3>
+            <p>{w.body}</p>
+          </div>
+        ))}
+      </div>
     </div>
   </section>
 
   <!-- Sprints -->
-  <section class="section section--surface">
+  <section class="section">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">How sprints work</span>
-        <h2>No retainers that disappear into a black box</h2>
-        <p class="lead">Work happens in 30-day sprints with a written scope and fixed price. You see the plan before you pay and the deliverables after.</p>
+        <span class="eyebrow">How we work</span>
+        <h2>30-day sprints instead of black-box retainers</h2>
+        <p class="lead">Start with a one-time Foundation Sprint ($997), then stack monthly sprints from $650. Every sprint has a written scope, a fixed price and a delivery report.</p>
       </div>
       <SprintCycle />
-      <div class="grid grid-3 teasers">
-        <a class="card teaser reveal" href="/pricing#seo"><span>Foundation Sprint</span><strong>$997</strong><small>one-time, 30 days</small></a>
-        <a class="card teaser teaser--featured reveal" href="/pricing#bundles"><span>Monthly SEO sprints</span><strong>from $650</strong><small>per month, no contract</small></a>
-        <a class="card teaser reveal" href="/pricing#websites"><span>Website Launch Sprint</span><strong>from $2,500</strong><small>one-time, live in ~30 days</small></a>
+      <div class="center"><a class="btn btn--secondary" href="/pricing">See sprints & pricing <Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
+  <!-- Let's work together -->
+  <section class="section section--surface" id="growth-audit">
+    <div class="wrap together">
+      <div class="reveal">
+        <span class="eyebrow">Free growth audit</span>
+        <h2>Let’s work together</h2>
+        <p class="lead">In a free consultation, we’ll review how patients find you today, where you’re losing them, and what to fix first.</p>
+        <ul class="benefits">
+          {consultation.map((c) => (
+            <li><Icon name="check" /><span><strong>{c.title}.</strong> {c.body}</span></li>
+          ))}
+        </ul>
+        <p class="together__note"><Icon name="whatsapp" />Prefer to chat? <a href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
       </div>
-      <div class="center"><a class="btn btn--secondary" href="/pricing">See all sprints & pricing <Icon name="arrow" /></a></div>
+      <LeadForm id="home" title="Book your free growth audit" button="Book my free audit" compact />
+    </div>
+  </section>
+
+  <!-- Founder -->
+  <section class="section">
+    <div class="wrap founder">
+      <div class="founder__photo" aria-hidden="true">W</div>
+      <div class="reveal">
+        <span class="eyebrow">A message from our founder</span>
+        <!-- TODO: replace with the founder's own words and photo -->
+        <h2>We don’t sell traffic. We help you fill your schedule.</h2>
+        <p>I’ve spent more than a decade in SEO, web design and paid search, and I’ve seen how often practices are sold rankings and reports instead of patients.</p>
+        <p>Web Frontier is built around a simple idea: tell you exactly what we’ll do, do it in 30 days, and show you the results. Healthcare is our specialty, and the same fundamentals have grown every kind of local business we’ve worked with.</p>
+        <p class="founder__sign"><strong>Founder name</strong>, Founder, Web Frontier <span class="tag tag--sample">Placeholder</span></p>
+        <a class="btn btn--primary" href="#growth-audit">Let’s work together <Icon name="arrow" /></a>
+      </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section">
+  <section class="section section--surface">
     <div class="wrap">
       <div class="head head--center">
         <span class="eyebrow">FAQ</span>
-        <h2>Questions we hear every week</h2>
+        <h2>Questions practices ask us</h2>
       </div>
       <Faq items={homeFaqs} />
     </div>
   </section>
 
-  <CtaBand />
+  <CtaBand title="Find out why patients are choosing your competitors" text="Get a free growth audit of your website, Google Business Profile and competitors. We’ll show you the 3 biggest fixes, whether you hire us or not." />
 </Base>
 
 <style>
   .hero { padding: clamp(40px, 6vw, 80px) 0 clamp(48px, 7vw, 96px); background:
     radial-gradient(60% 80% at 100% 0%, var(--brand-tint) 0%, transparent 70%),
     linear-gradient(180deg, #fff 0%, var(--surface) 100%); }
-  .hero__in { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+  .hero__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
+  .hero h1 { font-size: clamp(2.3rem, 5.4vw, 3.8rem); }
   .hero h1 .hl { color: var(--brand); }
-  .hero__points { list-style: none; padding: 0; margin: 24px 0 30px; display: grid; gap: 10px; }
-  .hero__points li { display: flex; gap: 10px; align-items: center; font-weight: 500; color: var(--ink); }
-  .hero__points :global(svg) { width: 20px; height: 20px; color: var(--success); flex: none; }
-  .hero__stats { display: flex; flex-wrap: wrap; gap: 32px; margin: 36px 0 0; }
+  .hero__ctas { margin: 28px 0 22px; }
+  .hero__points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .hero__points li { display: flex; gap: 8px; align-items: center; font-weight: 500; color: var(--ink); font-size: 0.95rem; }
+  .hero__points :global(svg) { width: 18px; height: 18px; color: var(--success); flex: none; }
+  .hero__stats { display: flex; flex-wrap: wrap; gap: 32px; margin: 32px 0 0; }
   .hero__stats dt { font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; color: var(--ink); }
   .hero__stats dd { margin: 0; font-size: 0.88rem; color: var(--muted); }
-  .hero__form { scroll-margin-top: 96px; }
-  @media (max-width: 960px) {
-    .hero__in { grid-template-columns: 1fr; }
-    .hero__ctas .btn--primary { display: none; }
-  }
+  @media (max-width: 960px) { .hero__in { grid-template-columns: 1fr; } }
 
   .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fff; }
   .strip__in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 20px; padding-bottom: 20px; }
@@ -242,49 +262,63 @@ const compare = [
   .strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0; padding: 0; }
   .strip li { font-family: var(--font-display); font-weight: 700; color: #8291a5; font-size: 1.02rem; }
 
-  .icon-badge--warn { background: #fff1e6; color: #c2570c; }
-  .bridge { text-align: center; margin: 40px 0 0; font-size: 1.12rem; color: var(--ink); font-weight: 600; }
-  .bridge a { display: inline-flex; align-items: center; gap: 6px; }
-  .bridge :global(svg) { width: 18px; height: 18px; }
+  .problem { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  .problem p { font-size: 1.06rem; }
+  .problem .btn { margin-top: 8px; }
+  @media (max-width: 960px) { .problem { grid-template-columns: 1fr; } }
+  .pains { display: grid; gap: 14px; }
+  .pain { display: flex; gap: 16px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+  .pain h3 { font-size: 1.08rem; margin-bottom: 4px; }
+  .pain p { margin: 0; font-size: 0.97rem; }
+  .pain__icon { flex: none; width: 42px; height: 42px; border-radius: 12px; background: #fff1e6; color: #c2570c; display: grid; place-items: center; }
+  .pain__icon :global(svg) { width: 20px; height: 20px; }
 
-  .svc { text-decoration: none; color: inherit; display: flex; flex-direction: column; transition: border-color .15s ease, box-shadow .15s ease; }
-  .svc:hover { border-color: var(--brand); box-shadow: var(--shadow); color: inherit; }
-  .svc p { flex: 1; }
-  .svc__foot { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 0.92rem; }
-  .svc__foot strong { color: var(--ink); }
-  .svc__more { display: inline-flex; align-items: center; gap: 6px; color: var(--brand); font-weight: 700; font-size: 0.92rem; }
-  .svc__more :global(svg) { width: 16px; height: 16px; }
-  .svc--cta { background: var(--brand); border-color: var(--brand); color: #e6f4f3; justify-content: center; }
-  .svc--cta h3 { color: #fff; }
-  .svc--cta .svc__more { color: #fff; }
-  .svc--cta:hover { color: #e6f4f3; background: var(--brand-dark); }
+  .quote-band { background: var(--brand); padding: clamp(40px, 6vw, 72px) 0; }
+  .bigquote { margin: 0 auto; max-width: 900px; text-align: center; color: #e6f4f3; }
+  .bigquote blockquote { margin: 0 0 18px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.35; color: #fff; letter-spacing: -0.01em; }
+  .bigquote figcaption { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .bigquote strong { color: #fff; }
 
-  .promise h3 { color: #fff; font-size: 1.12rem; }
-  .promise p { font-size: 0.97rem; }
-  .icon-badge--night { background: rgb(95 211 207 / 0.12); color: #5fd3cf; }
-  .compare { margin-top: 56px; border: 1px solid rgb(255 255 255 / 0.1); border-radius: var(--radius-lg); overflow: hidden; }
-  .compare__row { display: grid; grid-template-columns: 1fr 1fr; }
-  .compare__row > span { padding: 16px 22px; display: flex; gap: 10px; align-items: flex-start; border-top: 1px solid rgb(255 255 255 / 0.08); }
-  .compare__row--head > span { border-top: 0; font-family: var(--font-display); font-weight: 700; color: #fff; background: var(--night-2); }
-  .compare__us { background: rgb(14 124 123 / 0.14); color: #e6f4f3; font-weight: 500; }
-  .compare__row :global(svg) { width: 18px; height: 18px; flex: none; margin-top: 4px; }
-  .compare__them :global(svg) { color: #f87171; }
-  .compare__us :global(svg) { color: #5fd3cf; }
-  @media (max-width: 640px) { .compare__row > span { padding: 14px; font-size: 0.92rem; } }
+  .pillar { position: relative; display: flex; flex-direction: column; padding: 28px 24px; border-radius: var(--radius-lg); border: 1px solid rgb(255 255 255 / 0.1); background: var(--night-2); text-decoration: none; color: #a9b8c5; transition: border-color .15s ease; }
+  .pillar:hover { border-color: #5fd3cf; color: #a9b8c5; }
+  .pillar h3 { color: #fff; margin: 0 0 6px; }
+  .pillar p { flex: 1; font-size: 0.97rem; }
+  .pillar__n { position: absolute; top: 22px; right: 24px; font-family: var(--font-display); font-weight: 800; color: rgb(255 255 255 / 0.18); font-size: 1.4rem; }
+  .pillar__icon { width: 46px; height: 46px; border-radius: 12px; background: rgb(95 211 207 / 0.12); color: #5fd3cf; display: grid; place-items: center; margin-bottom: 18px; }
+  .pillar__icon :global(svg) { width: 22px; height: 22px; }
+  .pillar__more { display: inline-flex; align-items: center; gap: 6px; color: #5fd3cf; font-weight: 700; font-size: 0.92rem; }
+  .pillar__more :global(svg) { width: 16px; height: 16px; }
 
-  .steps { list-style: none; padding: 0; margin: 0 0 48px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: s; }
-  .step { position: relative; padding-top: 8px; }
-  .step__num { display: grid; place-items: center; width: 48px; height: 48px; border-radius: 50%; background: var(--ink); color: #fff; font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; margin-bottom: 18px; }
-  .step:first-child .step__num { background: var(--accent); color: var(--ink); }
-  @media (max-width: 960px) { .steps { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .steps { grid-template-columns: 1fr; } }
+  .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+  @media (max-width: 960px) { .specs { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 520px) { .specs { grid-template-columns: 1fr; } }
+  .spec { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); font-weight: 600; background: #fff; }
+  .spec:hover { border-color: var(--brand); color: var(--ink); }
+  .spec__icon { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--brand-tint); color: var(--brand); display: grid; place-items: center; }
+  .spec__icon :global(svg) { width: 18px; height: 18px; }
+  .spec :global(.spec__arrow) { width: 16px; height: 16px; margin-left: auto; color: var(--brand); flex: none; }
+  .others { margin-top: 32px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-lg); background: var(--surface); }
+  .others h3 { font-size: 1.5rem; }
+  @media (max-width: 860px) { .others { grid-template-columns: 1fr; } }
+  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips li { padding: 8px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--line); font-weight: 600; font-size: 0.92rem; color: var(--ink); }
 
   .center { text-align: center; margin-top: 40px; }
 
-  .teasers { margin-top: 24px; }
-  .teaser { text-decoration: none; color: var(--muted); text-align: center; display: grid; gap: 4px; transition: border-color .15s ease; }
-  .teaser:hover { border-color: var(--brand); color: var(--muted); }
-  .teaser span { font-weight: 600; color: var(--ink); }
-  .teaser strong { font-family: var(--font-display); font-size: 2rem; color: var(--ink); letter-spacing: -0.03em; }
-  .teaser--featured { border: 2px solid var(--brand); }
+  .together { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; scroll-margin-top: 80px; }
+  @media (max-width: 960px) { .together { grid-template-columns: 1fr; } }
+  #growth-audit { scroll-margin-top: 70px; }
+  .benefits { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 14px; }
+  .benefits li { display: flex; gap: 12px; }
+  .benefits :global(svg) { width: 22px; height: 22px; padding: 3px; border-radius: 50%; background: var(--brand); color: #fff; flex: none; margin-top: 2px; }
+  .benefits strong { color: var(--ink); }
+  .together__note { display: flex; align-items: center; gap: 8px; color: var(--muted); }
+  .together__note :global(svg) { width: 18px; height: 18px; color: var(--brand); }
+
+  .founder { display: grid; grid-template-columns: 240px 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; max-width: 1000px; }
+  .founder__photo { width: 240px; height: 240px; border-radius: 28px; background: linear-gradient(135deg, var(--brand), var(--night)); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 4rem; font-weight: 800; }
+  .founder p { font-size: 1.06rem; }
+  .founder__sign { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); }
+  .founder__sign strong { color: var(--ink); }
+  @media (max-width: 760px) { .founder { grid-template-columns: 1fr; } .founder__photo { width: 120px; height: 120px; font-size: 2.2rem; border-radius: 20px; } }
 </style>

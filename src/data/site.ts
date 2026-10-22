@@ -5,9 +5,10 @@ const whatsappNumber = '639063813194';
 
 export const site = {
   name: 'Web Frontier',
-  tagline: 'SEO, websites & ads that fill your calendar',
+  tagline: 'Medical marketing that fills your schedule',
+  experience: '10+ years',
   description:
-    'Web Frontier helps local businesses in the US, UK, Canada and Australia get more calls and booked jobs from Google, with SEO, websites, Google Ads and Local Services Ads delivered in fixed-price 30-day sprints.',
+    'Web Frontier is a medical marketing agency helping practices and local businesses in the US, UK, Canada and Australia get more patients and customers from Google with SEO, websites, Google Ads and Local Services Ads, delivered in fixed-price 30-day sprints.',
   url: 'https://webfrontierco.netlify.app', // TODO: custom domain
   email: '', // TODO: business email. Email links stay hidden while this is empty.
   whatsappDisplay: '+63 906 381 3194',
@@ -27,7 +28,7 @@ export const site = {
   formEndpoint: '', // e.g. 'https://formspree.io/f/xxxxxxx'
   // Stats are hidden until real numbers are filled in.
   stats: [
-    { value: '', label: 'Leads generated for clients' }, // TODO
+    { value: '', label: 'New patients generated' }, // TODO
     { value: '', label: 'Keywords ranked on page 1' }, // TODO
     { value: '', label: 'Average client rating' }, // TODO
   ],
@@ -35,8 +36,8 @@ export const site = {
 
 export const nav = [
   { label: 'Services', href: '/services' },
-  { label: 'Sprints & Pricing', href: '/pricing' },
+  { label: 'Who We Serve', href: '/who-we-serve' },
   { label: 'Results', href: '/work' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },
-  { label: 'Contact', href: '/contact' },
 ];
