@@ -60,5 +60,6 @@ export const nav = [
   { label: 'Specialties', href: '/who-we-serve' },
   { label: 'Results', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
+  { label: 'Resources', href: '/resources' },
   { label: 'About', href: '/about' },
 ];

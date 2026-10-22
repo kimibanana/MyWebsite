@@ -1,0 +1,30 @@
+---
+import Base from '../../../layouts/Base.astro';
+import PageHero from '../../../components/PageHero.astro';
+import ResourceList from '../../../components/ResourceList.astro';
+import CtaBand from '../../../components/CtaBand.astro';
+import { categories, categorySlug, getResources } from '../../../lib/resources';
+
+export function getStaticPaths() {
+  return categories.map((c) => ({ params: { category: c.slug }, props: { name: c.name } }));
+}
+const { name } = Astro.props as { name: string };
+const { category } = Astro.params;
+const items = (await getResources()).filter((r) => categorySlug(r.data.category) === category);
+---
+<Base
+  title={`${name} Guides for Clinics & Medical Practices | Web Frontier`}
+  description={`Free ${name} guides for clinics, hospitals and medical practices in the Philippines and worldwide.`}
+>
+  <PageHero
+    eyebrow="Resources"
+    title={`${name} guides for clinics`}
+    crumbs={[{ label: 'Resources', href: '/resources' }, { label: name }]}
+  />
+  <section class="section">
+    <div class="wrap">
+      <ResourceList items={items} active={category} />
+    </div>
+  </section>
+  <CtaBand />
+</Base>

@@ -126,7 +126,11 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
   .hdr__toggle :global(.i-close) { display: none; }
   .hdr__mobile-cta { display: none; }
 
-  @media (max-width: 1120px) { .hdr__phone span { display: none; } }
+  .hdr__actions .btn { white-space: nowrap; }
+  .hdr__phone :global(svg) { flex: none; }
+  @media (max-width: 1440px) { .hdr__phone span { display: none; } }
+  @media (max-width: 1180px) { .hdr__in { gap: 14px; } .hdr__nav > ul > li > a { padding: 10px 9px; font-size: 0.95rem; } .hdr__actions { gap: 10px; } }
+  @media (max-width: 1060px) and (min-width: 961px) { .hdr__actions .btn { display: none; } }
   @media (max-width: 960px) {
     .hdr__in { min-height: 66px; }
     .hdr__toggle { display: block; }

@@ -1,0 +1,166 @@
+---
+import { render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Icon from '../../components/Icon.astro';
+import Faq from '../../components/Faq.astro';
+import ResourceCard from '../../components/ResourceCard.astro';
+import { site } from '../../data/site';
+import { categorySlug, formatDate, getResources, readingTime, type Resource } from '../../lib/resources';
+
+export async function getStaticPaths() {
+  const all = await getResources();
+  return all.map((r) => ({ params: { slug: r.id }, props: { r, all } }));
+}
+const { r, all } = Astro.props as { r: Resource; all: Resource[] };
+const { Content, headings } = await render(r);
+const toc = headings.filter((h) => h.depth === 2);
+const related = [
+  ...all.filter((x) => x.id !== r.id && x.data.category === r.data.category),
+  ...all.filter((x) => x.id !== r.id && x.data.category !== r.data.category),
+].slice(0, 3);
+const url = new URL(`/resources/${r.id}`, Astro.site).href;
+const modified = r.data.updated ?? r.data.date;
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: r.data.title,
+    description: r.data.description,
+    datePublished: r.data.date.toISOString(),
+    dateModified: modified.toISOString(),
+    mainEntityOfPage: url,
+    author: { '@type': 'Person', name: site.founder.name, jobTitle: site.founder.role, url: new URL('/about', Astro.site).href },
+    publisher: { '@id': `${site.url}/#organization` },
+    articleSection: r.data.category,
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: new URL('/', Astro.site).href },
+      { '@type': 'ListItem', position: 2, name: 'Resources', item: new URL('/resources', Astro.site).href },
+      { '@type': 'ListItem', position: 3, name: r.data.category, item: new URL(`/resources/category/${categorySlug(r.data.category)}`, Astro.site).href },
+      { '@type': 'ListItem', position: 4, name: r.data.title },
+    ],
+  },
+  ...(r.data.faqs.length
+    ? [{
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: r.data.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+      }]
+    : []),
+];
+---
+<Base title={`${r.data.title} | Web Frontier`} description={r.data.description} schema={schema}>
+  <article>
+    <header class="ah pattern">
+      <div class="wrap ah__in">
+        <nav class="breadcrumbs" aria-label="Breadcrumb">
+          <a href="/">Home</a><span aria-hidden="true">/</span><a href="/resources">Resources</a><span aria-hidden="true">/</span><a href={`/resources/category/${categorySlug(r.data.category)}`}>{r.data.category}</a>
+        </nav>
+        <h1>{r.data.title}</h1>
+        <p class="lead">{r.data.description}</p>
+        <div class="ah__meta">
+          <span class="ah__avatar" aria-hidden="true">{site.founder.initials}</span>
+          <span><strong>{site.founder.name}</strong><br />Updated {formatDate(modified)} · {readingTime(r)} min read</span>
+        </div>
+      </div>
+    </header>
+
+    <div class="wrap ab">
+      <aside class="ab__side">
+        {toc.length > 1 && (
+          <details class="toc" open>
+            <summary>In this guide</summary>
+            <ol>{toc.map((h) => <li><a href={`#${h.slug}`}>{h.text}</a></li>)}</ol>
+          </details>
+        )}
+        <div class="side-cta">
+          <strong>Want this done for your clinic?</strong>
+          <p>Get a free growth audit with the 3 biggest fixes for your practice.</p>
+          <a class="btn btn--primary btn--sm btn--block" href="/free-audit">Get my free audit</a>
+        </div>
+      </aside>
+
+      <div class="prose article">
+        <Content />
+
+        {r.data.faqs.length > 0 && (
+          <section class="article__faq">
+            <h2 id="faq">Frequently asked questions</h2>
+            <Faq items={r.data.faqs} />
+          </section>
+        )}
+
+        <div class="author">
+          <span class="author__avatar" aria-hidden="true">{site.founder.initials}</span>
+          <div>
+            <p class="author__name">{site.founder.name}</p>
+            <p class="author__role">{site.founder.role}, {site.name}</p>
+            <p>Kimberly has spent more than a decade in SEO, web design and paid search, and leads Web Frontier’s work with clinics and practices in the Philippines and worldwide.</p>
+          </div>
+        </div>
+
+        <div class="end-cta">
+          <h2>Want results like this for your clinic?</h2>
+          <p>We’ll review your website, Google Business Profile, ads and AI visibility, and show you the 3 biggest fixes. Free, no obligation.</p>
+          <div class="btn-row">
+            <a class="btn btn--primary" href="/free-audit">Get my free growth audit <Icon name="arrow" /></a>
+            <a class="btn btn--secondary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Keep reading</span><h2>More guides for clinics</h2></div>
+      <div class="grid grid-3">{related.map((x) => <ResourceCard r={x} />)}</div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .ah { padding: clamp(32px, 5vw, 56px) 0 clamp(36px, 5vw, 56px); background: radial-gradient(60% 90% at 100% 0%, var(--brand-tint) 0%, transparent 70%), var(--surface); }
+  .ah__in { max-width: 900px; }
+  .ah h1 { font-size: clamp(1.9rem, 4.2vw, 2.9rem); }
+  .ah__meta { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--muted); margin-top: 20px; }
+  .ah__meta strong { color: var(--ink); }
+  .ah__avatar, .author__avatar { flex: none; width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), var(--night)); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-weight: 800; }
+
+  .ab { display: grid; grid-template-columns: 260px minmax(0, 1fr); gap: clamp(32px, 5vw, 64px); padding-top: clamp(36px, 5vw, 56px); padding-bottom: clamp(48px, 6vw, 80px); align-items: start; }
+  .ab__side { position: sticky; top: 96px; display: grid; gap: 16px; }
+  @media (max-width: 960px) { .ab { grid-template-columns: 1fr; } .ab__side { position: static; } .side-cta { display: none; } }
+  .toc { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 16px 18px; }
+  .toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; color: var(--ink); }
+  .toc ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 8px; font-size: 0.9rem; }
+  .toc a { color: var(--muted); text-decoration: none; }
+  .toc a:hover { color: var(--brand-text); }
+  .side-cta { padding: 18px; border-radius: var(--radius); background: var(--brand-tint); }
+  .side-cta strong { color: var(--ink); font-family: var(--font-display); }
+  .side-cta p { font-size: 0.9rem; margin: 6px 0 12px; }
+
+  .article { max-width: 760px; font-size: 1.06rem; }
+  .article :global(h2) { scroll-margin-top: 96px; }
+  .article :global(h3) { font-size: 1.2rem; margin-top: 1.6em; }
+  .article :global(ul), .article :global(ol) { padding-left: 1.3em; display: grid; gap: 6px; }
+  .article :global(li > input[type='checkbox']) { margin-right: 8px; accent-color: var(--brand); }
+  .article :global(.contains-task-list) { list-style: none; padding-left: 0; }
+  .article :global(table) { width: 100%; border-collapse: collapse; margin: 1.4em 0; font-size: 0.95rem; display: block; overflow-x: auto; }
+  .article :global(th), .article :global(td) { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  .article :global(th) { background: var(--surface); color: var(--ink); font-weight: 700; }
+  .article :global(strong) { color: var(--ink); }
+  .article :global(code) { font-size: 0.9em; background: var(--surface); padding: 1px 6px; border-radius: 6px; }
+  .article__faq { margin-top: 2em; }
+  .article__faq :global(.faq) { margin: 0; }
+
+  .author { display: flex; gap: 16px; margin-top: 48px; padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+  .author p { margin: 0; font-size: 0.95rem; }
+  .author__name { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 1.05rem !important; }
+  .author__role { color: var(--muted); margin-bottom: 8px !important; }
+  .end-cta { margin-top: 32px; padding: clamp(24px, 4vw, 36px); border-radius: var(--radius-lg); background: var(--night); color: #c7d2dc; }
+  .end-cta h2 { color: #fff; margin-top: 0; }
+</style>
