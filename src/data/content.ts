@@ -386,7 +386,7 @@ export const homeFaqs = [
   },
   {
     q: 'Do you work with international clients?',
-    a: 'Yes. We serve practices in the US, UK, Canada, Australia, Singapore, the UAE and beyond. We schedule calls in your time zone, follow your country’s advertising and privacy rules, and reply within one business day.',
+    a: 'Yes, most of our work is international. We serve practices in the US, UK, Canada, Australia, Singapore, the UAE and beyond, as well as the Philippines, where we are based. We schedule calls in your time zone, follow your country’s advertising and privacy rules, and reply within one business day.',
   },
   {
     q: 'What is a sprint?',

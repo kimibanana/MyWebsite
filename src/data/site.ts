@@ -8,7 +8,7 @@ export const site = {
   tagline: 'Medical marketing that fills your schedule',
   experience: '10+ years',
   description:
-    'Web Frontier is a medical and healthcare marketing agency in the Philippines, working with clinics, hospitals and practices worldwide. We bring in more patients with medical SEO, websites and Google Ads, delivered in fixed-price 30-day sprints.',
+    'Web Frontier is a medical and healthcare marketing agency working with clinics, hospitals and practices worldwide, from its base in the Philippines. We bring in more patients with medical SEO, websites and Google Ads, delivered in fixed-price 30-day sprints.',
   url: 'https://webfrontierco.netlify.app', // TODO: custom domain
   email: 'info@webfrontier.co',
   founder: {

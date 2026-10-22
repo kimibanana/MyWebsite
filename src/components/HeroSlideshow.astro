@@ -70,9 +70,10 @@ const slides = [
   .ss figcaption { position: absolute; left: 22px; bottom: 20px; z-index: 1; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
   .ss__controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
   .ss__dots { display: flex; gap: 8px; }
-  .ss__dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 6px; background: var(--line); cursor: pointer; transition: width .3s ease, background-color .3s ease; }
-  .ss__dots button[aria-current='true'] { width: 26px; background: var(--brand); }
-  .ss__pause { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--muted); display: grid; place-items: center; cursor: pointer; }
+  /* The visible dot stays small; the transparent border gives a 44px-tall tap area. */
+  .ss__dots button { box-sizing: content-box; width: 9px; height: 9px; padding: 0; border: 17px solid transparent; border-width: 17px 4px; margin: -17px -4px; border-radius: 22px; background: var(--line) padding-box; cursor: pointer; transition: width .3s ease, background-color .3s ease; }
+  .ss__dots button[aria-current='true'] { width: 26px; background: var(--brand) padding-box; }
+  .ss__pause { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--muted); display: grid; place-items: center; cursor: pointer; }
   .ss__pause svg { width: 14px; height: 14px; }
   .ss__pause .i-play, .ss.is-paused .ss__pause .i-pause { display: none; }
   .ss.is-paused .ss__pause .i-play { display: block; }

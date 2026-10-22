@@ -1,7 +1,8 @@
 ---
 import { caseStudies } from '../data/content';
-interface Props { limit?: number }
-const { limit } = Astro.props;
+// illustrative: show the scope only, without the sample outcome numbers.
+interface Props { limit?: number; illustrative?: boolean }
+const { limit, illustrative = false } = Astro.props;
 const list = limit ? caseStudies.slice(0, limit) : caseStudies;
 ---
 <div class="cs grid grid-3">
@@ -9,18 +10,18 @@ const list = limit ? caseStudies.slice(0, limit) : caseStudies;
     <article class="cs__card reveal">
       <div class="cs__top">
         <span class="tag">{c.service}</span>
-        {c.placeholder && <span class="tag tag--sample" title="Sample project; replace with a real client">Sample</span>}
+        {c.placeholder && <span class="tag tag--sample">{illustrative ? 'Illustrative' : 'Sample'}</span>}
       </div>
       <h3>{c.client}, {c.location}</h3>
-      <p class="cs__label">The problem</p>
+      <p class="cs__label">{illustrative ? 'The situation' : 'The problem'}</p>
       <p>{c.challenge}</p>
-      <p class="cs__label">What we did</p>
+      <p class="cs__label">{illustrative ? 'The sprint plan' : 'What we did'}</p>
       <p>{c.solution}</p>
-      <dl class="cs__results">
+      {!illustrative && <dl class="cs__results">
         {c.results.map((r) => (
           <div><dt>{r.value}</dt><dd>{r.label}</dd></div>
         ))}
-      </dl>
+      </dl>}
     </article>
   ))}
 </div>
