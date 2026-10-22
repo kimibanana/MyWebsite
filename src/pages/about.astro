@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { promises } from '../data/content';
+import { site } from '../data/site';
+
+const values = [
+  { icon: 'chart', title: 'Results over activity', body: 'We report on leads and revenue, not hours logged or tasks ticked off.' },
+  { icon: 'heart', title: 'Plain language', body: 'No jargon. If we can’t explain it simply, we shouldn’t be charging for it.' },
+  { icon: 'users', title: 'Real partnership', body: 'You talk directly to the people doing the work, and we answer within a business day.' },
+  { icon: 'zap', title: 'Speed and quality', body: 'Fast websites, fast replies, and work done right the first time.' },
+];
+---
+<Base
+  title="About Web Frontier | Local SEO & Web Agency for Service Businesses"
+  description="Web Frontier is a remote local SEO and web agency for service businesses in the US, UK, Canada and Australia, built on fixed-scope sprints and real results."
+>
+  <PageHero
+    eyebrow="About Web Frontier"
+    title="Built for local businesses tired of black-box marketing"
+    lead="We’re a remote team of local SEO specialists, designers and ads managers who help service businesses get found on Google and turn searches into booked jobs."
+    crumbs={[{ label: 'About' }]}
+  />
+
+  <section class="section">
+    <div class="wrap story">
+      <div class="prose reveal">
+        <span class="eyebrow">Our story</span>
+        <h2>Why we started Web Frontier</h2>
+        <!-- TODO: replace with the founder's real story -->
+        <p>After years working in SEO and web development, we kept meeting the same frustrated business owners. They had paid agencies every month for SEO they couldn’t see, websites that never made the phone ring, and lead platforms that sold the same lead to five competitors.</p>
+        <p>Web Frontier was built to be the opposite. Instead of open-ended retainers, we work in 30-day sprints: a written scope, a fixed price, and a report of exactly what was delivered and what it achieved.</p>
+        <p>Today we help home service companies, clinics, law firms and contractors across the US, UK, Canada and Australia, and we treat every client’s budget like our own.</p>
+      </div>
+      <aside class="founder card reveal">
+        <div class="founder__photo" aria-hidden="true">W</div>
+        <h3>Founder name</h3>
+        <p class="founder__role">Founder & Senior SEO Strategist</p>
+        <p>Add a short bio here: years of experience, specialties, certifications, and a personal touch. People buy from people.</p>
+        <span class="tag tag--sample">Placeholder</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Our values</span><h2>What we stand for</h2></div>
+      <div class="grid grid-4">
+        {values.map((v) => (
+          <div class="card reveal"><div class="icon-badge"><Icon name={v.icon} /></div><h3>{v.title}</h3><p>{v.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Our promises</span><h2>What every client gets</h2></div>
+      <div class="grid grid-4">
+        {promises.map((p) => (
+          <div class="card reveal"><div class="icon-badge"><Icon name={p.icon} /></div><h3>{p.title}</h3><p>{p.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Let’s talk about your goals" />
+</Base>
+
+<style>
+  .story { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  @media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
+  .founder { text-align: center; }
+  .founder__photo { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 18px; display: grid; place-items: center; background: var(--brand); color: #fff; font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; }
+  .founder__role { color: var(--brand); font-weight: 600; margin-bottom: 12px; }
+</style>

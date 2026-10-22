@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import { testimonials } from '../data/content';
+---
+<div class="grid grid-3">
+  {testimonials.map((t) => (
+    <figure class="tm reveal">
+      <div class="tm__stars" aria-label="5 out of 5 stars">
+        {[1, 2, 3, 4, 5].map(() => <Icon name="star" />)}
+      </div>
+      <blockquote>“{t.quote}”</blockquote>
+      <figcaption>
+        <span class="tm__avatar" aria-hidden="true">{t.name.charAt(0)}</span>
+        <span><strong>{t.name}</strong><small>{t.role}</small></span>
+        {t.placeholder && <span class="tag tag--sample">Sample</span>}
+      </figcaption>
+    </figure>
+  ))}
+</div>
+
+<style>
+  .tm { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 28px; display: flex; flex-direction: column; }
+  .tm__stars { display: flex; gap: 2px; color: var(--accent); margin-bottom: 14px; }
+  .tm__stars :global(svg) { width: 18px; height: 18px; fill: currentColor; }
+  blockquote { margin: 0 0 22px; color: var(--ink); font-size: 1.03rem; }
+  figcaption { margin-top: auto; display: flex; align-items: center; gap: 12px; }
+  figcaption strong { display: block; color: var(--ink); font-size: 0.95rem; }
+  figcaption small { display: block; color: var(--muted); font-size: 0.85rem; }
+  figcaption .tag { margin-left: auto; }
+  .tm__avatar { width: 42px; height: 42px; border-radius: 50%; background: var(--brand-tint); color: var(--brand); display: grid; place-items: center; font-weight: 800; font-family: var(--font-display); flex: none; }
+</style>

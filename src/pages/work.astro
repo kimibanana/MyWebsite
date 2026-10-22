@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CaseStudies from '../components/CaseStudies.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Results | Local SEO & Google Ads Case Studies | Web Frontier"
+  description="See how Web Frontier helps local service businesses get more calls and booked jobs with Local SEO, websites, Google Ads and LSA."
+>
+  <PageHero
+    eyebrow="Results"
+    title="Results we’re proud of"
+    lead="Every engagement starts with a business problem and ends with a measurable result: more calls, more booked jobs, lower cost per lead."
+    crumbs={[{ label: 'Results' }]}
+  />
+  <section class="section">
+    <div class="wrap"><CaseStudies /></div>
+  </section>
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Client reviews</span><h2>In their words</h2></div>
+      <Testimonials />
+    </div>
+  </section>
+  <CtaBand title="Want results like these?" text="Start with a free audit. We’ll show you exactly where your biggest opportunities are." />
+</Base>

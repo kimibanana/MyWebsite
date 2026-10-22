@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+interface Props { title?: string; text?: string }
+const {
+  title = 'Find out what’s stopping Google from sending you more jobs',
+  text = 'Get a free growth audit of your website, Google Business Profile and competitors. We’ll show you the 3 biggest fixes, whether you hire us or not.',
+} = Astro.props;
+---
+<section class="cta">
+  <div class="wrap">
+    <div class="cta__box reveal">
+      <div>
+        <h2>{title}</h2>
+        <p>{text}</p>
+      </div>
+      <div class="btn-row">
+        <a class="btn btn--primary" href="/free-audit">Get my free audit <Icon name="arrow" /></a>
+        <a class="btn btn--ghost-light" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta { padding: clamp(56px, 8vw, 96px) 0; }
+  .cta__box {
+    display: grid; grid-template-columns: 1.4fr auto; gap: 32px; align-items: center;
+    padding: clamp(32px, 5vw, 56px); border-radius: 28px; color: #c7d2dc;
+    background: radial-gradient(120% 140% at 100% 0%, #13534f 0%, var(--night) 55%);
+  }
+  .cta__box h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+  .cta__box p { margin: 0; max-width: 56ch; }
+  @media (max-width: 860px) { .cta__box { grid-template-columns: 1fr; } }
+</style>

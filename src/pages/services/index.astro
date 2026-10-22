@@ -1,0 +1,57 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { services } from '../../data/services';
+---
+<Base
+  title="Local SEO, Web Design, Google Ads & LSA Services | Web Frontier"
+  description="Local SEO, web design, Google Ads, Local Services Ads and website maintenance for local businesses in the US, UK, Canada and Australia. Fixed-price sprints."
+>
+  <PageHero
+    eyebrow="Services"
+    title="Services that turn local searches into booked jobs"
+    lead="Whether you need to rank in the Map Pack, a website that converts, or leads this week from ads, we deliver it in fixed-scope sprints with plain-language reporting."
+    crumbs={[{ label: 'Services' }]}
+  >
+    <div class="btn-row"><a class="btn btn--primary" href="/free-audit">Get a free growth audit <Icon name="arrow" /></a></div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap list">
+      {services.map((s) => (
+        <article class="row reveal">
+          <div class="icon-badge"><Icon name={s.icon} /></div>
+          <div class="row__body">
+            <h2>{s.name}</h2>
+            <p>{s.short}</p>
+            <ul class="checks">{s.included.slice(0, 4).map((i) => <li>{i}</li>)}</ul>
+          </div>
+          <div class="row__side">
+            <p class="row__price"><small>Starts at</small><strong>{s.startingAt}</strong></p>
+            <a class="btn btn--secondary btn--sm" href={`/services/${s.slug}`}>View details <Icon name="arrow" /></a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CtaBand title="Not sure which service you need?" text="Tell us your goals and market, and we’ll recommend the simplest set of sprints to get you there. Free, no obligation." />
+</Base>
+
+<style>
+  .list { display: grid; gap: 20px; }
+  .row { display: grid; grid-template-columns: auto 1fr auto; gap: 28px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: #fff; }
+  .row h2 { font-size: 1.5rem; }
+  .row .checks { grid-template-columns: 1fr 1fr; font-size: 0.95rem; }
+  .row__side { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-end; gap: 16px; min-width: 170px; }
+  .row__price { text-align: right; margin: 0; }
+  .row__price small { display: block; color: var(--muted); font-size: 0.8rem; }
+  .row__price strong { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); }
+  @media (max-width: 860px) {
+    .row { grid-template-columns: 1fr; gap: 12px; padding: 24px; }
+    .row .checks { grid-template-columns: 1fr; }
+    .row__side { align-items: flex-start; flex-direction: row; flex-wrap: wrap; align-items: center; }
+    .row__price { text-align: left; }
+  }
+</style>

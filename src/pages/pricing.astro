@@ -1,0 +1,147 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import SprintCard from '../components/SprintCard.astro';
+import SprintCycle from '../components/SprintCycle.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { foundationSprint, monthlySprints, bundles, webPackages, carePlans } from '../data/content';
+
+const faqs = [
+  { q: 'Do I have to start with the Foundation Sprint?', a: 'For SEO, yes. It fixes the technical issues and sets up tracking so every sprint after it is measurable. Websites, ads and maintenance can start on their own.' },
+  { q: 'Can I change sprints from month to month?', a: 'Yes. Add, pause or swap sprints before the next one starts. The price changes with the scope, and you always know both up front.' },
+  { q: 'What does a sprint report include?', a: 'Every deliverable completed with links, ranking and traffic changes, calls and leads tracked, and what we recommend for the next sprint, in plain language.' },
+  { q: 'How do payments work?', a: 'Sprints are paid at the start of each 30-day cycle by card or bank transfer. Website projects are 50% to start and 50% at launch. All prices are in USD.' },
+  { q: 'Is ad spend included?', a: 'No. Google Ads and Local Services Ads budgets are paid directly to Google from your own account, so you always control and see your spend.' },
+];
+---
+<Base
+  title="SEO Sprints & Pricing | Fixed-Price Local SEO, Websites & Ads | Web Frontier"
+  description="No vague retainers. Local SEO, web design and Google Ads in fixed-price 30-day sprints. Foundation Sprint $997, monthly sprints from $650."
+>
+  <PageHero
+    eyebrow="Sprints & pricing"
+    title="No vague retainers. Just 30-day sprints with a fixed scope."
+    lead="Every sprint has a written list of deliverables, a fixed price and a delivery date. You see the plan before you pay and the results after. Stack the sprints you need and change them any month."
+    crumbs={[{ label: 'Sprints & pricing' }]}
+  >
+    <nav class="jump" aria-label="Jump to">
+      <a href="#seo">SEO sprints</a><a href="#bundles">Bundles</a><a href="#websites">Websites</a><a href="#care">Maintenance</a>
+    </nav>
+  </PageHero>
+
+  <section class="section section--tight">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">How every sprint runs</span><h2>30 days. Clear scope. Real deliverables.</h2></div>
+      <SprintCycle />
+    </div>
+  </section>
+
+  <section class="section section--surface" id="seo">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Step 1</span>
+        <h2>Start with the Foundation Sprint</h2>
+        <p class="lead">One-time, 30 days. We fix what’s holding your site back, set up tracking, and hand you a 90-day roadmap you keep whether or not you continue.</p>
+      </div>
+      <div class="foundation">
+        <SprintCard sprint={foundationSprint} />
+        <div class="foundation__why reveal">
+          <h3>Why start here?</h3>
+          <p>Content and links can’t perform on a site with broken technical SEO, a half-finished Google Business Profile and no tracking. The Foundation Sprint fixes all of that first, so every dollar you spend afterward is measurable.</p>
+          <ul class="checks">
+            <li>Delivered in 30 days, with a written report</li>
+            <li>Roadmap is yours to keep</li>
+            <li>No commitment to monthly sprints</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="head head--step">
+        <span class="eyebrow">Step 2</span>
+        <h2>Stack monthly sprints</h2>
+        <p class="lead">Pick one or more. Month-to-month, no contract.</p>
+      </div>
+      <div class="grid grid-4">{monthlySprints.map((s) => <SprintCard sprint={s} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="bundles">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Not sure what to pick?</span><h2>Popular sprint bundles</h2></div>
+      <div class="grid grid-3">
+        {bundles.map((b) => (
+          <a href={`/contact?plan=${encodeURIComponent(b.name)}`} class:list={['card', 'bundle', 'reveal', { 'bundle--featured': b.featured }]}>
+            <span class="bundle__name">{b.name}</span>
+            <strong>{b.price}</strong>
+            <span class="bundle__sprints">{b.sprints}</span>
+            <small>{b.note}</small>
+          </a>
+        ))}
+      </div>
+      <p class="note">All bundles start after the Foundation Sprint. Add an Ads Sprint to any bundle for $750/mo.</p>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="websites">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Websites</span><h2>Website sprints</h2><p class="lead">A fixed-scope build with a launch date. You own the site, domain and files.</p></div>
+      <div class="grid grid-2">{webPackages.map((p) => <SprintCard sprint={p} label="Includes" />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="care">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Maintenance</span><h2>Website care plans</h2><p class="lead">Month-to-month. Cancel anytime.</p></div>
+      <div class="grid grid-2">
+        {carePlans.map((c) => (
+          <div class="card care reveal">
+            <div><h3>{c.name}</h3><ul class="checks">{c.features.map((f) => <li>{f}</li>)}</ul></div>
+            <strong>{c.price}</strong>
+          </div>
+        ))}
+      </div>
+      <div class="guarantee reveal">
+        <Icon name="shield" />
+        <div>
+          <!-- TODO: confirm this guarantee before launch -->
+          <h3>The sprint promise</h3>
+          <p>If we don’t deliver every item in a sprint’s written scope by the end of the 30 days, we keep working on it at no extra cost until it’s done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">FAQ</span><h2>Sprint & pricing questions</h2></div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+  <CtaBand title="Not sure which sprints you need?" text="Get a free growth audit. We’ll recommend the right sprints for your market and budget, with no obligation." />
+</Base>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a { padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .jump a:hover { border-color: var(--brand); }
+  #seo, #bundles, #websites, #care { scroll-margin-top: 70px; }
+  .foundation { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; }
+  .foundation__why p { font-size: 1.05rem; }
+  @media (max-width: 860px) { .foundation { grid-template-columns: 1fr; } }
+  .head--step { margin-top: clamp(56px, 8vw, 88px); }
+  .bundle { text-decoration: none; color: var(--muted); text-align: center; display: grid; gap: 4px; }
+  .bundle:hover { border-color: var(--brand); color: var(--muted); }
+  .bundle--featured { border: 2px solid var(--brand); box-shadow: var(--shadow); }
+  .bundle__name { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 1.1rem; }
+  .bundle strong { font-family: var(--font-display); font-size: 2rem; color: var(--ink); letter-spacing: -0.03em; }
+  .bundle__sprints { color: var(--brand); font-weight: 600; }
+  .note { text-align: center; margin: 24px 0 0; color: var(--muted); }
+  .care { display: flex; justify-content: space-between; gap: 20px; align-items: flex-start; }
+  .care strong { font-family: var(--font-display); font-size: 1.6rem; color: var(--ink); white-space: nowrap; }
+  .guarantee { margin-top: 32px; display: flex; gap: 20px; padding: 28px; border-radius: var(--radius-lg); background: var(--brand-tint); }
+  .guarantee > :global(svg) { width: 40px; height: 40px; color: var(--brand); flex: none; }
+  .guarantee p { margin: 0; }
+  @media (max-width: 520px) { .guarantee, .care { flex-direction: column; } }
+</style>

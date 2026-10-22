@@ -1,0 +1,42 @@
+// Every business detail the site shows lives here.
+// Items marked TODO are placeholders waiting on real info.
+
+const whatsappNumber = '639063813194';
+
+export const site = {
+  name: 'Web Frontier',
+  tagline: 'SEO, websites & ads that fill your calendar',
+  description:
+    'Web Frontier helps local businesses in the US, UK, Canada and Australia get more calls and booked jobs from Google, with SEO, websites, Google Ads and Local Services Ads delivered in fixed-price 30-day sprints.',
+  url: 'https://webfrontier.co', // TODO: real domain
+  email: 'hello@webfrontier.co', // TODO
+  whatsappDisplay: '+63 906 381 3194',
+  whatsapp: `https://wa.me/${whatsappNumber}`,
+  phoneHref: `tel:+${whatsappNumber}`,
+  bookingUrl: '/contact', // TODO: Calendly or Google Calendar booking link
+  hours: 'Mon–Fri, working in US, UK & AU hours',
+  markets: ['United States', 'United Kingdom', 'Canada', 'Australia'],
+  marketCodes: ['US', 'GB', 'CA', 'AU'],
+  founded: '2024', // TODO
+  social: {
+    linkedin: '', // TODO
+    facebook: '', // TODO
+  },
+  // Form handling. Works out of the box on Netlify. For other hosts, set a
+  // Formspree (or similar) endpoint here and it will be used instead.
+  formEndpoint: '', // e.g. 'https://formspree.io/f/xxxxxxx'
+  // Stats are hidden until real numbers are filled in.
+  stats: [
+    { value: '', label: 'Leads generated for clients' }, // TODO
+    { value: '', label: 'Keywords ranked on page 1' }, // TODO
+    { value: '', label: 'Average client rating' }, // TODO
+  ],
+};
+
+export const nav = [
+  { label: 'Services', href: '/services' },
+  { label: 'Sprints & Pricing', href: '/pricing' },
+  { label: 'Results', href: '/work' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+];
