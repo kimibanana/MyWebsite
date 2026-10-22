@@ -9,10 +9,11 @@ import SprintCycle from '../components/SprintCycle.astro';
 import Dashboard from '../components/Dashboard.astro';
 import { site } from '../data/site';
 import {
-  homeFaqs, pains, framework, specialties, otherBusinesses, whyUs, consultation, testimonials,
+  homeFaqs, pains, framework, specialties, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
 } from '../data/content';
 
 const stats = site.stats.filter((s) => s.value);
+const intlMarkets = site.markets.filter((m) => m !== 'Philippines');
 const featured = testimonials[0];
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -22,7 +23,7 @@ const faqSchema = {
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 ---
 <Base
-  title="Medical Marketing Agency | SEO, Websites & Ads for Practices | Web Frontier"
+  title="Medical Marketing Agency Philippines & Worldwide | Healthcare SEO, Websites & Ads | Web Frontier"
   description={site.description}
   schema={[faqSchema]}
 >
@@ -30,23 +31,24 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   <section class="hero pattern">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">Medical marketing agency</span>
+        <span class="eyebrow">Medical marketing agency · Philippines & worldwide</span>
         <h1>More patients. More calls. <span class="hl">More bookings.</span></h1>
-        <p class="lead">We help dental, aesthetic and medical practices, and the local businesses around them, win on Google with SEO, websites, Google Ads and Local Services Ads. {site.experience} of experience, delivered in fixed-price 30‑day sprints.</p>
+        <p class="lead">A healthcare-only marketing agency for clinics, hospitals and practices in the Philippines and around the world. We bring in patients with medical SEO, websites and Google Ads, delivered in fixed-price 30‑day sprints.</p>
         <div class="btn-row hero__ctas">
           <a class="btn btn--primary" href="#growth-audit">Get my free growth audit <Icon name="arrow" /></a>
           <a class="btn btn--secondary" href="/pricing">What to expect</a>
         </div>
         <ul class="hero__points">
           <li><Icon name="check" />No long-term contracts</li>
-          <li><Icon name="check" />HIPAA-conscious marketing</li>
+          <li><Icon name="check" />Healthcare compliance built in</li>
           <li><Icon name="check" />You own every account</li>
         </ul>
-        {stats.length > 0 && (
-          <dl class="hero__stats">
-            {stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
-          </dl>
-        )}
+        <dl class="hero__stats">
+          <div><dt>100%</dt><dd>Healthcare focus</dd></div>
+          <div><dt>{site.experience}</dt><dd>In SEO, web & ads</dd></div>
+          <div><dt>30 days</dt><dd>Per fixed-scope sprint</dd></div>
+          {stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
+        </dl>
       </div>
       <Dashboard />
     </div>
@@ -78,6 +80,26 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
           </div>
         ))}
       </div>
+    </div>
+  </section>
+
+  <!-- Specialist, not generalist -->
+  <section class="section section--surface">
+    <div class="wrap specialist">
+      <div class="reveal">
+        <span class="eyebrow">Specialist, not generalist</span>
+        <h2>We only do healthcare. That’s the point.</h2>
+        <p class="lead">A generalist agency learns medical marketing on your budget. Ads get disapproved, treatment claims cross regulator lines, and patient data ends up in the wrong tools.</p>
+        <p>We work only with clinics, hospitals and practices. We already know how patients search for your treatments, what Google and Meta will and won’t approve, and what the FDA, DOH and regulators abroad expect from health advertising.</p>
+      </div>
+      <ul class="vs reveal">
+        <li class="vs__row vs__head"><span></span><strong>Generalist agency</strong><strong>Web Frontier</strong></li>
+        <li class="vs__row"><span>Knows your specialty</span><span>Learns as it goes</span><span><Icon name="check" />From day one</span></li>
+        <li class="vs__row"><span>Healthcare ad policies</span><span>Disapprovals and appeals</span><span><Icon name="check" />Built to pass</span></li>
+        <li class="vs__row"><span>Treatment claims</span><span>Copied from competitors</span><span><Icon name="check" />Reviewed for compliance</span></li>
+        <li class="vs__row"><span>Patient privacy</span><span>Standard tracking</span><span><Icon name="check" />Health data kept out</span></li>
+        <li class="vs__row"><span>What you pay for</span><span>Open-ended retainer</span><span><Icon name="check" />Fixed-scope sprints</span></li>
+      </ul>
     </div>
   </section>
 
@@ -129,13 +151,13 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
     </div>
   </section>
 
-  <!-- Specialties + other businesses -->
+  <!-- Specialties -->
   <section class="section">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">Who we serve</span>
-        <h2>Proven across medical specialties</h2>
-        <p class="lead">Every specialty has different patients, search behavior and rules. Our process adapts to yours.</p>
+        <span class="eyebrow">Specialties</span>
+        <h2>Built for every corner of healthcare</h2>
+        <p class="lead">Every specialty has different patients, search behavior and rules. Our process adapts to yours, from single-doctor clinics to hospitals.</p>
       </div>
       <div class="specs">
         {specialties.map((s) => (
@@ -145,15 +167,6 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
             <Icon name="arrow" class="spec__arrow" />
           </a>
         ))}
-      </div>
-      <div class="others reveal">
-        <div>
-          <span class="eyebrow">Not a medical practice?</span>
-          <h3>We help other local businesses too</h3>
-          <p>After {site.experience} in this industry, our fundamentals are solid: rank on Google, win the Map Pack, convert visitors and run ads that pay for themselves. That works for any business that serves a local area.</p>
-          <a class="btn btn--secondary" href="/who-we-serve#local-businesses">See local businesses we serve <Icon name="arrow" /></a>
-        </div>
-        <ul class="chips">{otherBusinesses.map((b) => <li>{b}</li>)}</ul>
       </div>
       <div class="center"><a class="btn btn--primary" href="#growth-audit">Help me get more patients <Icon name="arrow" /></a></div>
     </div>
@@ -192,6 +205,54 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
     </div>
   </section>
 
+  <!-- Compliance -->
+  <section class="section section--night">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Healthcare compliance</span>
+        <h2>Medical marketing that understands the rules</h2>
+        <p class="lead">Health advertising is regulated differently in every country. Every sprint runs through our compliance review before anything goes live.</p>
+      </div>
+      <div class="comp">
+        <ol class="comp__steps">
+          {complianceSteps.map((c, i) => (
+            <li class="reveal"><span class="comp__n">{i + 1}</span><div><h3>{c.title}</h3><p>{c.body}</p></div></li>
+          ))}
+        </ol>
+        <div class="comp__rules reveal">
+          <h3>Rules we work with</h3>
+          <p class="comp__label">Philippines</p>
+          <ul>{complianceFrameworks.philippines.map((r) => <li>{r}</li>)}</ul>
+          <p class="comp__label">International</p>
+          <ul>{complianceFrameworks.global.map((r) => <li>{r}</li>)}</ul>
+          <p class="comp__note">We’re marketers, not lawyers. Your practice gives final approval on all clinical claims.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Location -->
+  <section class="section">
+    <div class="wrap where">
+      <div class="reveal">
+        <span class="eyebrow">Where we work</span>
+        <h2>Medical marketing agency in the Philippines, working worldwide</h2>
+        <p class="lead">Based in {site.map.label}, we help clinics and hospitals across the country win on Google Maps and search, and we serve practices abroad on their own time zone.</p>
+        <a class="btn btn--secondary" href="/contact">Book a call, wherever you are <Icon name="arrow" /></a>
+      </div>
+      <div class="where__lists reveal">
+        <div class="card">
+          <h3><Icon name="pin" />Across the Philippines</h3>
+          <ul class="chips">{site.phCities.map((c) => <li>{c}</li>)}</ul>
+        </div>
+        <div class="card">
+          <h3><Icon name="globe" />Around the world</h3>
+          <ul class="chips">{intlMarkets.map((m) => <li>{m}</li>)}</ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Let's work together -->
   <section class="section section--surface" id="growth-audit">
     <div class="wrap together">
@@ -217,9 +278,9 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
       <div class="reveal">
         <span class="eyebrow">A message from our founder</span>
         <!-- TODO: founder photo; confirm wording -->
-        <h2>We don’t sell traffic. We help you fill your schedule.</h2>
-        <p>I’ve spent more than a decade in SEO, web design and paid search, and I’ve seen how often practices are sold rankings and reports instead of patients.</p>
-        <p>Web Frontier is built around a simple idea: tell you exactly what we’ll do, do it in 30 days, and show you the results. Healthcare is our specialty, and the same fundamentals have grown every kind of local business we’ve worked with.</p>
+        <h2>Why we only do healthcare</h2>
+        <p>I’ve spent more than a decade in SEO, web design and paid search. The clients who needed good marketing most, and were served worst by it, were clinics: sold rankings and reports instead of patients, by agencies that didn’t understand medical ads or patient privacy.</p>
+        <p>So we stopped doing everything and chose one thing. Web Frontier only works with healthcare, in the Philippines and around the world. We tell you exactly what we’ll do, do it in 30 days, and show you the results in patients, not page views.</p>
         <p class="founder__sign"><strong>{site.founder.name}</strong>, {site.founder.role}, Web Frontier</p>
         <a class="btn btn--primary" href="#growth-audit">Let’s work together <Icon name="arrow" /></a>
       </div>
@@ -297,6 +358,36 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   .spec__icon { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--brand-tint); color: var(--brand-text); display: grid; place-items: center; }
   .spec__icon :global(svg) { width: 18px; height: 18px; }
   .spec :global(.spec__arrow) { width: 16px; height: 16px; margin-left: auto; color: var(--brand-text); flex: none; }
+  .specialist { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  @media (max-width: 960px) { .specialist { grid-template-columns: 1fr; } }
+  .vs { list-style: none; margin: 0; padding: 8px; border-radius: var(--radius-lg); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .vs__row { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; padding: 14px 16px; font-size: 0.93rem; color: var(--muted); border-bottom: 1px solid var(--line); align-items: center; }
+  .vs__row:last-child { border-bottom: 0; }
+  .vs__row > span:first-child { font-weight: 600; color: var(--ink); }
+  .vs__row > span:last-child { display: flex; gap: 6px; align-items: center; color: var(--ink); font-weight: 600; }
+  .vs__row :global(svg) { width: 16px; height: 16px; color: var(--success); flex: none; }
+  .vs__head strong { font-family: var(--font-display); font-size: 0.85rem; color: var(--muted); }
+  .vs__head strong:last-child { color: var(--brand-text); }
+  @media (max-width: 520px) { .vs__row { grid-template-columns: 1fr 1fr; } .vs__row > span:first-child, .vs__head span { grid-column: 1 / -1; } .vs__head span { display: none; } }
+
+  .comp { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
+  @media (max-width: 960px) { .comp { grid-template-columns: 1fr; } }
+  .comp__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+  .comp__steps li { display: flex; gap: 16px; padding: 18px 20px; border-radius: var(--radius); background: var(--night-2); border: 1px solid rgb(255 255 255 / 0.08); }
+  .comp__steps h3 { color: #fff; font-size: 1.05rem; margin: 0 0 4px; }
+  .comp__steps p { margin: 0; color: #a9b8c5; font-size: 0.95rem; }
+  .comp__n { flex: none; width: 34px; height: 34px; border-radius: 50%; background: rgb(95 211 207 / 0.14); color: #5fd3cf; display: grid; place-items: center; font-weight: 800; font-family: var(--font-display); }
+  .comp__rules { padding: 26px; border-radius: var(--radius-lg); background: var(--night-2); border: 1px solid rgb(255 255 255 / 0.08); color: #a9b8c5; }
+  .comp__rules h3 { color: #fff; }
+  .comp__label { margin: 16px 0 8px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #5fd3cf; }
+  .comp__rules ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 0.95rem; color: #dbe4ec; }
+  .comp__note { margin: 20px 0 0; font-size: 0.85rem; }
+
+  .where { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  @media (max-width: 960px) { .where { grid-template-columns: 1fr; } }
+  .where__lists { display: grid; gap: 16px; }
+  .where__lists h3 { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+  .where__lists h3 :global(svg) { width: 20px; height: 20px; color: var(--brand-text); }
   .others { margin-top: 32px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-lg); background: var(--surface); }
   .others h3 { font-size: 1.5rem; }
   @media (max-width: 860px) { .others { grid-template-columns: 1fr; } }

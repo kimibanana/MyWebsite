@@ -236,20 +236,36 @@ export const framework = [
 
 export const specialties = [
   { name: 'Dental & orthodontics', icon: 'heart' },
-  { name: 'Med spas & aesthetics', icon: 'star' },
+  { name: 'Aesthetic & med spa clinics', icon: 'star' },
   { name: 'Dermatology', icon: 'shield' },
-  { name: 'Plastic surgery', icon: 'users' },
-  { name: 'Chiropractic', icon: 'zap' },
-  { name: 'Physical therapy', icon: 'chart' },
-  { name: 'Primary & urgent care', icon: 'clipboard' },
+  { name: 'Plastic & cosmetic surgery', icon: 'users' },
+  { name: 'Hospitals & medical centers', icon: 'clipboard' },
+  { name: 'Diagnostics & laboratories', icon: 'chart' },
+  { name: 'Primary care & family clinics', icon: 'heart' },
+  { name: 'Fertility & IVF', icon: 'star' },
+  { name: 'Weight loss & wellness', icon: 'zap' },
+  { name: 'Eye care & ophthalmology', icon: 'eye' },
+  { name: 'Physical therapy & rehab', icon: 'zap' },
   { name: 'Mental health & therapy', icon: 'chat' },
 ];
 
-export const otherBusinesses = ['HVAC', 'Plumbing', 'Roofing', 'Electrical', 'Law firms', 'Contractors', 'Cleaning', 'Pest control', 'Real estate', 'Auto services'];
+// Rules our compliance review checks copy and campaigns against.
+export const complianceFrameworks = {
+  philippines: ['FDA Philippines advertising rules', 'DOH guidelines', 'Data Privacy Act of 2012', 'PRC & medical society codes of ethics'],
+  global: ['HIPAA (United States)', 'Ahpra & TGA (Australia)', 'ASA / CAP Code (United Kingdom)', 'Google & Meta healthcare ad policies'],
+};
+
+export const complianceSteps = [
+  { title: 'Regulatory mapping', body: 'We list the rules that apply to your specialty and country before we write a word.' },
+  { title: 'Claims & copy review', body: 'Treatment claims, before-and-after images and testimonials are checked against those rules.' },
+  { title: 'Platform policy check', body: 'Ads and landing pages are built to pass Google and Meta healthcare policies the first time.' },
+  { title: 'Privacy-safe tracking', body: 'Patient health information stays out of forms, analytics and ad platforms.' },
+  { title: 'Ongoing monitoring', body: 'Every sprint we re-check live ads and pages as rules and platform policies change.' },
+];
 
 export const whyUs = [
-  { icon: 'heart', title: 'Healthcare-first', body: 'Built around how patients choose providers, and the rules that come with medical marketing.' },
-  { icon: 'clock', title: 'A decade of experience', body: '10+ years of SEO, web and ads work. The fundamentals that grow a practice grow any local business.' },
+  { icon: 'heart', title: '100% healthcare', body: 'We only work with clinics, hospitals and practices, so we know how patients choose a provider and the rules that come with it.' },
+  { icon: 'clock', title: 'A decade of experience', body: '10+ years of SEO, web and ads work, with a team that already speaks your specialty’s language.' },
   { icon: 'file', title: 'Fixed-scope sprints', body: 'Every 30-day sprint has a written scope, fixed price and delivery report. No black-box retainers.' },
   { icon: 'users', title: 'Direct access', body: 'Talk to the specialists doing the work, with regular calls to review progress and results.' },
 ];
@@ -263,16 +279,28 @@ export const consultation = [
 
 export const homeFaqs = [
   {
-    q: 'Do you only work with medical practices?',
-    a: 'Healthcare is our focus, but not our limit. The same fundamentals (local SEO, fast websites, well-run ads, and reviews) work for any local business, and we also serve home services, law firms, contractors and other local companies.',
+    q: 'Do you only work with healthcare businesses?',
+    a: 'Yes. We work only with clinics, hospitals, practices and other healthcare providers. That focus is why we understand patient search behavior, medical advertising rules and the ad-platform policies that trip up generalist agencies.',
+  },
+  {
+    q: 'Do you work with clinics in the Philippines?',
+    a: 'Yes. We are based in Laguna and work with clinics and hospitals across Metro Manila, Calabarzon, Cebu, Davao and the rest of the country. We know local search behavior, Google Maps in Philippine cities, and the FDA Philippines and DOH rules on health advertising.',
+  },
+  {
+    q: 'Do you work with international clients?',
+    a: 'Yes. We serve practices in the US, UK, Canada, Australia, Singapore, the UAE and beyond. We schedule calls in your time zone, follow your country’s advertising and privacy rules, and reply within one business day.',
   },
   {
     q: 'What is a sprint?',
     a: 'A sprint is 30 days of focused work with a written scope, fixed price and delivery date. Week 1 we plan, weeks 2–3 we execute, and week 4 we deliver a report of exactly what was done and what moved.',
   },
   {
-    q: 'Is your marketing HIPAA-conscious?',
-    a: 'Yes. We keep protected health information out of marketing tools: forms collect only non-clinical contact details, and tracking is set up so patient health data isn’t shared with ad platforms. Where you need intake or booking, we connect the compliant tools your practice already uses.',
+    q: 'How quickly will we see results?',
+    a: 'Google Ads can bring enquiries within the first week or two once campaigns are live. SEO and Google Maps rankings usually show clear movement in 3 to 6 months, depending on your competition and your website’s starting point.',
+  },
+  {
+    q: 'Is your marketing compliant with healthcare rules?',
+    a: 'Every campaign goes through our compliance review against the rules for your country and specialty, such as FDA Philippines and DOH guidelines, HIPAA in the US, or Ahpra and TGA in Australia, plus Google and Meta healthcare policies. We keep patient health information out of marketing tools. Your practice still gives final approval on all claims.',
   },
   {
     q: 'Do you lock clients into contracts?',
@@ -281,10 +309,6 @@ export const homeFaqs = [
   {
     q: 'Will we own our website and accounts?',
     a: 'Always. Your domain, website, Google Business Profile, Analytics and ad accounts stay in your practice’s name.',
-  },
-  {
-    q: 'Where is your team, and what hours do you work?',
-    a: 'We are a remote team serving practices and local businesses in the US, UK, Canada and Australia. We schedule calls in your time zone and reply within one business day.',
   },
 ];
 

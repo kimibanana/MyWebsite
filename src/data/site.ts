@@ -8,7 +8,7 @@ export const site = {
   tagline: 'Medical marketing that fills your schedule',
   experience: '10+ years',
   description:
-    'Web Frontier is a medical marketing agency helping practices and local businesses in the US, UK, Canada and Australia get more patients and customers from Google with SEO, websites, Google Ads and Local Services Ads, delivered in fixed-price 30-day sprints.',
+    'Web Frontier is a medical and healthcare marketing agency in the Philippines, working with clinics, hospitals and practices worldwide. We bring in more patients with medical SEO, websites and Google Ads, delivered in fixed-price 30-day sprints.',
   url: 'https://webfrontierco.netlify.app', // TODO: custom domain
   email: 'info@webfrontier.co',
   founder: {
@@ -20,9 +20,11 @@ export const site = {
   whatsapp: `https://wa.me/${whatsappNumber}`,
   phoneHref: `tel:+${whatsappNumber}`,
   bookingUrl: '/contact', // TODO: Calendly or Google Calendar booking link
-  hours: 'Mon–Fri, working in US, Canada, UK & AU hours',
-  markets: ['United States', 'United Kingdom', 'Canada', 'Australia'],
-  marketCodes: ['US', 'GB', 'CA', 'AU'],
+  hours: 'Mon–Fri, Philippine time, with calls in your time zone',
+  // Home market first, then the international markets we serve.
+  markets: ['Philippines', 'United States', 'United Kingdom', 'Canada', 'Australia', 'Singapore', 'United Arab Emirates', 'New Zealand'],
+  marketCodes: ['PH', 'US', 'GB', 'CA', 'AU', 'SG', 'AE', 'NZ'],
+  phCities: ['Metro Manila', 'Laguna', 'Cavite', 'Batangas', 'Pampanga', 'Cebu', 'Davao', 'Iloilo', 'Bacolod', 'Cagayan de Oro'],
   founded: '2024', // TODO
   // TODO: accounts not created yet. These handles are placeholders; update
   // each URL once the profile exists, then set socialLive to true so the
@@ -36,7 +38,7 @@ export const site = {
     { name: 'YouTube', icon: 'youtube', url: 'https://www.youtube.com/@webfrontierco' },
     { name: 'TikTok', icon: 'tiktok', url: 'https://www.tiktok.com/@webfrontierco' },
   ],
-  // Google Map on the contact page. TODO: confirm the address to show.
+  // Google Map on the contact page. TODO: confirm the exact address to show.
   map: {
     query: 'Laguna, Philippines',
     label: 'Laguna, Philippines',
@@ -55,7 +57,7 @@ export const site = {
 
 export const nav = [
   { label: 'Services', href: '/services' },
-  { label: 'Who We Serve', href: '/who-we-serve' },
+  { label: 'Specialties', href: '/who-we-serve' },
   { label: 'Results', href: '/work' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'About', href: '/about' },

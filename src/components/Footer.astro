@@ -10,11 +10,11 @@ const year = new Date().getFullYear();
     <div class="ftr__grid">
       <div class="ftr__brand">
         <Logo light />
-        <p>{site.tagline}. SEO, websites and ads for medical practices and local businesses, delivered in fixed-price 30-day sprints. {site.experience} in the industry.</p>
+        <p>{site.tagline}. SEO, websites and ads for clinics, hospitals and practices, delivered in fixed-price 30-day sprints. {site.experience} in the industry.</p>
         <ul class="ftr__contact">
           <li><Icon name="whatsapp" /><a href={site.whatsapp} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
           {site.email && <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>}
-          <li><Icon name="globe" />Serving the US, UK, Canada & Australia</li>
+          <li><Icon name="globe" />Based in the Philippines, serving clients worldwide</li>
           <li><Icon name="clock" />{site.hours}</li>
         </ul>
         <ul class="ftr__social" aria-label="Social media">
@@ -31,7 +31,7 @@ const year = new Date().getFullYear();
         <h3>Company</h3>
         <ul>
           <li><a href="/about">About us</a></li>
-          <li><a href="/who-we-serve">Who we serve</a></li>
+          <li><a href="/who-we-serve">Specialties</a></li>
           <li><a href="/work">Results</a></li>
           <li><a href="/pricing">Sprints & pricing</a></li>
           <li><a href="/contact">Contact</a></li>

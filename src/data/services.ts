@@ -170,7 +170,7 @@ export const services: Service[] = [
       'Review generation to improve ranking',
       'Monthly lead and cost report',
     ],
-    idealFor: ['Eligible healthcare specialties', 'Home services', 'Legal and professional services'],
+    idealFor: ['Eligible healthcare specialties', 'Practices in the US, Canada, UK and other countries where LSA is available', 'Clinics that want pay-per-lead pricing'],
     faqs: [
       { q: 'Is my practice eligible?', a: 'Eligibility depends on your specialty and location and changes over time. We confirm whether your category is available before you pay anything.' },
       { q: 'Should we run LSA or Google Ads?', a: 'Often both. LSA captures high-intent searches with a trust badge; Google Ads covers treatments and keywords LSA doesn’t. We recommend the right mix for your budget.' },
@@ -209,13 +209,13 @@ export const services: Service[] = [
       'Monthly content edits (30 min or 2 hrs by plan)',
       'Monthly health report',
     ],
-    idealFor: ['Any practice or local business website', 'WordPress sites', 'Sites we built or inherited'],
+    idealFor: ['Clinic, hospital and practice websites', 'WordPress sites', 'Sites we built or inherited'],
     faqs: [
       { q: 'Can you take over a site someone else built?', a: 'Yes. We start with a health check, fix urgent issues, then move it onto a care plan.' },
       { q: 'What if our site gets hacked?', a: 'On a care plan, cleanup and restoration are included at no extra cost.' },
     ],
-    metaTitle: 'Website Maintenance for Practices & Local Businesses | Web Frontier',
-    metaDescription: 'Managed hosting, backups, security, updates and fast edits for practice and local business websites. Care plans from $99/month, cancel anytime.',
+    metaTitle: 'Website Maintenance for Clinics & Practices | Web Frontier',
+    metaDescription: 'Managed hosting, backups, security, updates and fast edits for clinic and practice websites. Care plans from $99/month, cancel anytime.',
   },
 ];
 
