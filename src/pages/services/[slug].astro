@@ -4,6 +4,7 @@ import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
 import LeadForm from '../../components/LeadForm.astro';
 import Faq from '../../components/Faq.astro';
+import { priceHtml } from '../../lib/price';
 import CtaBand from '../../components/CtaBand.astro';
 import CaseStudies from '../../components/CaseStudies.astro';
 import { services, type Service } from '../../data/services';
@@ -41,7 +42,7 @@ const schema = [
     lead={s.intro}
     crumbs={[{ label: 'Services', href: '/services' }, { label: s.name }]}
   >
-    <p class="price">Starts at <strong>{s.startingAt}</strong> <span>· {s.priceNote}</span></p>
+    <p class="price">Starts at <strong set:html={priceHtml(s.startingAt)} /> <span set:html={'· ' + priceHtml(s.priceNote)} /></p>
     <div class="btn-row">
       <a class="btn btn--primary" href="#quote">Get a free quote <Icon name="arrow" /></a>
       <a class="btn btn--secondary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />Ask on WhatsApp</a>

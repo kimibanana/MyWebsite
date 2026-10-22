@@ -1,7 +1,7 @@
 ---
 import Icon from './Icon.astro';
 import type { Sprint } from '../data/content';
-import { annualPrice } from '../lib/price';
+import { priceHtml } from '../lib/price';
 interface Props { sprint: Sprint; label?: string; annual?: boolean }
 const { sprint, label = 'Deliverables', annual = false } = Astro.props;
 ---
@@ -14,13 +14,13 @@ const { sprint, label = 'Deliverables', annual = false } = Astro.props;
   <p class="sc__blurb">{sprint.blurb}</p>
   {annual ? (
     <p class="sc__price">
-      <strong class="monthly-only">{sprint.price}</strong>
-      <strong class="annual-only">{annualPrice(sprint.price)}</strong>
+      <strong class="monthly-only" set:html={priceHtml(sprint.price)} />
+      <strong class="annual-only" set:html={priceHtml(sprint.price, true)} />
       <span>{sprint.cadence}</span>
-      <s class="annual-only sc__was">{sprint.price}</s>
+      <s class="annual-only sc__was" set:html={priceHtml(sprint.price)} />
     </p>
   ) : (
-    <p class="sc__price"><strong>{sprint.price}</strong><span>{sprint.cadence}</span></p>
+    <p class="sc__price"><strong set:html={priceHtml(sprint.price)} /><span>{sprint.cadence}</span></p>
   )}
   <p class="sc__label">{label}</p>
   <ul class="checks">{sprint.deliverables.map((d) => <li>{d}</li>)}</ul>

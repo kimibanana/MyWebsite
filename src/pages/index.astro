@@ -8,6 +8,7 @@ import CaseStudies from '../components/CaseStudies.astro';
 import SprintCycle from '../components/SprintCycle.astro';
 import Dashboard from '../components/Dashboard.astro';
 import { site } from '../data/site';
+import { priceHtml } from '../lib/price';
 import {
   homeFaqs, pains, framework, specialties, industryGroups, capabilityGroups, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
 } from '../data/content';
@@ -223,7 +224,7 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
       <div class="head head--center">
         <span class="eyebrow">How we work</span>
         <h2>30-day sprints instead of black-box retainers</h2>
-        <p class="lead">Start with a one-time Foundation Sprint ($997), then stack monthly sprints from $650. Every sprint has a written scope, a fixed price and a delivery report. Partner with us for 12 months and save 15% on every monthly sprint.</p>
+        <p class="lead" set:html={priceHtml('Start with a one-time Foundation Sprint ($997), then stack monthly sprints from $650.') + ` Every sprint has a written scope, a fixed price and a delivery report. Partner with us for 12 months and save 15% on every monthly sprint.`} />
       </div>
       <SprintCycle />
       <div class="center"><a class="btn btn--secondary" href="/pricing">See sprints & pricing <Icon name="arrow" /></a></div>

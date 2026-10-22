@@ -7,21 +7,22 @@ import Faq from '../components/Faq.astro';
 import CtaBand from '../components/CtaBand.astro';
 import Icon from '../components/Icon.astro';
 import BillingToggle from '../components/BillingToggle.astro';
-import { annualPrice, discountLabel } from '../lib/price';
+import { priceHtml, discountLabel } from '../lib/price';
+import CurrencySelect from '../components/CurrencySelect.astro';
 import { foundationSprint, monthlySprints, bundles, webPackages, carePlans } from '../data/content';
 
 const faqs = [
   { q: 'Do I have to start with the Foundation Sprint?', a: 'For SEO, yes. It fixes the technical issues and sets up tracking so every sprint after it is measurable. Websites, ads and maintenance can start on their own.' },
   { q: 'Can I change sprints from month to month?', a: 'Yes. Add, pause or swap sprints before the next one starts. The price changes with the scope, and you always know both up front.' },
   { q: 'What does a sprint report include?', a: 'Every deliverable completed with links, ranking and traffic changes, calls and leads tracked, and what we recommend for the next sprint, in plain language.' },
-  { q: 'How do payments work?', a: 'Sprints are paid at the start of each 30-day cycle by card or bank transfer. Website projects are 50% to start and 50% at launch. All prices are in USD.' },
+  { q: 'How do payments work?', a: 'Sprints are paid at the start of each 30-day cycle by card or bank transfer. Website projects are 50% to start and 50% at launch. Prices show in your local currency (PHP, USD, GBP or AUD), and you’re billed in that currency.' },
   { q: 'Is there a discount for a longer commitment?', a: `Yes. Partner with us for 12 months and every monthly sprint, bundle and care plan is ${discountLabel} off. Billing is still monthly, and the Foundation Sprint, website builds and ad spend are not discounted.` },
   { q: 'Is ad spend included?', a: 'No. Google Ads and Local Services Ads budgets are paid directly to Google from your own account, so you always control and see your spend.' },
 ];
 ---
 <Base
   title="Pricing | Medical Marketing Sprints | Web Frontier"
-  description="No vague retainers. Medical SEO, practice websites and Google Ads in fixed-price 30-day sprints. Foundation Sprint $997, monthly sprints from $650."
+  description="No vague retainers. Medical SEO, clinic websites and ads in fixed-price 30-day sprints, priced in PHP, USD, GBP or AUD. See every sprint, bundle and care plan."
 >
   <PageHero
     eyebrow="Sprints & pricing"
@@ -29,6 +30,7 @@ const faqs = [
     lead="Every sprint has a written list of deliverables, a fixed price and a delivery date. You see the plan before you pay and the results after. Stack the sprints you need and change them any month."
     crumbs={[{ label: 'Sprints & pricing' }]}
   >
+    <div class="cur-row"><CurrencySelect /></div>
     <nav class="jump" aria-label="Jump to">
       <a href="#seo">SEO sprints</a><a href="#bundles">Bundles</a><a href="#websites">Websites</a><a href="#care">Maintenance</a>
     </nav>
@@ -80,15 +82,15 @@ const faqs = [
         {bundles.map((b) => (
           <a href={`/contact?plan=${encodeURIComponent(b.name)}`} class:list={['card', 'bundle', 'reveal', { 'bundle--featured': b.featured }]}>
             <span class="bundle__name">{b.name}</span>
-            <strong class="monthly-only">{b.price}</strong>
-            <strong class="annual-only">{annualPrice(b.price)}</strong>
-            <s class="annual-only bundle__was">{b.price}</s>
+            <strong class="monthly-only" set:html={priceHtml(b.price)} />
+            <strong class="annual-only" set:html={priceHtml(b.price, true)} />
+            <s class="annual-only bundle__was" set:html={priceHtml(b.price)} />
             <span class="bundle__sprints">{b.sprints}</span>
             <small>{b.note}</small>
           </a>
         ))}
       </div>
-      <p class="note">All bundles start after the Foundation Sprint. Add an Ads Sprint to any bundle for <span class="monthly-only">$750/mo</span><span class="annual-only">{annualPrice('$750/mo')} on a 12-month partnership</span>.</p>
+      <p class="note">All bundles start after the Foundation Sprint. Add an Ads Sprint to any bundle for <span class="monthly-only" set:html={priceHtml('$750/mo')} /><span class="annual-only" set:html={priceHtml('$750/mo', true) + ' on a 12-month partnership'} />.</p>
     </div>
   </section>
 
@@ -107,9 +109,9 @@ const faqs = [
           <div class="card care reveal">
             <div><h3>{c.name}</h3><ul class="checks">{c.features.map((f) => <li>{f}</li>)}</ul></div>
             <div class="care__price">
-              <strong class="monthly-only">{c.price}</strong>
-              <strong class="annual-only">{annualPrice(c.price)}</strong>
-              <s class="annual-only">{c.price}</s>
+              <strong class="monthly-only" set:html={priceHtml(c.price)} />
+              <strong class="annual-only" set:html={priceHtml(c.price, true)} />
+              <s class="annual-only" set:html={priceHtml(c.price)} />
             </div>
           </div>
         ))}
@@ -137,6 +139,7 @@ const faqs = [
 </Base>
 
 <style>
+  .cur-row { margin-bottom: 16px; }
   .jump { display: flex; flex-wrap: wrap; gap: 8px; }
   .jump a { padding: 8px 16px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
   .jump a:hover { border-color: var(--brand); }

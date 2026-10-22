@@ -109,6 +109,7 @@ h3 { font-size: 1.25rem; font-weight: 700; }
 p { margin: 0 0 1em; text-wrap: pretty; }
 
 :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
+.js:not(.prices-ready) .price { visibility: hidden; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip { position: absolute; left: -9999px; top: 8px; z-index: 100; background: var(--brand); color: #fff; padding: 8px 14px; border-radius: 8px; }
 .skip:focus { left: 8px; }

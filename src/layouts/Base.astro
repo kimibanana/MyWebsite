@@ -69,6 +69,17 @@ const allSchema = [orgSchema, ...schema];
         try { t = localStorage.getItem('theme'); } catch (e) {}
         if (t !== 'light' && t !== 'dark') t = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
         d.dataset.theme = t;
+        // Currency: saved choice, else guess from the visitor's time zone.
+        var c = null;
+        try { c = localStorage.getItem('currency'); } catch (e) {}
+        if (!/^(USD|PHP|GBP|AUD)$/.test(c || '')) {
+          var tz = '';
+          try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+          c = tz === 'Asia/Manila' ? 'PHP'
+            : /^Europe\/(London|Belfast|Guernsey|Jersey|Isle_of_Man)$/.test(tz) ? 'GBP'
+            : /^Australia\//.test(tz) ? 'AUD' : 'USD';
+        }
+        d.dataset.currency = c;
       })();
     </script>
   </head>
@@ -81,6 +92,27 @@ const allSchema = [orgSchema, ...schema];
     </main>
     <Footer />
     <MobileBar />
+    <script>
+      // Show every price in the chosen currency and keep all selectors in sync.
+      const root = document.documentElement;
+      const applyCurrency = (code: string) => {
+        root.dataset.currency = code;
+        const key = code.toLowerCase();
+        document.querySelectorAll<HTMLElement>('.price').forEach((el) => {
+          const v = el.dataset[key];
+          if (v) el.textContent = v;
+        });
+        document.querySelectorAll<HTMLSelectElement>('.cur__select').forEach((s) => (s.value = code));
+        root.classList.add('prices-ready');
+      };
+      document.querySelectorAll<HTMLSelectElement>('.cur__select').forEach((s) =>
+        s.addEventListener('change', () => {
+          try { localStorage.setItem('currency', s.value); } catch {}
+          applyCurrency(s.value);
+        }),
+      );
+      applyCurrency(root.dataset.currency || 'USD');
+    </script>
     <script>
       // Minimal scroll reveal. Respects reduced motion via CSS.
       const items = document.querySelectorAll('.reveal');

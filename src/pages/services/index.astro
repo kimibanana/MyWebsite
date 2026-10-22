@@ -5,6 +5,7 @@ import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services } from '../../data/services';
 import { capabilityGroups } from '../../data/content';
+import { priceHtml } from '../../lib/price';
 ---
 <Base
   title="Healthcare Marketing Services | SEO, Websites, Google & Meta Ads | Web Frontier"
@@ -30,7 +31,7 @@ import { capabilityGroups } from '../../data/content';
             <ul class="checks">{s.included.slice(0, 4).map((i) => <li>{i}</li>)}</ul>
           </div>
           <div class="row__side">
-            <p class="row__price"><small>Starts at</small><strong>{s.startingAt}</strong></p>
+            <p class="row__price"><small>Starts at</small><strong set:html={priceHtml(s.startingAt)} /></p>
             <a class="btn btn--secondary btn--sm" href={`/services/${s.slug}`}>View details <Icon name="arrow" /></a>
           </div>
         </article>

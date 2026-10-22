@@ -247,7 +247,6 @@ export const industryGroups: { title: string; items: Industry[] }[] = [
       { name: 'Urgent care clinics', icon: 'clock', focus: 'Show up first, with accurate hours and wait times, when patients need care today.' },
       { name: 'Weight management clinics', icon: 'zap', focus: 'Promote programs and treatments within strict health-claim and ad-policy rules.' },
       { name: 'Peptide clinics', icon: 'plus', focus: 'Compliant education and campaigns for a closely watched treatment category.' },
-      { name: 'Medicinal cannabis clinics', icon: 'shield', focus: 'Careful, compliant marketing in markets where medicinal cannabis is legal.' },
       { name: 'Pain management clinics', icon: 'heart', focus: 'Reach patients searching for relief from chronic and acute pain.' },
     ],
   },

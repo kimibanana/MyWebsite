@@ -1,5 +1,6 @@
 ---
 import Icon from './Icon.astro';
+import CurrencySelect from './CurrencySelect.astro';
 import { site } from '../data/site';
 ---
 <div class="tb">
@@ -9,11 +10,14 @@ import { site } from '../data/site';
       {site.email && <li><a href={`mailto:${site.email}`}><Icon name="mail" /><span>{site.email}</span></a></li>}
       <li class="tb__hours"><Icon name="clock" /><span>{site.hours}</span></li>
     </ul>
+    <div class="tb__right">
+    <CurrencySelect compact />
     <ul class="tb__social" aria-label="Social media">
       {site.social.map((s) => (
         <li><a href={s.url} target="_blank" rel="noopener" aria-label={s.name} title={s.name}><Icon name={s.icon} /></a></li>
       ))}
     </ul>
+    </div>
   </div>
 </div>
 
@@ -26,6 +30,7 @@ import { site } from '../data/site';
   .tb a { color: #c7d2dc; text-decoration: none; }
   .tb a:hover { color: #fff; }
   .tb__contact :global(svg) { width: 14px; height: 14px; color: #5fd3cf; flex: none; }
+  .tb__right { display: flex; align-items: center; gap: 10px; }
   .tb__social { gap: 2px; }
   .tb__social a { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; }
   .tb__social a:hover { background: rgb(255 255 255 / 0.1); }
