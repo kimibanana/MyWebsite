@@ -1,11 +1,10 @@
 ---
-// Calm, slow crossfade of healthcare, healing and nature photos.
+// Calm, slow crossfade of healthcare and healing photos.
 // Photos are from Unsplash (free to use). Each slide has a soft gradient
 // behind the photo, so it still looks right while an image loads.
 const img = (id: string) => `https://images.unsplash.com/${id}?auto=format&fit=crop&w=1100&h=1300&q=70`;
 const slides = [
   { src: img('photo-1631217868264-e5b90bb7e133'), alt: 'A smiling doctor talking with a patient in a clinic', caption: 'Care that listens', tint: '#cfe5df' },
-  { src: img('photo-1499570023676-b0a761678e07'), alt: 'Sunrise through green trees', caption: 'Room to heal', tint: '#d9e8cf' },
   { src: img('photo-1519494026892-80bbd2d6fd0d'), alt: 'A modern hospital building', caption: 'Trusted places of care', tint: '#d6e4ea' },
   { src: img('photo-1542601906990-b4d3fb778b09'), alt: 'Hands holding a young plant growing in soil', caption: 'Growth, gently', tint: '#e3e7d2' },
   { src: img('photo-1584432810601-6c7f27d2362b'), alt: 'A healthcare worker with a stethoscope', caption: 'People who care', tint: '#dfe6ee' },
@@ -61,22 +60,22 @@ const slides = [
 
 <style>
   .ss { position: relative; }
-  .ss__frame { position: relative; aspect-ratio: 5 / 6; border-radius: 32px; overflow: hidden; box-shadow: var(--shadow-lg); background: var(--sage); }
+  .ss__frame { position: relative; aspect-ratio: 5 / 6; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); background: var(--sage); }
   .ss__slide { position: absolute; inset: 0; margin: 0; opacity: 0; transition: opacity 1.4s ease; background: linear-gradient(160deg, var(--tint), #f5f7f2); }
   .ss__slide.is-active { opacity: 1; }
   :global([data-theme='dark']) .ss__slide { background: linear-gradient(160deg, #16343a, #0f2129); }
   .ss__slide img { display: block; width: 100%; height: 100%; object-fit: cover; color: transparent; font-size: 0; transform: scale(1.04); transition: transform 7s ease-out; }
   .ss__slide.is-active img { transform: scale(1); }
   .ss__slide::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgb(11 26 36 / 0.45)); }
-  .ss figcaption { position: absolute; left: 22px; bottom: 20px; z-index: 1; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; letter-spacing: 0.01em; }
+  .ss figcaption { position: absolute; left: 22px; bottom: 20px; z-index: 1; color: #fff; font-family: var(--font-display); font-weight: 600; font-size: 1rem; }
   .ss__controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 16px; }
   .ss__dots { display: flex; gap: 8px; }
-  .ss__dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 999px; background: var(--line); cursor: pointer; transition: width .3s ease, background-color .3s ease; }
+  .ss__dots button { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 6px; background: var(--line); cursor: pointer; transition: width .3s ease, background-color .3s ease; }
   .ss__dots button[aria-current='true'] { width: 26px; background: var(--brand); }
   .ss__pause { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--line); background: var(--card); color: var(--muted); display: grid; place-items: center; cursor: pointer; }
   .ss__pause svg { width: 14px; height: 14px; }
   .ss__pause .i-play, .ss.is-paused .ss__pause .i-pause { display: none; }
   .ss.is-paused .ss__pause .i-play { display: block; }
   @media (prefers-reduced-motion: reduce) { .ss__slide, .ss__slide img { transition: none; } }
-  @media (max-width: 960px) { .ss__frame { aspect-ratio: 4 / 3; border-radius: 24px; } }
+  @media (max-width: 960px) { .ss__frame { aspect-ratio: 4 / 3; } }
 </style>
