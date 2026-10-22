@@ -1,0 +1,24 @@
+---
+import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+---
+<Base title="Thank you | Kimi Web Solutions" description="We received your message." noindex>
+  <section class="section">
+    <div class="wrap ty">
+      <span class="ty__icon"><Icon name="check" /></span>
+      <h1>Thanks! We got your message.</h1>
+      <p class="lead">A specialist will reply within 1 business day. Need us sooner? Message us directly.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={site.messenger} target="_blank" rel="noopener"><Icon name="chat" />Chat on Messenger</a>
+        <a class="btn btn--secondary" href="/work">See our work while you wait</a>
+      </div>
+    </div>
+  </section>
+</Base>
+<style>
+  .ty { text-align: center; display: grid; justify-items: center; }
+  .ty .lead { margin: 0 auto 28px; }
+  .ty__icon { width: 72px; height: 72px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; margin-bottom: 24px; }
+  .ty__icon :global(svg) { width: 36px; height: 36px; }
+</style>

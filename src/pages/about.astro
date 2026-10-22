@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { promises } from '../data/content';
+import { site } from '../data/site';
+
+const values = [
+  { icon: 'chart', title: 'Results over activity', body: 'We report on leads and revenue, not hours logged or tasks ticked off.' },
+  { icon: 'heart', title: 'Plain language', body: 'No jargon. If we can’t explain it simply, we shouldn’t be charging for it.' },
+  { icon: 'users', title: 'Real partnership', body: 'You talk directly to the people doing the work, and we answer within a business day.' },
+  { icon: 'zap', title: 'Speed and quality', body: 'Fast websites, fast replies, and work done right the first time.' },
+];
+---
+<Base
+  title="About Us | Kimi Web Solutions, SEO & Web Agency in the Philippines"
+  description="Kimi Web Solutions is a Philippine SEO and web design agency built on transparency, plain-language reporting and real results."
+>
+  <PageHero
+    eyebrow="About Kimi"
+    title="An agency built on honesty and results"
+    lead={`We’re a ${site.address.countryName}-based team of SEO specialists, designers and developers who help businesses get found online and turn visitors into customers.`}
+    crumbs={[{ label: 'About' }]}
+  />
+
+  <section class="section">
+    <div class="wrap story">
+      <div class="prose reveal">
+        <span class="eyebrow">Our story</span>
+        <h2>Why we started Kimi</h2>
+        <!-- TODO: replace with the founder's real story -->
+        <p>After years working in SEO and web development, we kept meeting the same frustrated business owners. They had paid for websites that never brought in a single enquiry, and for SEO that came with vague reports and long contracts.</p>
+        <p>Kimi Web Solutions was built to be the opposite: an agency that explains what it does, prices it clearly, and measures success by the growth of your business.</p>
+        <p>Today we work with clinics, service companies, e-commerce brands and B2B firms across the Philippines and abroad, and we treat every client’s budget like our own.</p>
+      </div>
+      <aside class="founder card reveal">
+        <div class="founder__photo" aria-hidden="true">K</div>
+        <h3>Founder name</h3>
+        <p class="founder__role">Founder & Senior SEO Strategist</p>
+        <p>Add a short bio here: years of experience, specialties, certifications, and a personal touch. People buy from people.</p>
+        <span class="tag tag--sample">Placeholder</span>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Our values</span><h2>What we stand for</h2></div>
+      <div class="grid grid-4">
+        {values.map((v) => (
+          <div class="card reveal"><div class="icon-badge"><Icon name={v.icon} /></div><h3>{v.title}</h3><p>{v.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Our promises</span><h2>What every client gets</h2></div>
+      <div class="grid grid-4">
+        {promises.map((p) => (
+          <div class="card reveal"><div class="icon-badge"><Icon name={p.icon} /></div><h3>{p.title}</h3><p>{p.body}</p></div>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand title="Let’s talk about your goals" />
+</Base>
+
+<style>
+  .story { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  @media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
+  .founder { text-align: center; }
+  .founder__photo { width: 112px; height: 112px; border-radius: 50%; margin: 0 auto 18px; display: grid; place-items: center; background: var(--brand); color: #fff; font-family: var(--font-display); font-size: 2.6rem; font-weight: 800; }
+  .founder__role { color: var(--brand); font-weight: 600; margin-bottom: 12px; }
+</style>

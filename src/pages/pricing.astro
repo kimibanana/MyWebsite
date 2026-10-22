@@ -1,0 +1,86 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import PriceCard from '../components/PriceCard.astro';
+import Faq from '../components/Faq.astro';
+import CtaBand from '../components/CtaBand.astro';
+import Icon from '../components/Icon.astro';
+import { pricing } from '../data/content';
+
+const faqs = [
+  { q: 'Are these final prices?', a: 'These are starting prices for typical projects. After a free call we send a fixed written quote based on your exact needs, and that is the price you pay.' },
+  { q: 'Do you offer payment terms?', a: 'Yes. Website projects are usually 50% to start and 50% at launch. Larger projects can be split into milestones. We accept bank transfer, GCash and card.' },
+  { q: 'Why does SEO have a 3-month starting period?', a: 'SEO takes time to show results. The first months cover technical fixes and foundations, so judging it after one month would not be fair to you or to us. After that it is month-to-month.' },
+  { q: 'Is VAT included?', a: 'Prices shown exclude VAT where applicable. Your written quote will show the full amount.' },
+  { q: 'Do you have packages for international clients?', a: 'Yes. We can quote in USD, AUD or other currencies and schedule calls in your time zone.' },
+];
+---
+<Base
+  title="Pricing | Website & SEO Packages Philippines | Kimi Web Solutions"
+  description="Transparent pricing for websites, SEO and website care. Websites from ₱25,000, SEO from ₱8,000/month. Fixed quotes and no lock-in contracts."
+>
+  <PageHero
+    eyebrow="Pricing"
+    title="Simple, transparent pricing"
+    lead="Pick a starting point. Every project gets a fixed written quote before we begin, so you will never be surprised by an invoice."
+    crumbs={[{ label: 'Pricing' }]}
+  >
+    <nav class="jump" aria-label="Jump to">
+      <a href="#websites">Websites</a><a href="#seo">SEO plans</a><a href="#addons">Add-ons</a>
+    </nav>
+  </PageHero>
+
+  <section class="section" id="websites">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Websites</span><h2>Website design packages</h2><p class="lead">One-time fee. You own the site, the domain and all the files.</p></div>
+      <div class="grid grid-3">{pricing.websites.map((p) => <PriceCard plan={p} />)}</div>
+    </div>
+  </section>
+
+  <section class="section section--surface" id="seo">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">SEO</span><h2>Monthly SEO plans</h2><p class="lead">3-month starting period, then month-to-month. Cancel anytime with 30 days notice.</p></div>
+      <div class="grid grid-3">{pricing.seo.map((p) => <PriceCard plan={p} />)}</div>
+    </div>
+  </section>
+
+  <section class="section" id="addons">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Add-ons</span><h2>Add-ons & one-time services</h2></div>
+      <ul class="addons">
+        {pricing.addons.map((a) => <li><span>{a.name}</span><strong>{a.price}</strong></li>)}
+      </ul>
+      <div class="guarantee reveal">
+        <Icon name="shield" />
+        <div>
+          <h3>Our promise</h3>
+          <p>If we miss an agreed website launch date because of our delay, your first month of website care is free. If you’re not happy with your design concept, we’ll revise it until you are, before a single page is built.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">FAQ</span><h2>Pricing questions</h2></div>
+      <Faq items={faqs} />
+    </div>
+  </section>
+  <CtaBand title="Want an exact price for your project?" text="Get a free audit and fixed quote within 1 business day. No obligation." />
+</Base>
+
+<style>
+  .jump { display: flex; flex-wrap: wrap; gap: 8px; }
+  .jump a { padding: 8px 16px; border-radius: 999px; background: #fff; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+  .jump a:hover { border-color: var(--brand); }
+  #websites, #seo, #addons { scroll-margin-top: 70px; }
+  .addons { list-style: none; padding: 0; margin: 0; border: 1px solid var(--line); border-radius: var(--radius-lg); overflow: hidden; }
+  .addons li { display: flex; justify-content: space-between; gap: 16px; padding: 18px 24px; border-top: 1px solid var(--line); }
+  .addons li:first-child { border-top: 0; }
+  .addons span { color: var(--ink); font-weight: 500; }
+  .addons strong { color: var(--ink); font-family: var(--font-display); white-space: nowrap; }
+  .guarantee { margin-top: 32px; display: flex; gap: 20px; padding: 28px; border-radius: var(--radius-lg); background: var(--brand-tint); }
+  .guarantee > :global(svg) { width: 40px; height: 40px; color: var(--brand); flex: none; }
+  .guarantee p { margin: 0; }
+  @media (max-width: 520px) { .addons li { flex-direction: column; gap: 2px; } .guarantee { flex-direction: column; } }
+</style>

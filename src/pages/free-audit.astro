@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Testimonials from '../components/Testimonials.astro';
+import Faq from '../components/Faq.astro';
+import Icon from '../components/Icon.astro';
+
+const youGet = [
+  { title: 'Technical health check', body: 'Speed, mobile usability, indexing and errors that block Google.' },
+  { title: 'Ranking snapshot', body: 'Where you rank today for the searches that matter to your business.' },
+  { title: 'Competitor comparison', body: 'Why your top competitors outrank you, and how to catch up.' },
+  { title: 'Conversion review', body: 'What stops visitors from calling, booking or buying.' },
+  { title: 'Your 3 biggest fixes', body: 'A short, prioritized list you can act on, with or without us.' },
+];
+const faqs = [
+  { q: 'Is it really free?', a: 'Yes. No credit card, no catch. We do it because many people who see what is possible decide to work with us, but there is no obligation.' },
+  { q: 'What if I don’t have a website yet?', a: 'We will review your Google presence and competitors instead, and recommend what kind of website you need.' },
+  { q: 'How do I receive the audit?', a: 'We send a short video walkthrough or hop on a 15-minute call, whichever you prefer, within 2 business days.' },
+];
+---
+<Base
+  title="Free SEO & Website Audit | Kimi Web Solutions"
+  description="Get a free SEO and website audit from a real specialist. See your technical issues, rankings, competitors and your 3 biggest fixes within 2 business days."
+>
+  <section class="lp">
+    <div class="wrap lp__in">
+      <div>
+        <span class="eyebrow">Free · No obligation</span>
+        <h1>Find out why your website isn’t bringing in customers</h1>
+        <p class="lead">A real SEO specialist (not an automated tool) will review your website and Google presence, then show you exactly what to fix first.</p>
+        <ul class="get">
+          {youGet.map((g) => (
+            <li><Icon name="check" /><span><strong>{g.title}.</strong> {g.body}</span></li>
+          ))}
+        </ul>
+        <p class="note"><Icon name="clock" />Delivered within 2 business days</p>
+      </div>
+      <LeadForm id="audit" title="Request your free audit" button="Send me my free audit" />
+    </div>
+  </section>
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><h2>Business owners who started with a free audit</h2></div>
+      <Testimonials />
+    </div>
+  </section>
+  <section class="section">
+    <div class="wrap"><Faq items={faqs} /></div>
+  </section>
+</Base>
+
+<style>
+  .lp { padding: clamp(36px, 6vw, 80px) 0; background: radial-gradient(60% 90% at 100% 0%, var(--brand-tint) 0%, transparent 70%), var(--surface); }
+  .lp__in { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
+  @media (max-width: 960px) { .lp__in { grid-template-columns: 1fr; } }
+  .lp h1 { font-size: clamp(2rem, 4.4vw, 3.1rem); }
+  .get { list-style: none; padding: 0; margin: 28px 0; display: grid; gap: 14px; }
+  .get li { display: flex; gap: 12px; }
+  .get :global(svg) { width: 22px; height: 22px; padding: 3px; border-radius: 50%; background: var(--brand); color: #fff; flex: none; margin-top: 2px; }
+  .get strong { color: var(--ink); }
+  .note { display: flex; gap: 8px; align-items: center; font-weight: 600; color: var(--ink); }
+  .note :global(svg) { width: 18px; height: 18px; color: var(--brand); }
+</style>

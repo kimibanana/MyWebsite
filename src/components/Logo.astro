@@ -1,0 +1,21 @@
+---
+// Placeholder wordmark until a real logo is supplied.
+interface Props { light?: boolean }
+const { light = false } = Astro.props;
+---
+<span class:list={['logo', { 'logo--light': light }]}>
+  <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
+    <rect width="40" height="40" rx="11" fill="#0E7C7B" />
+    <path d="M13 28V12M13 21l9-9M17 18l8 10" stroke="#fff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <circle cx="29" cy="12" r="3.4" fill="#FF8A3D" />
+  </svg>
+  <span class="logo__text">Kimi<span class="logo__sub">Web Solutions</span></span>
+</span>
+
+<style>
+  .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
+  .logo--light { color: #fff; }
+  .logo__mark { width: 38px; height: 38px; flex: none; }
+  .logo__text { font-family: var(--font-display); font-weight: 800; font-size: 1.3rem; letter-spacing: -0.03em; line-height: 1; display: flex; flex-direction: column; }
+  .logo__sub { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; opacity: 0.65; margin-top: 3px; }
+</style>

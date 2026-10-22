@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { site } from '../data/site';
+---
+<Base title="Privacy Policy | Kimi Web Solutions" description="How Kimi Web Solutions collects and uses your information.">
+  <PageHero title="Privacy policy" crumbs={[{ label: 'Privacy policy' }]} />
+  <section class="section">
+    <div class="wrap prose">
+      <!-- TODO: have this reviewed for Data Privacy Act of 2012 (RA 10173) compliance before launch. -->
+      <p>{site.name} respects your privacy and handles personal information in line with the Philippine Data Privacy Act of 2012.</p>
+      <h2>What we collect</h2>
+      <p>When you fill in a form or contact us, we collect the details you provide, such as your name, email, phone number, website and message. We also use analytics tools that collect anonymous usage data like pages visited and device type.</p>
+      <h2>How we use it</h2>
+      <p>We use your information only to respond to your enquiry, prepare quotes and audits, deliver our services, and improve our website. We never sell your data.</p>
+      <h2>How long we keep it</h2>
+      <p>We keep enquiry data for as long as needed to serve you, and delete it on request.</p>
+      <h2>Your rights</h2>
+      <p>You can ask to access, correct or delete your personal data at any time by emailing <a href={`mailto:${site.email}`}>{site.email}</a>.</p>
+    </div>
+  </section>
+</Base>

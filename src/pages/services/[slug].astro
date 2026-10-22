@@ -1,0 +1,155 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import Icon from '../../components/Icon.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import Faq from '../../components/Faq.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import CaseStudies from '../../components/CaseStudies.astro';
+import { services, type Service } from '../../data/services';
+import { process } from '../../data/content';
+import { site } from '../../data/site';
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { service: s } }));
+}
+const { service: s } = Astro.props as { service: Service };
+const related = services.filter((x) => x.slug !== s.slug).slice(0, 3);
+
+const schema = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: s.name,
+    description: s.metaDescription,
+    serviceType: s.name,
+    provider: { '@id': `${site.url}/#organization` },
+    areaServed: site.areaServed,
+    offers: { '@type': 'Offer', priceCurrency: 'PHP', description: `Starts at ${s.startingAt}` },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: s.faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+<Base title={s.metaTitle} description={s.metaDescription} schema={schema}>
+  <PageHero
+    eyebrow={s.name}
+    title={s.headline}
+    lead={s.intro}
+    crumbs={[{ label: 'Services', href: '/services' }, { label: s.name }]}
+  >
+    <p class="price">Starts at <strong>{s.startingAt}</strong> <span>· {s.priceNote}</span></p>
+    <div class="btn-row">
+      <a class="btn btn--primary" href="#quote">Get a free quote <Icon name="arrow" /></a>
+      <a class="btn btn--secondary" href={site.messenger} target="_blank" rel="noopener"><Icon name="chat" />Ask a question</a>
+    </div>
+  </PageHero>
+
+  <section class="section">
+    <div class="wrap two">
+      <div class="reveal">
+        <span class="eyebrow">Is this you?</span>
+        <h2>Problems we solve</h2>
+        <ul class="pains">{s.pains.map((p) => <li><Icon name="close" />{p}</li>)}</ul>
+      </div>
+      <div class="reveal">
+        <span class="eyebrow">What changes</span>
+        <h2>What you get</h2>
+        <div class="outcomes">
+          {s.outcomes.map((o) => (
+            <div class="outcome"><Icon name="check" /><div><h3>{o.title}</h3><p>{o.body}</p></div></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap two">
+      <div class="reveal">
+        <span class="eyebrow">What’s included</span>
+        <h2>Everything included in {s.name}</h2>
+        <ul class="checks incl">{s.included.map((i) => <li>{i}</li>)}</ul>
+      </div>
+      <div class="card reveal">
+        <h3>Ideal for</h3>
+        <ul class="ideal">{s.idealFor.map((i) => <li>{i}</li>)}</ul>
+        <hr />
+        <h3>How we work</h3>
+        <ol class="mini-steps">{process.map((p) => <li><strong>{p.title}.</strong> {p.body}</li>)}</ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Results</span><h2>Recent client results</h2></div>
+      <CaseStudies limit={3} />
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">FAQ</span><h2>{s.name}: common questions</h2></div>
+      <Faq items={s.faqs} />
+    </div>
+  </section>
+
+  <section class="section" id="quote">
+    <div class="wrap quote">
+      <div>
+        <span class="eyebrow">Free quote</span>
+        <h2>Get a fixed quote for {s.name}</h2>
+        <p class="lead">Tell us a bit about your business. We’ll review your site and send a clear recommendation and price within 1 business day.</p>
+        <ul class="checks">
+          <li>No obligation and no pushy sales calls</li>
+          <li>Fixed pricing in writing before any work starts</li>
+          <li>A real specialist reviews your site, not a bot</li>
+        </ul>
+      </div>
+      <LeadForm id="svc" formName="service-quote" button="Get my free quote" />
+    </div>
+  </section>
+
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head"><h2>Related services</h2></div>
+      <div class="grid grid-3">
+        {related.map((r) => (
+          <a class="card rel" href={`/services/${r.slug}`}>
+            <div class="icon-badge"><Icon name={r.icon} /></div>
+            <h3>{r.name}</h3><p>{r.short}</p>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+  <CtaBand />
+</Base>
+
+<style>
+  .price { margin: 0 0 24px; color: var(--muted); }
+  .price strong { color: var(--ink); font-family: var(--font-display); font-size: 1.3rem; }
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  @media (max-width: 860px) { .two { grid-template-columns: 1fr; } }
+  .pains { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
+  .pains li { display: flex; gap: 12px; padding: 16px 18px; background: #fff7f2; border: 1px solid #fde3d2; border-radius: 12px; color: var(--ink); }
+  .pains :global(svg) { width: 20px; height: 20px; color: #c2570c; flex: none; margin-top: 3px; }
+  .outcomes { display: grid; gap: 22px; }
+  .outcome { display: flex; gap: 14px; }
+  .outcome > :global(svg) { width: 28px; height: 28px; padding: 5px; border-radius: 50%; background: var(--brand-tint); color: var(--brand); flex: none; }
+  .outcome h3 { font-size: 1.1rem; margin-bottom: 4px; }
+  .outcome p { margin: 0; }
+  .incl { margin-top: 8px; }
+  .ideal { padding-left: 20px; margin: 0 0 8px; }
+  .card hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
+  .mini-steps { padding-left: 20px; margin: 0; display: grid; gap: 10px; font-size: 0.95rem; }
+  .mini-steps strong { color: var(--ink); }
+  .quote { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; scroll-margin-top: 80px; }
+  @media (max-width: 860px) { .quote { grid-template-columns: 1fr; } }
+  .rel { text-decoration: none; color: inherit; }
+  .rel:hover { border-color: var(--brand); color: inherit; }
+</style>

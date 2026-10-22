@@ -1,0 +1,27 @@
+---
+// Sticky bottom bar on phones: the two highest-intent actions always in reach.
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+---
+<div class="mbar" aria-label="Quick contact">
+  <a href={site.messenger} target="_blank" rel="noopener" class="mbar__chat"><Icon name="chat" />Chat</a>
+  <a href={site.phoneHref} class="mbar__chat"><Icon name="phone" />Call</a>
+  <a href="/free-audit" class="btn btn--primary btn--sm">Free SEO audit</a>
+</div>
+
+<style>
+  .mbar { display: none; }
+  @media (max-width: 760px) {
+    .mbar {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+      display: grid; grid-template-columns: auto auto 1fr; gap: 8px; align-items: center;
+      padding: 10px 12px calc(10px + env(safe-area-inset-bottom));
+      background: #fff; border-top: 1px solid var(--line); box-shadow: 0 -6px 24px rgb(15 23 42 / 0.08);
+    }
+    .mbar__chat {
+      display: inline-flex; flex-direction: column; align-items: center; gap: 2px;
+      padding: 2px 12px; font-size: 0.75rem; font-weight: 600; color: var(--ink); text-decoration: none;
+    }
+    .mbar__chat :global(svg) { width: 20px; height: 20px; color: var(--brand); }
+  }
+</style>

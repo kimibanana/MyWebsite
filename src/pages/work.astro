@@ -1,0 +1,28 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CaseStudies from '../components/CaseStudies.astro';
+import Testimonials from '../components/Testimonials.astro';
+import CtaBand from '../components/CtaBand.astro';
+---
+<Base
+  title="Our Work | SEO & Website Case Studies | Kimi Web Solutions"
+  description="See how Kimi Web Solutions helps businesses get more calls, bookings and sales with websites and SEO that perform."
+>
+  <PageHero
+    eyebrow="Our work"
+    title="Results we’re proud of"
+    lead="Every project starts with a business problem and ends with a measurable result. Here are a few of them."
+    crumbs={[{ label: 'Our work' }]}
+  />
+  <section class="section">
+    <div class="wrap"><CaseStudies /></div>
+  </section>
+  <section class="section section--surface">
+    <div class="wrap">
+      <div class="head head--center"><span class="eyebrow">Client reviews</span><h2>In their words</h2></div>
+      <Testimonials />
+    </div>
+  </section>
+  <CtaBand title="Want results like these?" text="Start with a free audit. We’ll show you exactly where your biggest opportunities are." />
+</Base>

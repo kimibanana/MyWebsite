@@ -1,0 +1,66 @@
+---
+import Logo from './Logo.astro';
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { services } from '../data/services';
+const year = new Date().getFullYear();
+---
+<footer class="ftr">
+  <div class="wrap">
+    <div class="ftr__grid">
+      <div class="ftr__brand">
+        <Logo light />
+        <p>{site.tagline}. Fast websites and honest SEO for businesses in {site.address.locality}, across the Philippines, and beyond.</p>
+        <ul class="ftr__contact">
+          <li><Icon name="phone" /><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li><Icon name="pin" />{site.address.locality}, {site.address.countryName}</li>
+          <li><Icon name="clock" />{site.hours}</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Services</h3>
+        <ul>{services.map((s) => <li><a href={`/services/${s.slug}`}>{s.name}</a></li>)}</ul>
+      </div>
+      <div>
+        <h3>Company</h3>
+        <ul>
+          <li><a href="/about">About us</a></li>
+          <li><a href="/work">Our work</a></li>
+          <li><a href="/pricing">Pricing</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/free-audit">Free SEO audit</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Talk to us</h3>
+        <ul>
+          <li><a href={site.messenger} rel="noopener" target="_blank">Messenger</a></li>
+          <li><a href={site.viber}>Viber</a></li>
+          <li><a href={site.whatsapp} rel="noopener" target="_blank">WhatsApp</a></li>
+          {site.social.facebook && <li><a href={site.social.facebook} rel="noopener" target="_blank">Facebook</a></li>}
+          {site.social.linkedin && <li><a href={site.social.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>}
+        </ul>
+      </div>
+    </div>
+    <div class="ftr__bottom">
+      <span>© {year} {site.name}. All rights reserved.</span>
+      <span><a href="/privacy">Privacy policy</a></span>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .ftr { background: var(--night); color: #a9b8c5; padding: 72px 0 32px; font-size: 0.95rem; }
+  .ftr__grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 40px; }
+  .ftr h3 { color: #fff; font-size: 0.95rem; margin-bottom: 16px; }
+  .ftr ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .ftr a { color: #c7d2dc; text-decoration: none; }
+  .ftr a:hover { color: #fff; text-decoration: underline; }
+  .ftr__brand p { margin: 18px 0 20px; max-width: 38ch; }
+  .ftr__contact li { display: flex; gap: 10px; align-items: center; }
+  .ftr__contact :global(svg) { width: 16px; height: 16px; color: #5fd3cf; flex: none; }
+  .ftr__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; border-top: 1px solid rgb(255 255 255 / 0.1); margin-top: 56px; padding-top: 24px; font-size: 0.85rem; }
+  @media (max-width: 860px) { .ftr__grid { grid-template-columns: 1fr 1fr; } .ftr__brand { grid-column: 1 / -1; } }
+  @media (max-width: 760px) { .ftr { padding-bottom: 100px; } }
+</style>

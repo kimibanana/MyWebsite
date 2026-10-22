@@ -1,0 +1,67 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import LeadForm from '../components/LeadForm.astro';
+import Icon from '../components/Icon.astro';
+import { site } from '../data/site';
+
+const channels = [
+  { icon: 'chat', label: 'Messenger', value: 'Chat with us', href: site.messenger, ext: true },
+  { icon: 'phone', label: 'Call or Viber', value: site.phone, href: site.phoneHref },
+  { icon: 'mail', label: 'Email', value: site.email, href: `mailto:${site.email}` },
+  { icon: 'chat', label: 'WhatsApp', value: 'Message us', href: site.whatsapp, ext: true },
+];
+---
+<Base
+  title="Contact Us | Kimi Web Solutions"
+  description="Talk to Kimi Web Solutions about your website or SEO. Message us on Messenger, Viber or WhatsApp, call, or send the form. We reply within 1 business day."
+>
+  <PageHero
+    eyebrow="Contact"
+    title="Let’s grow your business together"
+    lead="Send a message, or reach us on whichever app you prefer. We reply within 1 business day, usually much sooner."
+    crumbs={[{ label: 'Contact' }]}
+  />
+  <section class="section">
+    <div class="wrap contact">
+      <div>
+        <ul class="channels">
+          {channels.map((c) => (
+            <li>
+              <a href={c.href} target={c.ext ? '_blank' : undefined} rel={c.ext ? 'noopener' : undefined}>
+                <span class="icon-badge"><Icon name={c.icon} /></span>
+                <span><small>{c.label}</small><strong>{c.value}</strong></span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <div class="card info">
+          <p><Icon name="clock" /><span><strong>Office hours</strong><br />{site.hours}</span></p>
+          <p><Icon name="pin" /><span><strong>Based in</strong><br />{site.address.locality}, {site.address.countryName}. Serving clients nationwide and abroad.</span></p>
+        </div>
+      </div>
+      <LeadForm id="contact" formName="contact" title="Send us a message" button="Send message" />
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Pre-select a plan when arriving from the pricing page (?plan=...).
+  const plan = new URLSearchParams(location.search).get('plan');
+  const msg = document.querySelector<HTMLTextAreaElement>('#contact-msg');
+  if (plan && msg && !msg.value) msg.value = `I’m interested in the ${plan} plan.`;
+</script>
+
+<style>
+  .contact { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(32px, 6vw, 72px); align-items: start; }
+  @media (max-width: 860px) { .contact { grid-template-columns: 1fr; } }
+  .channels { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 12px; }
+  .channels a { display: flex; align-items: center; gap: 16px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); background: #fff; }
+  .channels a:hover { border-color: var(--brand); color: var(--ink); }
+  .channels .icon-badge { margin: 0; flex: none; }
+  .channels small { display: block; color: var(--muted); font-size: 0.82rem; }
+  .channels strong { font-family: var(--font-display); }
+  .info p { display: flex; gap: 12px; }
+  .info :global(svg) { width: 20px; height: 20px; color: var(--brand); flex: none; margin-top: 4px; }
+  .info strong { color: var(--ink); }
+</style>
