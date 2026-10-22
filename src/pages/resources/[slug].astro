@@ -98,14 +98,6 @@ const schema = [
           </div>
         </div>
 
-        <div class="end-cta">
-          <h2>Want results like this for your clinic?</h2>
-          <p>We’ll review your website, Google Business Profile, ads and AI visibility, and show you the 3 biggest fixes. Free, no obligation.</p>
-          <div class="btn-row">
-            <a class="btn btn--primary" href="/free-audit">Get my free growth audit <Icon name="arrow" /></a>
-            <a class="btn btn--secondary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
-          </div>
-        </div>
       </div>
 
       <aside class="audit" aria-label="Free growth audit">
@@ -157,7 +149,7 @@ const schema = [
   .ab__side { position: sticky; top: 96px; display: grid; gap: 16px; }
   .audit { position: sticky; top: 96px; }
   @media (max-width: 1200px) { .ab { grid-template-columns: minmax(0, 1fr) 300px; } .ab__side { grid-column: 1; position: static; } .article { grid-column: 1; } .audit { grid-column: 2; grid-row: 1 / span 2; } }
-  @media (max-width: 960px) { .ab { grid-template-columns: 1fr; } .audit { display: none; } }
+  @media (max-width: 960px) { .ab { grid-template-columns: 1fr; } .audit { grid-column: 1; grid-row: auto; position: static; } }
   .toc { border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); padding: 16px 18px; }
   .toc summary { cursor: pointer; font-family: var(--font-display); font-weight: 700; color: var(--ink); }
   .toc ol { margin: 12px 0 0; padding-left: 20px; display: grid; gap: 8px; font-size: 0.9rem; }
@@ -197,6 +189,4 @@ const schema = [
   .author p { margin: 0; font-size: 0.95rem; }
   .author__name { font-family: var(--font-display); font-weight: 700; color: var(--ink); font-size: 1.05rem !important; }
   .author__role { color: var(--muted); margin-bottom: 8px !important; }
-  .end-cta { margin-top: 32px; padding: clamp(24px, 4vw, 36px); border-radius: var(--radius-lg); background: var(--night); color: #c7d2dc; }
-  .end-cta h2 { color: #fff; margin-top: 0; }
 </style>
