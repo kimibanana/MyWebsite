@@ -1,0 +1,28 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site';
+import { categorySlug, formatDate, readingTime, type Resource } from '../lib/resources';
+interface Props { r: Resource; featured?: boolean }
+const { r, featured = false } = Astro.props;
+---
+<article class:list={['rc', 'reveal', { 'rc--featured': featured }]}>
+  <a class="rc__cat" href={`/resources/category/${categorySlug(r.data.category)}`}>{r.data.category}</a>
+  <h3><a href={`/resources/${r.id}`}>{r.data.title}</a></h3>
+  {featured && <p class="rc__desc">{r.data.description}</p>}
+  <p class="rc__meta">{site.founder.name} · {formatDate(r.data.updated ?? r.data.date)} · {readingTime(r)} min read</p>
+  {featured && <a class="btn btn--primary btn--sm rc__btn" href={`/resources/${r.id}`}>Read the guide <Icon name="arrow" /></a>}
+</article>
+
+<style>
+  .rc { position: relative; display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); transition: border-color .15s ease; }
+  .rc:hover { border-color: var(--brand); }
+  .rc__cat { align-self: flex-start; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--brand-text); text-decoration: none; background: var(--brand-tint); padding: 4px 10px; border-radius: 999px; position: relative; z-index: 1; }
+  .rc h3 { margin: 0; font-size: 1.15rem; line-height: 1.35; }
+  .rc h3 a { color: var(--ink); text-decoration: none; }
+  .rc h3 a::after { content: ''; position: absolute; inset: 0; border-radius: inherit; }
+  .rc__meta { margin: auto 0 0; font-size: 0.85rem; color: var(--muted); }
+  .rc__desc { margin: 0; }
+  .rc--featured { padding: clamp(26px, 4vw, 44px); background: linear-gradient(135deg, var(--brand-tint), var(--card) 70%); }
+  .rc--featured h3 { font-size: clamp(1.5rem, 3vw, 2.1rem); }
+  .rc__btn { align-self: flex-start; position: relative; z-index: 1; }
+</style>

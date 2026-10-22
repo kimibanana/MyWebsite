@@ -1,0 +1,26 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import ResourceList from '../../components/ResourceList.astro';
+import CtaBand from '../../components/CtaBand.astro';
+import { getResources } from '../../lib/resources';
+
+const items = await getResources();
+---
+<Base
+  title="Medical Marketing Resources | SEO, AI Search & Ads Guides for Clinics | Web Frontier"
+  description="Free guides for clinics and medical practices: how to rank in Google Maps, get cited by ChatGPT and AI search, and turn ads into booked patients."
+>
+  <PageHero
+    eyebrow="Resources"
+    title="Learn how clinics get found, chosen and cited online"
+    lead="Practical guides for clinics, hospitals and practices on ranking in Google, getting recommended by AI search, and turning ads into booked patients. Written by our team, free to use."
+    crumbs={[{ label: 'Resources' }]}
+  />
+  <section class="section">
+    <div class="wrap">
+      <ResourceList items={items} showFeatured />
+    </div>
+  </section>
+  <CtaBand title="Want these strategies done for you?" text="Get a free growth audit of your website, Google Business Profile, ads and AI visibility. We’ll show you the 3 biggest fixes for your clinic." />
+</Base>

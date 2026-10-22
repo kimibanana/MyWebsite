@@ -9,11 +9,14 @@ import SprintCycle from '../components/SprintCycle.astro';
 import Dashboard from '../components/Dashboard.astro';
 import { site } from '../data/site';
 import { priceHtml } from '../lib/price';
+import ResourceCard from '../components/ResourceCard.astro';
+import { getResources } from '../lib/resources';
 import {
   homeFaqs, pains, framework, specialties, industryGroups, capabilityGroups, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
 } from '../data/content';
 
 const stats = site.stats.filter((s) => s.value);
+const latestGuides = (await getResources()).slice(0, 3);
 const intlMarkets = site.markets.filter((m) => m !== 'Philippines');
 const featured = testimonials[0];
 const faqSchema = {
@@ -310,6 +313,19 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
         <p class="founder__sign"><strong>{site.founder.name}</strong>, {site.founder.role}, Web Frontier</p>
         <a class="btn btn--primary" href="#growth-audit">Let’s work together <Icon name="arrow" /></a>
       </div>
+    </div>
+  </section>
+
+  <!-- Latest guides -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head">
+        <span class="eyebrow">Resources</span>
+        <h2>Free guides for clinics</h2>
+        <p class="lead">How to rank in Google Maps, get cited by AI search and turn ads into booked patients.</p>
+      </div>
+      <div class="grid grid-3">{latestGuides.map((r) => <ResourceCard r={r} />)}</div>
+      <div class="center"><a class="btn btn--secondary" href="/resources">See all guides <Icon name="arrow" /></a></div>
     </div>
   </section>
 

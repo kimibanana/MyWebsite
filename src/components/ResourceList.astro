@@ -1,0 +1,22 @@
+---
+import ResourceCard from './ResourceCard.astro';
+import { categories, type Resource } from '../lib/resources';
+interface Props { items: Resource[]; active?: string; showFeatured?: boolean }
+const { items, active, showFeatured = false } = Astro.props;
+const featured = showFeatured ? items.find((r) => r.data.featured) ?? items[0] : undefined;
+const rest = featured ? items.filter((r) => r !== featured) : items;
+---
+<nav class="cats" aria-label="Resource categories">
+  <a href="/resources" aria-current={!active ? 'page' : undefined}>All guides</a>
+  {categories.map((c) => <a href={`/resources/category/${c.slug}`} aria-current={active === c.slug ? 'page' : undefined}>{c.name}</a>)}
+</nav>
+{featured && <div class="featured"><ResourceCard r={featured} featured /></div>}
+<div class="grid grid-3">{rest.map((r) => <ResourceCard r={r} />)}</div>
+
+<style>
+  .cats { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+  .cats a { padding: 8px 16px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.93rem; }
+  .cats a:hover { border-color: var(--brand); }
+  .cats a[aria-current='page'] { background: var(--brand); border-color: var(--brand); color: #fff; }
+  .featured { margin-bottom: 24px; }
+</style>
