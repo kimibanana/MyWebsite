@@ -3,7 +3,6 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import LeadForm from '../components/LeadForm.astro';
 import Faq from '../components/Faq.astro';
-import CaseStudies from '../components/CaseStudies.astro';
 import SprintCycle from '../components/SprintCycle.astro';
 import HeroSlideshow from '../components/HeroSlideshow.astro';
 import ResourceCard from '../components/ResourceCard.astro';
@@ -12,7 +11,7 @@ import { priceHtml } from '../lib/price';
 import { getResources } from '../lib/resources';
 import { homeFaqs, pains, framework, whyUs, consultation } from '../data/content';
 
-const faqs = homeFaqs.slice(0, 5);
+const faqs = homeFaqs.filter((f) => f.home);
 const latestGuides = (await getResources()).slice(0, 3);
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -30,17 +29,17 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   <section class="hero pattern">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">Healthcare marketing · Philippines & worldwide</span>
-        <h1>Helping more patients find the care they need</h1>
-        <p class="lead">We help clinics and hospitals get found, trusted and booked online, so you can spend your time on patients, not marketing.</p>
+        <span class="eyebrow">For clinics and medical groups · Philippines & worldwide</span>
+        <h1>More patients finding and booking your clinic, without another job on your plate</h1>
+        <p class="lead">We handle SEO, websites, Google Ads and Local Services Ads for clinics and medical groups, in focused sprints with no long-term contract.</p>
         <div class="btn-row hero__ctas">
           <a class="btn btn--primary" href="#growth-audit">Get a free growth audit <Icon name="arrow" /></a>
-          <a class="btn btn--secondary" href="/services">How we help</a>
+          <a class="btn btn--secondary" href="#how-we-work">See how sprints work</a>
         </div>
         <ul class="hero__points">
-          <li><Icon name="heart" />100% healthcare</li>
-          <li><Icon name="shield" />Compliance built in</li>
-          <li><Icon name="unlock" />No long contracts</li>
+          <li><Icon name="heart" />Medical practices only</li>
+          <li><Icon name="file" />Focused 30-day sprints</li>
+          <li><Icon name="unlock" />No long-term contract</li>
         </ul>
       </div>
       <HeroSlideshow />
@@ -59,8 +58,8 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     <div class="wrap">
       <div class="head reveal">
         <span class="eyebrow">We understand</span>
-        <h2>Your days are full of patients. Marketing shouldn’t add to the load.</h2>
-        <p class="lead">Most clinics we meet are doing great work that patients simply can’t find. We fix that, calmly and clearly.</p>
+        <h2>You became a clinic to care for patients, not to manage Google</h2>
+        <p class="lead">Running a practice already takes everything you have. Keeping a website current, showing up on Google Maps and making sense of ads can feel like a second job that nobody on your team has time for.</p>
       </div>
       <div class="grid grid-3">
         {pains.map((p) => (
@@ -71,6 +70,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
           </div>
         ))}
       </div>
+      <p class="reassure reveal">None of that reflects the care you give. It just means your online presence needs someone looking after it.</p>
     </div>
   </section>
 
@@ -79,7 +79,8 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">How we help</span>
-        <h2>One simple path from search to booking</h2>
+        <h2>We take it off your desk</h2>
+        <p class="lead">We learn your services, your area and the patients you want to see more of. Then we look after each step between a patient searching and a patient booking.</p>
       </div>
       <ol class="path">
         {framework.map((f, i) => (
@@ -99,8 +100,8 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     <div class="wrap why">
       <div class="reveal">
         <span class="eyebrow">Why clinics choose us</span>
-        <h2>Specialists in healthcare, and only healthcare</h2>
-        <p class="lead">We work with {site.experience} of experience across clinics in the Philippines, the US, the UK, Australia and beyond.</p>
+        <h2>A team that works only with healthcare</h2>
+        <p class="lead">Most agencies serve every industry. We work only with clinics and medical groups, so we already understand your patients, your services and the care that healthcare marketing needs.</p>
         <a class="btn btn--secondary" href="/about">Meet the team <Icon name="arrow" /></a>
       </div>
       <ul class="why__list">
@@ -114,25 +115,13 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
     </div>
   </section>
 
-  <!-- Results -->
-  <section class="section section--surface">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Results</span>
-        <h2>Measured in patients, not page views</h2>
-      </div>
-      <CaseStudies />
-      <div class="center"><a class="btn btn--secondary" href="/work">See more results <Icon name="arrow" /></a></div>
-    </div>
-  </section>
-
   <!-- How we work -->
-  <section class="section">
+  <section class="section section--surface" id="how-we-work">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">How we work</span>
-        <h2>Calm, clear 30-day sprints</h2>
-        <p class="lead" set:html={priceHtml('Start with a Foundation Sprint, then add monthly sprints from $650. No long contracts.')} />
+        <h2>Focused sprints, at a pace that suits your practice</h2>
+        <p class="lead" set:html={priceHtml('Each 30-day sprint has one clear goal, such as reaching the Google Maps top 3 for a key service or making booking work on mobile. You see what changed and decide what comes next. Monthly sprints start from $650, with no long-term contract.')} />
       </div>
       <SprintCycle />
       <div class="center"><a class="btn btn--secondary" href="/pricing">See pricing <Icon name="arrow" /></a></div>
@@ -140,7 +129,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   </section>
 
   <!-- Founder -->
-  <section class="section section--surface">
+  <section class="section">
     <div class="wrap founder">
       <div class="founder__photo" aria-hidden="true">{site.founder.initials}</div>
       <div class="reveal">
@@ -153,7 +142,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   </section>
 
   <!-- Guides -->
-  <section class="section">
+  <section class="section section--surface">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Free guides</span>
@@ -165,7 +154,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   </section>
 
   <!-- FAQ -->
-  <section class="section section--surface">
+  <section class="section">
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Questions</span>
@@ -176,12 +165,12 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   </section>
 
   <!-- Free audit -->
-  <section class="section" id="growth-audit">
+  <section class="section section--surface" id="growth-audit">
     <div class="wrap together">
       <div class="reveal">
         <span class="eyebrow">Free growth audit</span>
-        <h2>Let’s see how patients find you today</h2>
-        <p class="lead">A friendly review of your online presence, with the three changes that would help most. No obligation.</p>
+        <h2>You don’t need a plan before we talk</h2>
+        <p class="lead">Tell us what your clinic wants more of, and we’ll show you where you stand today and the three changes that would help most. No obligation and no pressure.</p>
         <ul class="benefits">
           {consultation.slice(0, 3).map((c) => (
             <li><Icon name="check" /><span>{c.title}</span></li>
@@ -197,7 +186,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
 <style>
   .hero { padding: clamp(40px, 6vw, 88px) 0 clamp(56px, 7vw, 104px); background: linear-gradient(180deg, var(--sage), var(--bg) 85%); }
   .hero__in { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
-  .hero h1 { font-size: clamp(2.3rem, 5vw, 3.6rem); max-width: 14ch; }
+  .hero h1 { font-size: clamp(2.1rem, 4.2vw, 3.1rem); max-width: 18ch; }
   .hero .lead { max-width: 46ch; }
   .hero__ctas { margin: 30px 0 26px; }
   .hero__points { list-style: none; padding: 22px 0 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; border-top: 1px solid var(--line); }
@@ -239,6 +228,7 @@ const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health
   .why__list p { margin: 0; color: var(--muted); font-size: 0.98rem; }
 
   .center { text-align: center; margin-top: 44px; }
+  .reassure { margin: 40px 0 0; max-width: 60ch; font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; color: var(--ink); }
 
   .founder { display: grid; grid-template-columns: 160px 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; max-width: 900px; }
   .founder__photo { width: 160px; height: 160px; border-radius: var(--radius-lg); background: var(--ink); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; font-weight: 700; }

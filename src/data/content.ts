@@ -228,10 +228,10 @@ export const dashboard = {
 
 // Our four-channel framework.
 export const framework = [
-  { icon: 'pin', title: 'Get found', body: 'Medical SEO and Google Maps so patients find you when they search.', href: '/services/medical-seo' },
-  { icon: 'target', title: 'Get chosen', body: 'Google Ads and Local Services Ads at the top of the page, today.', href: '/services/google-ads' },
-  { icon: 'layout', title: 'Get booked', body: 'A fast website with online booking that turns visitors into appointments.', href: '/services/medical-website-design' },
-  { icon: 'star', title: 'Get trusted', body: 'Reviews, reputation and content that make patients choose you.', href: '/services/medical-seo' },
+  { icon: 'pin', title: 'Get found', body: 'SEO and Google Maps, so nearby patients see your clinic when they search for your services.', href: '/services/medical-seo' },
+  { icon: 'target', title: 'Get chosen', body: 'Google Ads and Local Services Ads that reach people searching now, with every enquiry tracked.', href: '/services/google-ads' },
+  { icon: 'layout', title: 'Get booked', body: 'A clear, welcoming website where calling or booking takes a few taps on any phone.', href: '/services/medical-website-design' },
+  { icon: 'star', title: 'Get trusted', body: 'Steady reviews and helpful answers to the questions patients ask before they book.', href: '/services/medical-seo' },
 ];
 
 export type Industry = { name: string; icon: string; focus: string; sub?: string[] };
@@ -362,10 +362,10 @@ export const complianceSteps = [
 ];
 
 export const whyUs = [
-  { icon: 'heart', title: 'Only healthcare', body: 'We know how patients choose care, and the rules that protect them.' },
-  { icon: 'shield', title: 'Compliance built in', body: 'Every page and ad is checked against your country’s health advertising rules.' },
-  { icon: 'file', title: 'Clear 30-day sprints', body: 'A written plan, a fixed price and a report you can actually read.' },
-  { icon: 'users', title: 'Real people', body: 'Talk directly to the specialists doing the work.' },
+  { icon: 'heart', title: 'Only healthcare', body: 'We understand how patients choose care, and the rules that protect them.' },
+  { icon: 'shield', title: 'Careful with claims', body: 'We check pages and ads against your country’s health advertising rules, and you approve every claim.' },
+  { icon: 'file', title: 'Progress you can see', body: 'Each sprint has a written goal and a plain-English report of what changed.' },
+  { icon: 'users', title: 'Hands-on support', body: 'You talk directly to the people doing the work, and we take care of the details.' },
 ];
 
 export const consultation = [
@@ -377,6 +377,7 @@ export const consultation = [
 
 export const homeFaqs = [
   {
+    home: true,
     q: 'Do you only work with healthcare businesses?',
     a: 'Yes. We work only with clinics, hospitals, practices and other healthcare providers. That focus is why we understand patient search behavior, medical advertising rules and the ad-platform policies that trip up generalist agencies.',
   },
@@ -389,6 +390,7 @@ export const homeFaqs = [
     a: 'Yes. We serve practices in the US, UK, Canada, Australia, Singapore, the UAE and beyond. We schedule calls in your time zone, follow your country’s advertising and privacy rules, and reply within one business day.',
   },
   {
+    home: true,
     q: 'What is a sprint?',
     a: 'A sprint is 30 days of focused work with a written scope, fixed price and delivery date. Week 1 we plan, weeks 2–3 we execute, and week 4 we deliver a report of exactly what was done and what moved.',
   },
@@ -401,12 +403,23 @@ export const homeFaqs = [
     a: 'Every campaign goes through our compliance review against the rules for your country and specialty, such as FDA Philippines and DOH guidelines, HIPAA in the US, or Ahpra and TGA in Australia, plus Google and Meta healthcare policies. We keep patient health information out of marketing tools. Your practice still gives final approval on all claims.',
   },
   {
+    home: true,
     q: 'Do you lock clients into contracts?',
     a: 'No. The Foundation Sprint is a one-time project and monthly sprints are month-to-month. We keep clients by delivering, not with contracts. If you’d like to commit, a 12-month partnership saves 15% on every monthly sprint and care plan.',
   },
   {
     q: 'Will we own our website and accounts?',
     a: 'Always. Your domain, website, Google Business Profile, Analytics and ad accounts stay in your practice’s name.',
+  },
+  {
+    home: true,
+    q: 'Do we need to know which service we need before we contact you?',
+    a: 'No. Tell us what your clinic wants more of, such as calls, bookings or a particular treatment, and what has or hasn’t worked so far. We’ll suggest where to start, and it’s fine if the answer is “not yet”.',
+  },
+  {
+    home: true,
+    q: 'Can you guarantee more bookings and calls?',
+    a: 'No honest agency can. Results depend on your location, competition, services and starting point. What we can promise is focused work on the things that most affect bookings, clear reporting on what changed, and straight answers about what is realistic for your practice.',
   },
 ];
 
@@ -424,9 +437,9 @@ export const sprintCycle = [
 ];
 
 export const pains = [
-  { icon: 'eye-off', title: 'Hard to find', body: 'Patients nearby search, but book with the clinics they see first.' },
-  { icon: 'question', title: 'Unclear marketing', body: 'You pay every month and still can’t tell what was done.' },
-  { icon: 'hourglass', title: 'A site that doesn’t book', body: 'Visitors leave with questions instead of appointments.' },
+  { icon: 'eye-off', title: 'Hard to find nearby', body: 'Other clinics appear on Google Maps before you, even for services you know you do well.' },
+  { icon: 'question', title: 'Quiet phones, unclear reports', body: 'You can’t tell which calls came from Google, or what an agency actually did last month.' },
+  { icon: 'hourglass', title: 'A website that holds you back', body: 'It hasn’t changed in years, it’s slow on phones, and booking takes too many steps.' },
 ];
 
 export const promises = [
