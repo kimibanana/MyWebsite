@@ -1,22 +1,23 @@
 ---
-// Placeholder wordmark until a final logo is supplied.
-interface Props { light?: boolean }
-const { light = false } = Astro.props;
+// Web Frontier logo: a heartbeat line that draws a W, with a medical plus.
+// The wordmark uses currentColor, so it follows light and dark themes.
+interface Props { size?: number; light?: boolean; class?: string }
+const { size = 38, light = false, class: className } = Astro.props;
 ---
-<span class:list={['logo', { 'logo--light': light }]}>
+<span class:list={['logo', { 'logo--light': light }, className]} style={`--logo-size:${size}px`}>
   <svg class="logo__mark" viewBox="0 0 40 40" aria-hidden="true">
-    <rect width="40" height="40" rx="11" fill="#0E7C7B" />
-    <path d="M7 29l9.5-13 5 6.5 3.5-4.5L33 29" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
-    <circle cx="27.5" cy="11" r="3.6" fill="#FF8A3D" />
+    <rect width="40" height="40" rx="8" fill="#0E7C7B" />
+    <path d="M5 21.5h4.2L12.6 11.5l4 17L20 15.5l3.4 13 4-17 3.1 10" stroke="#fff" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    <path d="M33 6v6M30 9h6" stroke="#FF8A3D" stroke-width="2.6" stroke-linecap="round" />
   </svg>
   <span class="logo__text">Web<span>Frontier</span></span>
 </span>
 
 <style>
-  .logo { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); }
+  .logo { display: inline-flex; align-items: center; gap: calc(var(--logo-size) * 0.3); color: var(--ink); }
   .logo--light { color: #fff; }
-  .logo__mark { width: 38px; height: 38px; flex: none; }
-  .logo__text { font-family: var(--font-display); font-weight: 700; font-size: 1.32rem; letter-spacing: -0.03em; line-height: 1; white-space: nowrap; }
-  .logo__text span { color: var(--brand-text); margin-left: 0.22em; }
+  .logo__mark { width: var(--logo-size); height: var(--logo-size); flex: none; }
+  .logo__text { font-family: var(--font-display); font-weight: 700; font-size: calc(var(--logo-size) * 0.6); letter-spacing: -0.02em; line-height: 1; white-space: nowrap; color: currentColor; }
+  .logo__text span { color: var(--brand-text); margin-left: 0.24em; }
   .logo--light .logo__text span { color: #5fd3cf; }
 </style>
