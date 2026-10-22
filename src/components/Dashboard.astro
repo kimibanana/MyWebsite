@@ -1,0 +1,54 @@
+---
+// Illustrative hero visual. Numbers are a sample and labeled as such.
+import { dashboard as d } from '../data/content';
+const max = Math.max(...d.channels.map((c) => c.share));
+---
+<figure class="dash" aria-label="Sample practice growth dashboard">
+  <header class="dash__head">
+    <div>
+      <strong>{d.title}</strong>
+      <small>{d.period}</small>
+    </div>
+    <span class="tag tag--sample">Sample</span>
+  </header>
+  <dl class="dash__kpis">
+    {d.kpis.map((k) => (
+      <div class="kpi">
+        <dt>{k.label}</dt>
+        <dd><span class="kpi__v">{k.value}</span><span class="kpi__c">{k.change}</span></dd>
+      </div>
+    ))}
+  </dl>
+  <div class="dash__table">
+    <p class="dash__label">New patients by channel</p>
+    <ul>
+      {d.channels.map((c) => (
+        <li>
+          <span class="ch__name">{c.name}</span>
+          <span class="ch__bar"><span style={`width:${(c.share / max) * 100}%`}></span></span>
+          <span class="ch__n">{c.patients}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</figure>
+
+<style>
+  .dash { margin: 0; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 22px; }
+  .dash__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; padding-bottom: 16px; border-bottom: 1px solid var(--line); }
+  .dash__head strong { display: block; font-family: var(--font-display); color: var(--ink); }
+  .dash__head small { color: var(--muted); font-size: 0.82rem; }
+  .dash__kpis { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+  .kpi { background: var(--surface); border-radius: 12px; padding: 12px 14px; }
+  .kpi dt { font-size: 0.78rem; color: var(--muted); font-weight: 600; }
+  .kpi dd { margin: 2px 0 0; display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .kpi__v { font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; color: var(--ink); letter-spacing: -0.02em; }
+  .kpi__c { font-size: 0.78rem; font-weight: 700; color: var(--success); background: #e7f6ec; padding: 1px 7px; border-radius: 999px; }
+  .dash__label { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin: 0 0 10px; }
+  .dash__table ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+  .dash__table li { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 12px; align-items: center; font-size: 0.88rem; color: var(--ink); }
+  .ch__bar { height: 8px; border-radius: 999px; background: var(--brand-tint); overflow: hidden; }
+  .ch__bar span { display: block; height: 100%; border-radius: inherit; background: var(--brand); }
+  .ch__n { font-weight: 700; font-variant-numeric: tabular-nums; min-width: 2ch; text-align: right; }
+  @media (max-width: 420px) { .dash__table li { grid-template-columns: 1fr auto; } .ch__bar { display: none; } }
+</style>

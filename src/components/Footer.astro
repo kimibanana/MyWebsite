@@ -10,7 +10,7 @@ const year = new Date().getFullYear();
     <div class="ftr__grid">
       <div class="ftr__brand">
         <Logo light />
-        <p>{site.tagline}. Local SEO, websites and ads for service businesses, delivered in fixed-price 30-day sprints.</p>
+        <p>{site.tagline}. SEO, websites and ads for medical practices and local businesses, delivered in fixed-price 30-day sprints. {site.experience} in the industry.</p>
         <ul class="ftr__contact">
           <li><Icon name="whatsapp" /><a href={site.whatsapp} target="_blank" rel="noopener">{site.whatsappDisplay}</a></li>
           {site.email && <li><Icon name="mail" /><a href={`mailto:${site.email}`}>{site.email}</a></li>}
@@ -26,6 +26,7 @@ const year = new Date().getFullYear();
         <h3>Company</h3>
         <ul>
           <li><a href="/about">About us</a></li>
+          <li><a href="/who-we-serve">Who we serve</a></li>
           <li><a href="/work">Results</a></li>
           <li><a href="/pricing">Sprints & pricing</a></li>
           <li><a href="/contact">Contact</a></li>

@@ -1,6 +1,6 @@
 # Web Frontier website
 
-Marketing site for Web Frontier, a Local SEO, web design and Google Ads agency for local service businesses in the US, UK, Canada and Australia. Services are sold as fixed-price 30-day sprints.
+Marketing site for Web Frontier, a medical marketing agency (SEO, websites, Google Ads, Local Services Ads, maintenance) that also serves other local businesses in the US, UK, Canada and Australia. The homepage follows a WEBRIS-style flow, and services are sold as fixed-price 30-day sprints.
 Built with [Astro](https://astro.build) as a static site: fast, secure, and SEO-friendly, with no database or plugins to maintain.
 
 ## Pages
@@ -9,7 +9,8 @@ Built with [Astro](https://astro.build) as a static site: fast, secure, and SEO-
 | --- | --- |
 | Home | `/` |
 | Services overview | `/services` |
-| Service pages (5) | `/services/local-seo`, `/services/web-design`, `/services/google-ads`, `/services/local-services-ads`, `/services/website-care` |
+| Service pages (5) | `/services/medical-seo`, `/services/medical-website-design`, `/services/google-ads`, `/services/local-services-ads`, `/services/website-care` |
+| Who we serve | `/who-we-serve` |
 | Sprints & pricing | `/pricing` |
 | Results (case studies) | `/work` |
 | About | `/about` |
