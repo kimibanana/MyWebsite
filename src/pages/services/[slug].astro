@@ -24,8 +24,8 @@ const schema = [
     description: s.metaDescription,
     serviceType: s.name,
     provider: { '@id': `${site.url}/#organization` },
-    areaServed: site.areaServed,
-    offers: { '@type': 'Offer', priceCurrency: 'PHP', description: `Starts at ${s.startingAt}` },
+    areaServed: site.markets.map((name) => ({ '@type': 'Country', name })),
+    offers: { '@type': 'Offer', priceCurrency: 'USD', description: `Starts at ${s.startingAt}` },
   },
   {
     '@context': 'https://schema.org',
@@ -44,7 +44,7 @@ const schema = [
     <p class="price">Starts at <strong>{s.startingAt}</strong> <span>· {s.priceNote}</span></p>
     <div class="btn-row">
       <a class="btn btn--primary" href="#quote">Get a free quote <Icon name="arrow" /></a>
-      <a class="btn btn--secondary" href={site.messenger} target="_blank" rel="noopener"><Icon name="chat" />Ask a question</a>
+      <a class="btn btn--secondary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />Ask on WhatsApp</a>
     </div>
   </PageHero>
 
@@ -78,8 +78,10 @@ const schema = [
         <h3>Ideal for</h3>
         <ul class="ideal">{s.idealFor.map((i) => <li>{i}</li>)}</ul>
         <hr />
-        <h3>How we work</h3>
+        <h3>How it’s delivered</h3>
+        <p class="sprint-note">{s.sprintNote}</p>
         <ol class="mini-steps">{process.map((p) => <li><strong>{p.title}.</strong> {p.body}</li>)}</ol>
+        <a class="sprint-link" href="/pricing">See sprint pricing <Icon name="arrow" /></a>
       </div>
     </div>
   </section>
@@ -103,10 +105,10 @@ const schema = [
       <div>
         <span class="eyebrow">Free quote</span>
         <h2>Get a fixed quote for {s.name}</h2>
-        <p class="lead">Tell us a bit about your business. We’ll review your site and send a clear recommendation and price within 1 business day.</p>
+        <p class="lead">Tell us about your business. We’ll review your site and market, then send a clear sprint recommendation and price within 1 business day.</p>
         <ul class="checks">
           <li>No obligation and no pushy sales calls</li>
-          <li>Fixed pricing in writing before any work starts</li>
+          <li>Fixed scope and price in writing before any work starts</li>
           <li>A real specialist reviews your site, not a bot</li>
         </ul>
       </div>
@@ -148,6 +150,9 @@ const schema = [
   .card hr { border: 0; border-top: 1px solid var(--line); margin: 22px 0; }
   .mini-steps { padding-left: 20px; margin: 0; display: grid; gap: 10px; font-size: 0.95rem; }
   .mini-steps strong { color: var(--ink); }
+  .sprint-note { font-size: 0.95rem; color: var(--brand-dark); font-weight: 600; }
+  .sprint-link { display: inline-flex; align-items: center; gap: 6px; margin-top: 16px; font-weight: 700; }
+  .sprint-link :global(svg) { width: 16px; height: 16px; }
   .quote { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; scroll-margin-top: 80px; }
   @media (max-width: 860px) { .quote { grid-template-columns: 1fr; } }
   .rel { text-decoration: none; color: inherit; }

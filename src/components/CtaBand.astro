@@ -3,8 +3,8 @@ import Icon from './Icon.astro';
 import { site } from '../data/site';
 interface Props { title?: string; text?: string }
 const {
-  title = 'Find out what’s stopping your website from bringing in customers',
-  text = 'Get a free 15-minute SEO and website review. We’ll show you the 3 biggest fixes, whether you hire us or not.',
+  title = 'Find out what’s stopping Google from sending you more jobs',
+  text = 'Get a free growth audit of your website, Google Business Profile and competitors. We’ll show you the 3 biggest fixes, whether you hire us or not.',
 } = Astro.props;
 ---
 <section class="cta">
@@ -16,7 +16,7 @@ const {
       </div>
       <div class="btn-row">
         <a class="btn btn--primary" href="/free-audit">Get my free audit <Icon name="arrow" /></a>
-        <a class="btn btn--ghost-light" href={site.messenger} target="_blank" rel="noopener"><Icon name="chat" />Message us</a>
+        <a class="btn btn--ghost-light" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
       </div>
     </div>
   </div>

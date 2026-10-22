@@ -32,14 +32,14 @@ const isActive = (href: string) => path === href || path.startsWith(href + '/');
         )}
       </ul>
       <div class="hdr__mobile-cta">
-        <a class="btn btn--primary btn--block" href="/free-audit">Get a free SEO audit</a>
-        <a class="btn btn--secondary btn--block" href={site.phoneHref}><Icon name="phone" />{site.phone}</a>
+        <a class="btn btn--primary btn--block" href="/free-audit">Get a free growth audit</a>
+        <a class="btn btn--secondary btn--block" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />WhatsApp us</a>
       </div>
     </nav>
 
     <div class="hdr__actions">
-      <a class="hdr__phone" href={site.phoneHref}><Icon name="phone" /><span>{site.phone}</span></a>
-      <a class="btn btn--primary btn--sm" href="/free-audit">Free SEO audit</a>
+      <a class="hdr__phone" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" /><span>WhatsApp</span></a>
+      <a class="btn btn--primary btn--sm" href="/free-audit">Free growth audit</a>
       <button class="hdr__toggle" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
         <Icon name="menu" class="i-open" /><Icon name="close" class="i-close" />
       </button>

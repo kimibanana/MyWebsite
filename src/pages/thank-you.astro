@@ -3,15 +3,15 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 ---
-<Base title="Thank you | Kimi Web Solutions" description="We received your message." noindex>
+<Base title="Thank you | Web Frontier" description="We received your message." noindex>
   <section class="section">
     <div class="wrap ty">
       <span class="ty__icon"><Icon name="check" /></span>
       <h1>Thanks! We got your message.</h1>
-      <p class="lead">A specialist will reply within 1 business day. Need us sooner? Message us directly.</p>
+      <p class="lead">A specialist will reply within 1 business day, in your time zone. Need us sooner? Message us on WhatsApp.</p>
       <div class="btn-row">
-        <a class="btn btn--primary" href={site.messenger} target="_blank" rel="noopener"><Icon name="chat" />Chat on Messenger</a>
-        <a class="btn btn--secondary" href="/work">See our work while you wait</a>
+        <a class="btn btn--primary" href={site.whatsapp} target="_blank" rel="noopener"><Icon name="whatsapp" />Chat on WhatsApp</a>
+        <a class="btn btn--secondary" href="/work">See client results</a>
       </div>
     </div>
   </section>

@@ -6,20 +6,19 @@ import Icon from '../components/Icon.astro';
 import { site } from '../data/site';
 
 const channels = [
-  { icon: 'chat', label: 'Messenger', value: 'Chat with us', href: site.messenger, ext: true },
-  { icon: 'phone', label: 'Call or Viber', value: site.phone, href: site.phoneHref },
+  { icon: 'whatsapp', label: 'WhatsApp (fastest)', value: site.whatsappDisplay, href: site.whatsapp, ext: true },
   { icon: 'mail', label: 'Email', value: site.email, href: `mailto:${site.email}` },
-  { icon: 'chat', label: 'WhatsApp', value: 'Message us', href: site.whatsapp, ext: true },
+  { icon: 'calendar', label: 'Book a call', value: 'Pick a time in your time zone', href: site.bookingUrl },
 ];
 ---
 <Base
-  title="Contact Us | Kimi Web Solutions"
-  description="Talk to Kimi Web Solutions about your website or SEO. Message us on Messenger, Viber or WhatsApp, call, or send the form. We reply within 1 business day."
+  title="Contact Us | Web Frontier"
+  description="Talk to Web Frontier about Local SEO, your website or Google Ads. Message us on WhatsApp, email, or send the form. We reply within 1 business day."
 >
   <PageHero
     eyebrow="Contact"
     title="Let’s grow your business together"
-    lead="Send a message, or reach us on whichever app you prefer. We reply within 1 business day, usually much sooner."
+    lead="Send a message or reach us on WhatsApp. We reply within 1 business day in your time zone, usually much sooner."
     crumbs={[{ label: 'Contact' }]}
   />
   <section class="section">
@@ -37,7 +36,7 @@ const channels = [
         </ul>
         <div class="card info">
           <p><Icon name="clock" /><span><strong>Office hours</strong><br />{site.hours}</span></p>
-          <p><Icon name="pin" /><span><strong>Based in</strong><br />{site.address.locality}, {site.address.countryName}. Serving clients nationwide and abroad.</span></p>
+          <p><Icon name="globe" /><span><strong>Where we work</strong><br />A remote team serving local businesses in the {site.markets.join(', ').replace(/, ([^,]*)$/, ' and $1')}.</span></p>
         </div>
       </div>
       <LeadForm id="contact" formName="contact" title="Send us a message" button="Send message" />

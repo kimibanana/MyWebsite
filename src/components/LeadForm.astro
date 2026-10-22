@@ -12,7 +12,7 @@ interface Props {
 const {
   id = 'lead-form',
   title,
-  button = 'Get my free audit',
+  button = 'Get my free growth audit',
   compact = false,
   formName = 'free-audit',
 } = Astro.props;
@@ -43,13 +43,22 @@ const action = site.formEndpoint || '/thank-you';
       <input id={`${id}-email`} name="email" type="email" autocomplete="email" required />
     </div>
     <div class="field">
-      <label for={`${id}-phone`}>Mobile / Viber <span class="opt">(optional)</span></label>
+      <label for={`${id}-phone`}>Phone <span class="opt">(optional)</span></label>
       <input id={`${id}-phone`} name="phone" type="tel" autocomplete="tel" />
     </div>
   </div>
-  <div class="field">
-    <label for={`${id}-site`}>Website URL <span class="opt">(if you have one)</span></label>
-    <input id={`${id}-site`} name="website" type="text" inputmode="url" placeholder="yourbusiness.com" />
+  <div class="lead__row">
+    <div class="field">
+      <label for={`${id}-site`}>Website <span class="opt">(if you have one)</span></label>
+      <input id={`${id}-site`} name="website" type="text" inputmode="url" placeholder="yourbusiness.com" />
+    </div>
+    <div class="field">
+      <label for={`${id}-country`}>Country</label>
+      <select id={`${id}-country`} name="country">
+        {site.markets.map((m) => <option>{m}</option>)}
+        <option>Other</option>
+      </select>
+    </div>
   </div>
   <div class="field">
     <label for={`${id}-need`}>What do you need help with?</label>
@@ -65,7 +74,7 @@ const action = site.formEndpoint || '/thank-you';
     </div>
   )}
   <button class="btn btn--primary btn--block" type="submit">{button}</button>
-  <p class="form-note">We reply within 1 business day. No spam, no pressure.</p>
+  <p class="form-note">We reply within 1 business day, in your time zone. No spam, no pressure.</p>
 </form>
 
 <style>

@@ -26,15 +26,10 @@ const orgSchema = {
   image: `${site.url}/og-image.png`,
   description: site.description,
   email: site.email,
-  telephone: site.phone,
-  priceRange: '₱₱',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: site.address.locality,
-    addressRegion: site.address.region,
-    addressCountry: site.address.country,
-  },
-  areaServed: site.areaServed,
+  telephone: site.whatsappDisplay,
+  priceRange: '$$',
+  areaServed: site.markets.map((name) => ({ '@type': 'Country', name })),
+  knowsAbout: ['Local SEO', 'Web design', 'Google Ads', 'Local Services Ads', 'Website maintenance'],
   sameAs: Object.values(site.social).filter(Boolean),
 };
 const allSchema = [orgSchema, ...schema];
@@ -58,7 +53,7 @@ const allSchema = [orgSchema, ...schema];
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogUrl} />
-    <meta property="og:locale" content="en_PH" />
+    <meta property="og:locale" content="en_US" />
     <meta name="twitter:card" content="summary_large_image" />
 
     {allSchema.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s)} />)}

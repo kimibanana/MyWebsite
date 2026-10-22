@@ -8,7 +8,8 @@ import CaseStudies from '../components/CaseStudies.astro';
 import Testimonials from '../components/Testimonials.astro';
 import { site } from '../data/site';
 import { services } from '../data/services';
-import { homeFaqs, pains, process, promises } from '../data/content';
+import SprintCycle from '../components/SprintCycle.astro';
+import { homeFaqs, pains, process, promises, industries } from '../data/content';
 
 const stats = site.stats.filter((s) => s.value);
 const faqSchema = {
@@ -17,16 +18,15 @@ const faqSchema = {
   mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
 const compare = [
-  ['Vague monthly “activity” reports', 'Plain-language reports on leads, rankings and revenue'],
-  ['12-month lock-in contracts', 'Month-to-month after a 3-month start'],
-  ['Templates that look like everyone else', 'Custom design built around your customers'],
+  ['Open-ended retainer, scope unclear', 'Fixed-scope 30-day sprints, written down'],
+  ['Vague monthly “activity” reports', 'Every deliverable listed, plus calls and leads'],
+  ['6–12 month lock-in contracts', 'Month-to-month. Pause or swap sprints anytime'],
   ['Agency owns your site and accounts', 'Everything registered in your name'],
-  ['Account managers who pass messages along', 'Direct line to the specialist doing the work'],
+  ['Shared leads sold to your competitors', 'Exclusive leads from your own site and profile'],
 ];
-const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google Analytics 4', 'Search Console', 'Google Business Profile'];
 ---
 <Base
-  title="SEO & Web Design Agency Philippines | Kimi Web Solutions"
+  title="Local SEO, Web Design & Google Ads for Service Businesses | Web Frontier"
   description={site.description}
   schema={[faqSchema]}
 >
@@ -34,17 +34,17 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
   <section class="hero">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">SEO & Web Design Agency · Philippines</span>
-        <h1>More customers from Google, <span class="hl">not just a prettier website</span></h1>
-        <p class="lead">We build fast, conversion-focused websites and run honest SEO that gets your business found by people ready to buy. Clear pricing, plain-language reports, and no lock-in contracts.</p>
+        <span class="eyebrow">For local businesses in the US, UK, Canada & Australia</span>
+        <h1>More calls and booked jobs from Google, <span class="hl">one 30‑day sprint at a time</span></h1>
+        <p class="lead">Web Frontier gets local service businesses into the Map Pack, onto page one and in front of buyers with Local SEO, websites, Google Ads and Local Services Ads. No vague retainers: every sprint has a fixed scope, price and delivery date.</p>
         <ul class="hero__points">
-          <li><Icon name="check" />Free audit with your 3 biggest fixes</li>
-          <li><Icon name="check" />Fixed quotes, no hidden fees</li>
+          <li><Icon name="check" />Free growth audit with your 3 biggest fixes</li>
+          <li><Icon name="check" />Fixed-price sprints, no long contracts</li>
           <li><Icon name="check" />You own your site and accounts</li>
         </ul>
         <div class="btn-row hero__ctas">
-          <a class="btn btn--primary" href="#hero-form">Get my free SEO audit <Icon name="arrow" /></a>
-          <a class="btn btn--secondary" href="/pricing">See pricing</a>
+          <a class="btn btn--primary" href="#hero-form">Get my free growth audit <Icon name="arrow" /></a>
+          <a class="btn btn--secondary" href="/pricing">See how sprints work</a>
         </div>
         {stats.length > 0 && (
           <dl class="hero__stats">
@@ -53,15 +53,15 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
         )}
       </div>
       <div class="hero__form" id="hero-form">
-        <LeadForm id="hero" title="Get your free website & SEO audit" compact />
+        <LeadForm id="hero" title="Get your free growth audit" compact />
       </div>
     </div>
   </section>
 
-  <section class="strip" aria-label="Platforms we work with">
+  <section class="strip" aria-label="Industries we work with">
     <div class="wrap strip__in">
-      <span>Platforms we build and grow on</span>
-      <ul>{platforms.map((p) => <li>{p}</li>)}</ul>
+      <span>Built for local service businesses</span>
+      <ul>{industries.map((p) => <li>{p}</li>)}</ul>
     </div>
   </section>
 
@@ -70,8 +70,8 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
     <div class="wrap">
       <div class="head head--center">
         <span class="eyebrow">Sound familiar?</span>
-        <h2>Your website should be your best salesperson. Is it?</h2>
-        <p class="lead">Most business owners we talk to are dealing with at least one of these.</p>
+        <h2>Your competitors are getting the calls you should be getting</h2>
+        <p class="lead">Most local business owners we talk to are dealing with at least one of these.</p>
       </div>
       <div class="grid grid-4">
         {pains.map((p) => (
@@ -91,8 +91,8 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">What we do</span>
-        <h2>Everything you need to win online, under one roof</h2>
-        <p class="lead">Start with one service or combine them. Every plan is built around one goal: more enquiries and sales for your business.</p>
+        <h2>Everything you need to win your local market</h2>
+        <p class="lead">Start with one service or stack them. Every sprint is built around one goal: more calls, booked jobs and revenue.</p>
       </div>
       <div class="grid grid-3">
         {services.map((s) => (
@@ -105,8 +105,8 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
         ))}
         <a href="/free-audit" class="card svc svc--cta reveal">
           <h3>Not sure where to start?</h3>
-          <p>Tell us about your business and we’ll recommend the right mix, for free.</p>
-          <span class="svc__more">Get a free audit <Icon name="arrow" /></span>
+          <p>Tell us about your business and market, and we’ll recommend the right sprints for free.</p>
+          <span class="svc__more">Get a free growth audit <Icon name="arrow" /></span>
         </a>
       </div>
     </div>
@@ -116,9 +116,9 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
   <section class="section section--night">
     <div class="wrap">
       <div class="head">
-        <span class="eyebrow">Why Kimi</span>
-        <h2>The agency you wished you hired the first time</h2>
-        <p class="lead">We started Kimi because too many businesses were burned by agencies that overpromised, hid behind jargon and locked them in. Here’s what we do differently.</p>
+        <span class="eyebrow">Why Web Frontier</span>
+        <h2>The marketing partner you wished you hired the first time</h2>
+        <p class="lead">Too many local business owners have paid agencies for months without knowing what they got. We built Web Frontier around sprints so you always see the plan, the work and the results.</p>
       </div>
       <div class="grid grid-4 promises">
         {promises.map((p) => (
@@ -129,9 +129,9 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
           </div>
         ))}
       </div>
-      <div class="compare reveal" role="table" aria-label="Typical agency compared with Kimi">
+      <div class="compare reveal" role="table" aria-label="Typical agency compared with Web Frontier">
         <div class="compare__row compare__row--head" role="row">
-          <span role="columnheader">Typical agency</span><span role="columnheader">Kimi Web Solutions</span>
+          <span role="columnheader">Typical agency</span><span role="columnheader">Web Frontier</span>
         </div>
         {compare.map(([them, us]) => (
           <div class="compare__row" role="row">
@@ -148,7 +148,7 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
     <div class="wrap">
       <div class="head head--center">
         <span class="eyebrow">How it works</span>
-        <h2>From first call to more customers in 4 simple steps</h2>
+        <h2>From free audit to more booked jobs in 4 steps</h2>
       </div>
       <ol class="steps">
         {process.map((p, i) => (
@@ -168,11 +168,11 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
     <div class="wrap">
       <div class="head">
         <span class="eyebrow">Results</span>
-        <h2>Real businesses, measurable growth</h2>
-        <p class="lead">We measure success by calls, bookings and sales, not just rankings.</p>
+        <h2>Local businesses, measurable growth</h2>
+        <p class="lead">We measure success by calls, booked jobs and revenue, not just rankings.</p>
       </div>
       <CaseStudies />
-      <div class="center"><a class="btn btn--secondary" href="/work">See more of our work <Icon name="arrow" /></a></div>
+      <div class="center"><a class="btn btn--secondary" href="/work">See more results <Icon name="arrow" /></a></div>
     </div>
   </section>
 
@@ -186,20 +186,21 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
     </div>
   </section>
 
-  <!-- Pricing teaser -->
+  <!-- Sprints -->
   <section class="section section--surface">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">Transparent pricing</span>
-        <h2>Know what you’ll pay before we start</h2>
-        <p class="lead">No “contact us for pricing” runaround. Every project gets a fixed written quote.</p>
+        <span class="eyebrow">How sprints work</span>
+        <h2>No retainers that disappear into a black box</h2>
+        <p class="lead">Work happens in 30-day sprints with a written scope and fixed price. You see the plan before you pay and the deliverables after.</p>
       </div>
-      <div class="grid grid-3">
-        <a class="card teaser reveal" href="/pricing#websites"><span>Websites</span><strong>from ₱25,000</strong><small>one-time</small></a>
-        <a class="card teaser teaser--featured reveal" href="/pricing#seo"><span>SEO plans</span><strong>from ₱8,000</strong><small>per month, no lock-in</small></a>
-        <a class="card teaser reveal" href="/pricing#addons"><span>Website care & hosting</span><strong>from ₱2,500</strong><small>per month</small></a>
+      <SprintCycle />
+      <div class="grid grid-3 teasers">
+        <a class="card teaser reveal" href="/pricing#seo"><span>Foundation Sprint</span><strong>$997</strong><small>one-time, 30 days</small></a>
+        <a class="card teaser teaser--featured reveal" href="/pricing#bundles"><span>Monthly SEO sprints</span><strong>from $650</strong><small>per month, no contract</small></a>
+        <a class="card teaser reveal" href="/pricing#websites"><span>Website Launch Sprint</span><strong>from $2,500</strong><small>one-time, live in ~30 days</small></a>
       </div>
-      <div class="center"><a class="btn btn--secondary" href="/pricing">Compare all plans <Icon name="arrow" /></a></div>
+      <div class="center"><a class="btn btn--secondary" href="/pricing">See all sprints & pricing <Icon name="arrow" /></a></div>
     </div>
   </section>
 
@@ -239,7 +240,7 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
   .strip__in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 20px; padding-bottom: 20px; }
   .strip span { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
   .strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0; padding: 0; }
-  .strip li { font-family: var(--font-display); font-weight: 700; color: #94a3b8; font-size: 1.02rem; }
+  .strip li { font-family: var(--font-display); font-weight: 700; color: #8291a5; font-size: 1.02rem; }
 
   .icon-badge--warn { background: #fff1e6; color: #c2570c; }
   .bridge { text-align: center; margin: 40px 0 0; font-size: 1.12rem; color: var(--ink); font-weight: 600; }
@@ -280,6 +281,7 @@ const platforms = ['WordPress', 'Shopify', 'WooCommerce', 'Google Ads', 'Google 
 
   .center { text-align: center; margin-top: 40px; }
 
+  .teasers { margin-top: 24px; }
   .teaser { text-decoration: none; color: var(--muted); text-align: center; display: grid; gap: 4px; transition: border-color .15s ease; }
   .teaser:hover { border-color: var(--brand); color: var(--muted); }
   .teaser span { font-weight: 600; color: var(--ink); }

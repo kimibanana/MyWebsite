@@ -1,48 +1,42 @@
 // Every business detail the site shows lives here.
 // Items marked TODO are placeholders waiting on real info.
 
+const whatsappNumber = '639063813194';
+
 export const site = {
-  name: 'Kimi Web Solutions',
-  shortName: 'Kimi',
-  tagline: 'SEO & websites that bring in customers',
+  name: 'Web Frontier',
+  tagline: 'SEO, websites & ads that fill your calendar',
   description:
-    'Kimi Web Solutions builds fast, conversion-focused websites and runs SEO that gets Philippine businesses found on Google. Transparent pricing, monthly reports, no lock-in contracts.',
-  url: 'https://kimiwebsolutions.com', // TODO: real domain
-  email: 'hello@kimiwebsolutions.com', // TODO
-  phone: '+63 900 000 0000', // TODO
-  phoneHref: 'tel:+639000000000', // TODO
-  viber: 'viber://chat?number=%2B639000000000', // TODO
-  whatsapp: 'https://wa.me/639000000000', // TODO
-  messenger: 'https://m.me/kimiwebsolutions', // TODO
-  hours: 'Mon–Fri, 9:00 AM – 6:00 PM (PHT)', // TODO
-  address: {
-    locality: 'Laguna', // TODO: city
-    region: 'Calabarzon',
-    country: 'PH',
-    countryName: 'Philippines',
-  },
-  areaServed: ['Philippines', 'Worldwide (remote)'],
+    'Web Frontier helps local businesses in the US, UK, Canada and Australia get more calls and booked jobs from Google, with SEO, websites, Google Ads and Local Services Ads delivered in fixed-price 30-day sprints.',
+  url: 'https://webfrontier.co', // TODO: real domain
+  email: 'hello@webfrontier.co', // TODO
+  whatsappDisplay: '+63 906 381 3194',
+  whatsapp: `https://wa.me/${whatsappNumber}`,
+  phoneHref: `tel:+${whatsappNumber}`,
+  bookingUrl: '/contact', // TODO: Calendly or Google Calendar booking link
+  hours: 'Mon–Fri, working in US, UK & AU hours',
+  markets: ['United States', 'United Kingdom', 'Canada', 'Australia'],
+  marketCodes: ['US', 'GB', 'CA', 'AU'],
   founded: '2024', // TODO
   social: {
-    facebook: 'https://facebook.com/kimiwebsolutions', // TODO
-    linkedin: 'https://linkedin.com/company/kimiwebsolutions', // TODO
-    instagram: '', // TODO (optional)
+    linkedin: '', // TODO
+    facebook: '', // TODO
   },
   // Form handling. Works out of the box on Netlify. For other hosts, set a
   // Formspree (or similar) endpoint here and it will be used instead.
   formEndpoint: '', // e.g. 'https://formspree.io/f/xxxxxxx'
-  // Stats are hidden until real numbers are filled in (see Stats component).
+  // Stats are hidden until real numbers are filled in.
   stats: [
-    { value: '', label: 'Websites launched' }, // TODO
-    { value: '', label: 'Keywords on page 1' }, // TODO
+    { value: '', label: 'Leads generated for clients' }, // TODO
+    { value: '', label: 'Keywords ranked on page 1' }, // TODO
     { value: '', label: 'Average client rating' }, // TODO
   ],
 };
 
 export const nav = [
   { label: 'Services', href: '/services' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Our Work', href: '/work' },
+  { label: 'Sprints & Pricing', href: '/pricing' },
+  { label: 'Results', href: '/work' },
   { label: 'About', href: '/about' },
   { label: 'Contact', href: '/contact' },
 ];

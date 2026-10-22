@@ -6,28 +6,28 @@ import Faq from '../components/Faq.astro';
 import Icon from '../components/Icon.astro';
 
 const youGet = [
+  { title: 'Google Business Profile review', body: 'How your profile compares to the three businesses in the Map Pack.' },
+  { title: 'Ranking snapshot', body: 'Where you rank today, across your service area, for the jobs you want.' },
   { title: 'Technical health check', body: 'Speed, mobile usability, indexing and errors that block Google.' },
-  { title: 'Ranking snapshot', body: 'Where you rank today for the searches that matter to your business.' },
   { title: 'Competitor comparison', body: 'Why your top competitors outrank you, and how to catch up.' },
-  { title: 'Conversion review', body: 'What stops visitors from calling, booking or buying.' },
-  { title: 'Your 3 biggest fixes', body: 'A short, prioritized list you can act on, with or without us.' },
+  { title: 'Your 3 biggest fixes', body: 'A short, prioritized list you can act on, with or without us, plus the sprints we’d recommend.' },
 ];
 const faqs = [
   { q: 'Is it really free?', a: 'Yes. No credit card, no catch. We do it because many people who see what is possible decide to work with us, but there is no obligation.' },
   { q: 'What if I don’t have a website yet?', a: 'We will review your Google presence and competitors instead, and recommend what kind of website you need.' },
-  { q: 'How do I receive the audit?', a: 'We send a short video walkthrough or hop on a 15-minute call, whichever you prefer, within 2 business days.' },
+  { q: 'How do I receive the audit?', a: 'We send a short recorded video walkthrough, or meet on a 15-minute call in your time zone, within 2 business days.' },
 ];
 ---
 <Base
-  title="Free SEO & Website Audit | Kimi Web Solutions"
-  description="Get a free SEO and website audit from a real specialist. See your technical issues, rankings, competitors and your 3 biggest fixes within 2 business days."
+  title="Free Local Growth Audit | Web Frontier"
+  description="Get a free growth audit of your website, Google Business Profile, rankings and competitors from a real specialist. Your 3 biggest fixes in 2 business days."
 >
   <section class="lp">
     <div class="wrap lp__in">
       <div>
         <span class="eyebrow">Free · No obligation</span>
-        <h1>Find out why your website isn’t bringing in customers</h1>
-        <p class="lead">A real SEO specialist (not an automated tool) will review your website and Google presence, then show you exactly what to fix first.</p>
+        <h1>Find out why your competitors are getting the calls</h1>
+        <p class="lead">A real local SEO specialist (not an automated tool) will review your website, Google Business Profile and competitors, then show you exactly what to fix first.</p>
         <ul class="get">
           {youGet.map((g) => (
             <li><Icon name="check" /><span><strong>{g.title}.</strong> {g.body}</span></li>
@@ -35,12 +35,12 @@ const faqs = [
         </ul>
         <p class="note"><Icon name="clock" />Delivered within 2 business days</p>
       </div>
-      <LeadForm id="audit" title="Request your free audit" button="Send me my free audit" />
+      <LeadForm id="audit" title="Request your free growth audit" button="Send me my free audit" />
     </div>
   </section>
   <section class="section section--surface">
     <div class="wrap">
-      <div class="head head--center"><h2>Business owners who started with a free audit</h2></div>
+      <div class="head head--center"><h2>Business owners who started with a free growth audit</h2></div>
       <Testimonials />
     </div>
   </section>

@@ -1,157 +1,188 @@
-// Pricing, proof and FAQs. Prices are suggested starting points (TODO: confirm).
+// Sprints, pricing, proof and FAQs. Prices are suggested starting points (TODO: confirm).
 
-export const pricing = {
-  websites: [
-    {
-      name: 'Starter Website',
-      price: '₱25,000',
-      cadence: 'one-time',
-      blurb: 'For new businesses that need a professional site, fast.',
-      features: [
-        'Up to 5 pages',
-        'Mobile-first custom design',
-        'Contact form + chat buttons',
-        'Basic on-page SEO',
-        'Google Analytics & Search Console',
-        '30 days of free support',
-      ],
-      cta: 'Start my website',
-      featured: false,
-    },
-    {
-      name: 'Growth Website',
-      price: '₱55,000',
-      cadence: 'one-time',
-      blurb: 'Our most popular: a lead-generating site with SEO built in.',
-      features: [
-        'Up to 12 pages',
-        'Conversion-focused copywriting',
-        'Service & location pages for SEO',
-        'Schema markup + speed optimization',
-        'Blog setup with 2 starter articles',
-        'Google Business Profile setup',
-        '60 days of free support',
-      ],
-      cta: 'Get the Growth site',
-      featured: true,
-    },
-    {
-      name: 'E-commerce Store',
-      price: '₱45,000+',
-      cadence: 'one-time',
-      blurb: 'Shopify or WooCommerce with local payments.',
-      features: [
-        'Custom storefront design',
-        'Up to 50 products uploaded',
-        'GCash, Maya, card & COD',
-        'Shipping and courier setup',
-        'Product SEO',
-        'Store training',
-      ],
-      cta: 'Plan my store',
-      featured: false,
-    },
-  ],
-  seo: [
-    {
-      name: 'Local SEO',
-      price: '₱8,000',
-      cadence: '/month',
-      blurb: 'Win the Google Maps pack in your city.',
-      features: [
-        'Google Business Profile optimization',
-        'Citations and NAP cleanup',
-        'Review generation system',
-        'Weekly GBP posts',
-        'Monthly local ranking report',
-      ],
-      cta: 'Rank locally',
-      featured: false,
-    },
-    {
-      name: 'SEO Growth',
-      price: '₱15,000',
-      cadence: '/month',
-      blurb: 'Consistent rankings, traffic and leads.',
-      features: [
-        'Technical SEO fixes',
-        'Up to 20 target keywords',
-        '2 SEO articles per month',
-        'On-page optimization',
-        'Link building',
-        'Monthly report + strategy call',
-      ],
-      cta: 'Grow my traffic',
-      featured: true,
-    },
-    {
-      name: 'SEO Authority',
-      price: '₱30,000',
-      cadence: '/month',
-      blurb: 'For competitive industries and national reach.',
-      features: [
-        'Everything in SEO Growth',
-        'Up to 50 target keywords',
-        '4 SEO articles per month',
-        'Digital PR link building',
-        'Conversion rate optimization',
-        'Bi-weekly calls',
-      ],
-      cta: 'Dominate my market',
-      featured: false,
-    },
-  ],
-  addons: [
-    { name: 'Website Care & Hosting', price: 'from ₱2,500/mo' },
-    { name: 'Google Ads Management', price: 'from ₱12,000/mo' },
-    { name: 'In-depth SEO Audit', price: '₱9,500 one-time' },
-    { name: 'Extra SEO article', price: '₱2,500 each' },
-  ],
+export type Sprint = {
+  name: string;
+  icon: string;
+  price: string;
+  cadence: string;
+  blurb: string;
+  deliverables: string[];
+  featured?: boolean;
+  cta: string;
 };
+
+// Every engagement starts here.
+export const foundationSprint: Sprint = {
+  name: 'Foundation Sprint',
+  icon: 'flag',
+  price: '$997',
+  cadence: 'one-time · 30 days',
+  blurb: 'Fix what’s holding you back and get a clear 90-day roadmap. Every SEO engagement starts here.',
+  deliverables: [
+    'Tracking setup: GA4, Search Console, call tracking',
+    'Full website quality audit (technical, on-page, content)',
+    'Technical and on-page fixes implemented',
+    'Google Business Profile optimization',
+    'Top 30 citations built and cleaned up',
+    'Competitor and keyword map',
+    'Prioritized 90-day sprint roadmap',
+  ],
+  cta: 'Start my Foundation Sprint',
+};
+
+// Stack one or more after the Foundation Sprint.
+export const monthlySprints: Sprint[] = [
+  {
+    name: 'Local Sprint',
+    icon: 'pin',
+    price: '$650',
+    cadence: '/month',
+    blurb: 'Climb the Map Pack and build reviews.',
+    deliverables: [
+      'Weekly Google Business Profile posts',
+      'Review request system + responses',
+      '10 new citations or local links',
+      'Map Pack rank grid tracking',
+      'GBP Q&A and photo updates',
+    ],
+    cta: 'Add Local Sprint',
+  },
+  {
+    name: 'Content Sprint',
+    icon: 'file',
+    price: '$900',
+    cadence: '/month',
+    blurb: 'Pages that rank for the jobs you want.',
+    deliverables: [
+      '4 service, city or blog pages',
+      'Keyword targeting from your map',
+      'Internal linking + schema',
+      'Refresh of 1 underperforming page',
+      'Published and indexed for you',
+    ],
+    featured: true,
+    cta: 'Add Content Sprint',
+  },
+  {
+    name: 'Authority Sprint',
+    icon: 'link',
+    price: '$1,200',
+    cadence: '/month',
+    blurb: 'Earn the links that move rankings.',
+    deliverables: [
+      '6–8 relevant, white-hat backlinks',
+      'Local PR and partnership outreach',
+      'Link gap analysis vs. competitors',
+      'Anchor text and toxic link review',
+      'Live link report',
+    ],
+    cta: 'Add Authority Sprint',
+  },
+  {
+    name: 'Ads Sprint',
+    icon: 'target',
+    price: '$750',
+    cadence: '/month + ad spend',
+    blurb: 'Google Ads and Local Services Ads, managed for cost per lead.',
+    deliverables: [
+      'Google Ads and/or LSA management',
+      'Conversion and call tracking',
+      'Weekly search term cleanup',
+      'Ad and landing page testing',
+      'LSA lead disputes',
+    ],
+    cta: 'Add Ads Sprint',
+  },
+];
+
+// Pre-built stacks for people who don't want to choose.
+export const bundles = [
+  { name: 'Local Starter', sprints: 'Local Sprint', price: '$650/mo', note: 'Best for one location in a smaller market' },
+  { name: 'Local Growth', sprints: 'Local + Content', price: '$1,450/mo', note: 'Most popular: Map Pack plus organic pages', featured: true },
+  { name: 'Market Leader', sprints: 'Local + Content + Authority', price: '$2,500/mo', note: 'For competitive cities and multi-location businesses' },
+];
+
+export const webPackages: Sprint[] = [
+  {
+    name: 'Launch Sprint',
+    icon: 'layout',
+    price: '$2,500',
+    cadence: 'one-time · 30 days',
+    blurb: 'A fast, conversion-focused site for a single-location business.',
+    deliverables: [
+      'Up to 8 pages',
+      'Custom mobile-first design',
+      'Click-to-call + quote forms',
+      'On-page SEO + schema',
+      'GA4, Search Console, call tracking',
+      '30 days of post-launch support',
+    ],
+    cta: 'Plan my website',
+  },
+  {
+    name: 'Growth Site Sprint',
+    icon: 'layout',
+    price: '$4,500',
+    cadence: 'one-time · 30–45 days',
+    blurb: 'An SEO-led site with service and city pages built to rank.',
+    deliverables: [
+      'Up to 20 pages',
+      'Conversion copywriting',
+      'Service + location page system',
+      'Reviews and booking integrations',
+      'Redirect mapping from your old site',
+      '60 days of post-launch support',
+    ],
+    featured: true,
+    cta: 'Plan my website',
+  },
+];
+
+export const carePlans = [
+  { name: 'Care', price: '$99/mo', features: ['Hosting, SSL, backups', 'Updates and security', '30 min of edits / month'] },
+  { name: 'Care Plus', price: '$199/mo', features: ['Everything in Care', '2 hrs of edits / month', 'Monthly speed + SEO health check'] },
+];
 
 // Proof. Entries marked placeholder render with a "Sample" label and should be
 // replaced with real clients before launch.
 export const caseStudies = [
   {
     placeholder: true,
+    client: 'Roofing company',
+    location: 'Dallas, TX',
+    service: 'Local SEO + LSA',
+    challenge: 'Relied on shared leads from lead-gen platforms; invisible in the Map Pack outside one suburb.',
+    solution: 'Foundation Sprint, then Local and Content sprints with city pages, plus Local Services Ads setup.',
+    results: [
+      { value: '3.2×', label: 'more calls from Google' },
+      { value: 'Top 3', label: 'Map Pack in 9 suburbs' },
+      { value: '−38%', label: 'cost per lead' },
+    ],
+  },
+  {
+    placeholder: true,
     client: 'Dental clinic',
-    location: 'Laguna',
-    industry: 'Healthcare',
-    service: 'Local SEO + Website',
-    challenge: 'Not visible on Google Maps; most patients came from walk-ins and referrals.',
-    solution: 'New mobile-first website, Google Business Profile optimization and a review request system.',
+    location: 'Sydney, AU',
+    service: 'Web Design + Local SEO',
+    challenge: 'Outdated site with a confusing booking process and few new-patient enquiries.',
+    solution: 'Growth Site Sprint with online booking, treatment pages and a review system.',
     results: [
-      { value: '3×', label: 'more calls from Google' },
-      { value: 'Top 3', label: 'in the Maps pack' },
-      { value: '120+', label: 'new reviews' },
+      { value: '+64%', label: 'new patient bookings' },
+      { value: '1.8s', label: 'mobile load time' },
+      { value: '140+', label: 'new Google reviews' },
     ],
   },
   {
     placeholder: true,
-    client: 'Home furniture brand',
-    location: 'Metro Manila',
-    industry: 'E-commerce',
-    service: 'Shopify Store + SEO',
-    challenge: 'Selling only through Facebook chat; orders were hard to track and margins were thin.',
-    solution: 'Shopify store with GCash and card payments, product SEO and abandoned cart emails.',
+    client: 'HVAC contractor',
+    location: 'Toronto, CA',
+    service: 'Google Ads',
+    challenge: 'Spending heavily on ads with no call tracking and a rising cost per lead.',
+    solution: 'Rebuilt campaigns, added call tracking and a dedicated landing page; weekly Ads Sprint optimization.',
     results: [
-      { value: '42%', label: 'of sales now online-direct' },
-      { value: '2.1s', label: 'mobile load time' },
-      { value: '+180%', label: 'organic traffic in 6 months' },
-    ],
-  },
-  {
-    placeholder: true,
-    client: 'B2B logistics company',
-    location: 'Cavite',
-    industry: 'Logistics',
-    service: 'SEO Growth',
-    challenge: 'Outdated website and zero organic leads; relied entirely on sales cold calls.',
-    solution: 'Technical SEO overhaul, service pages for each route and monthly content.',
-    results: [
-      { value: '35', label: 'keywords on page 1' },
-      { value: '+240%', label: 'organic leads' },
-      { value: '₱0', label: 'extra ad spend' },
+      { value: '+112%', label: 'tracked leads' },
+      { value: '−41%', label: 'cost per lead' },
+      { value: '6.4×', label: 'return on ad spend' },
     ],
   },
 ];
@@ -159,68 +190,76 @@ export const caseStudies = [
 export const testimonials = [
   {
     placeholder: true,
-    quote: 'They explained everything in plain language and we finally understand what our marketing budget is doing. Calls from Google have tripled.',
+    quote: 'For the first time I know exactly what my marketing company did each month. The phone rings more and I stopped buying shared leads.',
     name: 'Client name',
-    role: 'Owner, Dental clinic',
+    role: 'Owner, Roofing company, Texas',
   },
   {
     placeholder: true,
-    quote: 'Our old site was slow and nobody used the contact form. The new one gets enquiries every week, and they replied to every question within the day.',
+    quote: 'They rebuilt our site in a month and new patient bookings went up straight away. Easy to work with and always quick to reply.',
     name: 'Client name',
-    role: 'Marketing Manager, Logistics company',
+    role: 'Practice Manager, Dental clinic, Sydney',
   },
   {
     placeholder: true,
-    quote: 'No lock-in, clear monthly reports, and real results. Exactly what we wanted from an agency.',
+    quote: 'The sprint model is brilliant. Clear scope, clear price, clear results. No more paying a retainer and hoping.',
     name: 'Client name',
-    role: 'Founder, E-commerce brand',
+    role: 'Founder, HVAC company, Ontario',
   },
 ];
 
 export const homeFaqs = [
   {
-    q: 'How much does a website or SEO cost?',
-    a: 'Websites start at ₱25,000 one-time and SEO plans start at ₱8,000 per month. Every project gets a fixed written quote before we start, so there are no surprise fees. See our pricing page for full details.',
+    q: 'What is a sprint?',
+    a: 'A sprint is 30 days of focused work with a written scope, fixed price and delivery date. Week 1 we plan, weeks 2–3 we execute, and week 4 we deliver a report showing exactly what was done and what moved. You choose which sprints to run next.',
   },
   {
-    q: 'Do you lock clients into long contracts?',
-    a: 'No. Website projects are one-time fees. SEO plans have a 3-month starting period (SEO needs time to show results fairly), then they are month-to-month. We keep clients by getting results, not with contracts.',
+    q: 'Why sprints instead of a normal retainer?',
+    a: 'With a typical retainer you pay every month and hope something happens. With sprints you see the deliverables before you pay and the results after. You can add, pause or swap sprints as your business changes.',
   },
   {
-    q: 'How soon will I see results?',
-    a: 'Google Ads can bring leads within days. A new website usually launches in 3–4 weeks. SEO typically shows ranking movement in 6–8 weeks and meaningful lead growth in 3–6 months.',
+    q: 'Do you lock clients into contracts?',
+    a: 'No. The Foundation Sprint is a one-time project. Monthly sprints are month-to-month; we keep clients by delivering, not with contracts.',
   },
   {
-    q: 'Will I own my website, domain and accounts?',
-    a: 'Always. Your domain, hosting, website files, Google Analytics and ad accounts are registered in your name. If you ever leave, you take everything with you.',
+    q: 'Will I own my website and accounts?',
+    a: 'Always. Your domain, hosting, website, Google Business Profile, Analytics and ad accounts are in your name. If you ever leave, you keep everything.',
   },
   {
-    q: 'I’m not technical. Will I understand what you are doing?',
-    a: 'Yes. We explain things in plain language, send a simple monthly report, and you always have a direct line to the person working on your account.',
+    q: 'Where is your team based, and what hours do you work?',
+    a: 'We are a remote team serving local businesses in the US, UK, Canada and Australia. We schedule calls in your time zone and reply within one business day.',
   },
   {
-    q: 'Do you work with businesses outside the Philippines?',
-    a: 'Yes. We are based in the Philippines and work with clients locally and abroad, with meetings scheduled around your time zone.',
+    q: 'What kinds of businesses do you work with?',
+    a: 'Local service businesses: home services like HVAC, plumbing, roofing and electrical, dental and medical clinics, law firms, med spas, and contractors.',
   },
 ];
 
 export const process = [
-  { title: 'Free audit & call', body: 'We review your website, rankings and competitors, then walk you through what we found. No obligation.' },
-  { title: 'Clear plan & quote', body: 'You get a written plan with fixed pricing, timelines and the results we are aiming for.' },
-  { title: 'We build & optimize', body: 'Our team does the work, with progress updates so you always know where things stand.' },
-  { title: 'Report & grow', body: 'Monthly reports in plain language, and a strategy that improves as the data comes in.' },
+  { title: 'Free growth audit', body: 'We review your site, Google Business Profile, rankings and competitors, then walk you through what we found. No obligation.' },
+  { title: 'Foundation Sprint', body: '30 days to fix the technical issues, set up tracking and build your 90-day roadmap.' },
+  { title: 'Monthly sprints', body: 'Stack the sprints that fit your goals: Local, Content, Authority or Ads. Each has a fixed scope and price.' },
+  { title: 'Report & next sprint', body: 'Every sprint ends with a plain-language report. We review the data together and plan the next one.' },
+];
+
+export const sprintCycle = [
+  { week: 'Week 1', title: 'Plan', body: 'Agree on the sprint scope, targets and deliverables.' },
+  { week: 'Weeks 2–3', title: 'Execute', body: 'Our specialists do the work, with progress updates.' },
+  { week: 'Week 4', title: 'Deliver & report', body: 'You get a report of what shipped and what moved.' },
 ];
 
 export const pains = [
-  { icon: 'eye-off', title: 'Invisible on Google', body: 'Customers search for what you sell every day, and find your competitors instead.' },
-  { icon: 'hourglass', title: 'A website that just sits there', body: 'It looks okay, but it does not bring in calls, bookings or sales.' },
-  { icon: 'question', title: 'No idea what you are paying for', body: 'Past agencies sent vague reports, long contracts and no real results.' },
-  { icon: 'wallet', title: 'Ads that burn cash', body: 'You pay for clicks every day, and the leads stop the moment you stop paying.' },
+  { icon: 'eye-off', title: 'Invisible on Google Maps', body: 'Customers in your area search every day, and call the three businesses on the map instead of you.' },
+  { icon: 'wallet', title: 'Paying for shared leads', body: 'Lead platforms sell the same homeowner to five competitors, and the price keeps going up.' },
+  { icon: 'question', title: 'Retainers with no visibility', body: 'You pay every month, get a vague report, and can’t tell what was actually done.' },
+  { icon: 'hourglass', title: 'A website that just sits there', body: 'It looks okay, but it doesn’t make the phone ring.' },
 ];
 
 export const promises = [
-  { icon: 'file', title: 'Fixed, written quotes', body: 'Know the full price before we start. No hidden fees.' },
-  { icon: 'unlock', title: 'No lock-in contracts', body: 'Month-to-month SEO after the starting period.' },
-  { icon: 'key', title: 'You own everything', body: 'Domain, site, accounts and data stay in your name.' },
-  { icon: 'chart', title: 'Plain-language reports', body: 'Leads, rankings and what we did, every month.' },
+  { icon: 'file', title: 'Fixed scope, fixed price', body: 'Every sprint is written down before we start.' },
+  { icon: 'unlock', title: 'No long-term contracts', body: 'Month-to-month sprints. Pause or swap anytime.' },
+  { icon: 'key', title: 'You own everything', body: 'Site, profiles, accounts and data stay in your name.' },
+  { icon: 'chart', title: 'Results you can see', body: 'Calls, leads and rankings reported every sprint.' },
 ];
+
+export const industries = ['HVAC', 'Plumbing', 'Roofing', 'Electrical', 'Dental', 'Law firms', 'Med spas', 'Contractors', 'Cleaning', 'Pest control'];

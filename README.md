@@ -1,6 +1,6 @@
-# Kimi Web Solutions website
+# Web Frontier website
 
-Marketing site for Kimi Web Solutions, an SEO and web design agency in the Philippines.
+Marketing site for Web Frontier, a Local SEO, web design and Google Ads agency for local service businesses in the US, UK, Canada and Australia. Services are sold as fixed-price 30-day sprints.
 Built with [Astro](https://astro.build) as a static site: fast, secure, and SEO-friendly, with no database or plugins to maintain.
 
 ## Pages
@@ -9,21 +9,21 @@ Built with [Astro](https://astro.build) as a static site: fast, secure, and SEO-
 | --- | --- |
 | Home | `/` |
 | Services overview | `/services` |
-| Service pages (7) | `/services/seo`, `/services/local-seo`, `/services/web-design`, `/services/ecommerce`, `/services/google-ads`, `/services/website-care`, `/services/website-audit` |
-| Pricing | `/pricing` |
-| Our work (case studies) | `/work` |
+| Service pages (5) | `/services/local-seo`, `/services/web-design`, `/services/google-ads`, `/services/local-services-ads`, `/services/website-care` |
+| Sprints & pricing | `/pricing` |
+| Results (case studies) | `/work` |
 | About | `/about` |
 | Contact | `/contact` |
-| Free SEO audit landing page | `/free-audit` |
+| Free growth audit landing page | `/free-audit` |
 | Thank you, privacy, 404 | `/thank-you`, `/privacy`, `/404` |
 
 ## Editing content
 
 Almost everything you will want to change lives in three files:
 
-- `src/data/site.ts`: business name, phone, email, Messenger/Viber/WhatsApp links, hours, location, social links, stats, form endpoint.
+- `src/data/site.ts`: business name, WhatsApp, email, booking link, hours, markets served, social links, stats, form endpoint.
 - `src/data/services.ts`: each service page (headline, pain points, what's included, starting price, FAQs, SEO title and description).
-- `src/data/content.ts`: pricing plans, case studies, testimonials, homepage FAQs, process steps.
+- `src/data/content.ts`: sprints and pricing (Foundation Sprint, monthly sprints, bundles, website sprints, care plans), case studies, testimonials, FAQs, process steps, industries.
 
 Search the code for `TODO` to find every placeholder. Case studies and testimonials marked `placeholder: true` show a "Sample" label; replace them with real clients and set `placeholder: false` (or remove the line).
 

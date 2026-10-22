@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://kimiwebsolutions.com/sitemap-index.xml
+Sitemap: https://webfrontier.co/sitemap-index.xml
