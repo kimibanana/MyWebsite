@@ -117,8 +117,20 @@ const schema = [
             <li><Icon name="check" />Google rankings and Maps</li>
             <li><Icon name="check" />What ChatGPT and AI search say about you</li>
           </ul>
-          <a class="btn btn--primary btn--block" href="/free-audit">Get my free audit</a>
-          <p class="audit__note">Free, no obligation. Or <a href={site.whatsapp} target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
+          <form class="audit__form" name="free-audit" method="POST" action={site.formEndpoint || '/thank-you'} data-netlify={site.formEndpoint ? undefined : 'true'} netlify-honeypot="company_url">
+            <input type="hidden" name="form-name" value="free-audit" />
+            <p class="sr-only"><label>Leave this empty <input name="company_url" tabindex="-1" autocomplete="off" /></label></p>
+            <label class="sr-only" for="sp-name">Your name</label>
+            <input id="sp-name" name="name" autocomplete="name" placeholder="Your name" required />
+            <label class="sr-only" for="sp-email">Email</label>
+            <input id="sp-email" name="email" type="email" autocomplete="email" placeholder="Email" required />
+            <label class="sr-only" for="sp-site">Clinic website</label>
+            <input id="sp-site" name="website" inputmode="url" placeholder="Clinic website (if you have one)" />
+            <label class="sr-only" for="sp-msg">What would you like help with?</label>
+            <textarea id="sp-msg" name="message" rows="2" placeholder="What would you like help with?"></textarea>
+            <button class="btn btn--primary btn--block" type="submit">Get my free audit</button>
+          </form>
+          <p class="audit__note">Free, no obligation. Please don’t include patient details. Or <a href={site.whatsapp} target="_blank" rel="noopener">message us on WhatsApp</a>.</p>
         </div>
       </aside>
     </div>
@@ -154,9 +166,17 @@ const schema = [
   .audit__card { padding: 24px; border: 1px solid var(--line); border-top: 4px solid var(--brand); border-radius: var(--radius-lg); background: var(--card); box-shadow: var(--shadow); }
   .audit__kicker { font-size: 0.85rem; font-weight: 600; color: var(--brand-text); }
   .audit__title { font-family: var(--font-display); font-weight: 700; font-size: 1.25rem; line-height: 1.25; letter-spacing: -0.01em; color: var(--ink); margin: 6px 0 16px; }
-  .audit__list { list-style: none; padding: 0; margin: 0 0 20px; display: grid; gap: 10px; font-size: 0.93rem; color: var(--ink-2); }
+  .audit__list { list-style: none; padding: 0; margin: 0 0 18px; display: grid; gap: 10px; font-size: 0.93rem; color: var(--ink-2); }
   .audit__list li { display: flex; gap: 10px; align-items: flex-start; line-height: 1.45; }
   .audit__list :global(svg) { width: 18px; height: 18px; flex: none; margin-top: 1px; color: var(--brand-text); }
+  .audit__form { display: grid; gap: 10px; }
+  /* Keep the whole sticky panel on screen on shorter laptop displays */
+  @media (max-height: 820px) { .audit__list { display: none; } .audit__title { margin-bottom: 14px; } }
+  .audit__form input, .audit__form textarea { font: inherit; font-size: 0.95rem; color: var(--ink); width: 100%; min-height: 44px; padding: 10px 12px; border: 1px solid #c9d3dd; border-radius: var(--radius); background: var(--card); }
+  .audit__form textarea { min-height: 64px; resize: vertical; }
+  .audit__form input:focus, .audit__form textarea:focus { outline: none; border-color: var(--brand); box-shadow: 0 0 0 3px var(--brand-tint); }
+  .audit__form .btn { margin-top: 4px; }
+  :global([data-theme='dark']) .audit__form input, :global([data-theme='dark']) .audit__form textarea { border-color: var(--line); }
   .audit__note { font-size: 0.85rem; color: var(--muted); margin: 12px 0 0; text-align: center; }
 
   .article { max-width: 760px; font-size: 1.06rem; }
