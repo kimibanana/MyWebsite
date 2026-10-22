@@ -4,58 +4,44 @@ import PageHero from '../components/PageHero.astro';
 import Icon from '../components/Icon.astro';
 import CtaBand from '../components/CtaBand.astro';
 import { site } from '../data/site';
-import { specialties } from '../data/content';
+import { industryGroups, specialties } from '../data/content';
 
 const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
-// What growth looks like in each specialty.
-const detail: Record<string, { focus: string; wins: string[] }> = {
-  'Hospitals & medical centers': { focus: 'Grow departments and specialty centers with search visibility for every service and doctor.', wins: ['Department and doctor profile pages', 'Google Maps for every branch', 'Campaigns for high-value services'] },
-  'Diagnostics & laboratories': { focus: 'Be the lab or imaging center patients and doctors find first, with clear tests, prices and branches.', wins: ['Test and package pages', 'Branch-level local SEO', 'Online booking and home-service requests'] },
-  'Fertility & IVF': { focus: 'Reach couples early in a long, emotional research journey with sensitive, trustworthy content.', wins: ['Treatment and success-rate pages', 'Consultation funnels', 'Privacy-first tracking'] },
-  'Weight loss & wellness': { focus: 'Promote programs and treatments within strict health-claim and ad-platform rules.', wins: ['Compliant program pages', 'Policy-safe Google Ads', 'Consultation booking'] },
-  'Eye care & ophthalmology': { focus: 'Fill the schedule for eye exams, LASIK, cataract and specialist care.', wins: ['Procedure pages', 'Map Pack for every clinic', 'Procedure campaigns'] },
-  'Dental & orthodontics': { focus: 'Fill the schedule with new patients and grow high-value treatments like implants, Invisalign and cosmetic dentistry.', wins: ['“Dentist near me” Map Pack rankings', 'Implant and Invisalign landing pages', 'Emergency dental ads'] },
-  'Aesthetic & med spa clinics': { focus: 'Book more consultations for injectables, lasers and body treatments while staying inside ad platform policies.', wins: ['Treatment pages with before-and-after galleries', 'Policy-compliant Google Ads', 'Online consultation booking'] },
-  'Dermatology': { focus: 'Attract both medical and cosmetic patients with content patients and Google trust.', wins: ['Condition pages reviewed by your dermatologists', 'Cosmetic treatment campaigns', 'Multi-provider profiles'] },
-  'Plastic & cosmetic surgery': { focus: 'Reach high-intent patients researching procedures and turn them into consultations.', wins: ['Procedure pages and galleries', 'Surgeon credential and review signals', 'Consultation funnels'] },
-  'Chiropractic': { focus: 'Become the go-to chiropractor in your area for back pain, injuries and wellness care.', wins: ['Local SEO for each condition', 'Local Services Ads where eligible', 'New-patient offer pages'] },
-  'Physical therapy & rehab': { focus: 'Compete with national chains for local patients and physician referrals.', wins: ['Location and condition pages', 'Review generation across clinics', 'Direct-access patient campaigns'] },
-  'Primary care & family clinics': { focus: 'Be the first clinic people find when they need care today.', wins: ['Map Pack visibility for every location', 'Wait-time and hours accuracy', 'Service and insurance pages'] },
-  'Mental health & therapy': { focus: 'Help people find the right therapist with sensitive, privacy-first marketing.', wins: ['Specialty and modality pages', 'Privacy-conscious tracking', 'Therapist profile optimization'] },
-};
 ---
 <Base
   title="Healthcare Specialties We Serve | Philippines & Worldwide | Web Frontier"
-  description="Web Frontier markets dental, aesthetic, dermatology, plastic surgery, hospitals, diagnostics, fertility and other healthcare providers in the Philippines and worldwide."
+  description="Healthcare marketing for GP clinics, hospitals, allied health, NDIS and aged care, aesthetics, cosmetic surgery, dental, fertility, diagnostics, pharmacy, veterinary and more, in the Philippines and worldwide."
 >
   <PageHero
     eyebrow="Specialties"
     title="Built for every corner of healthcare"
-    lead="We work only with healthcare providers, from single-doctor clinics to hospitals, in the Philippines and around the world."
+    lead={`We work only with healthcare: ${specialties.length} industries, from single-doctor clinics to hospitals, in the Philippines and around the world.`}
     crumbs={[{ label: 'Specialties' }]}
   >
     <nav class="jump" aria-label="Jump to">
-      <a href="#specialties">Specialties</a><a href="#locations">Philippines & worldwide</a>
+      {industryGroups.map((g) => <a href={`#${slug(g.title)}`}>{g.title}</a>)}<a href="#locations">Philippines & worldwide</a>
     </nav>
   </PageHero>
 
-  <section class="section" id="specialties">
-    <div class="wrap">
-      <div class="head"><span class="eyebrow">Medical specialties</span><h2>Marketing for every kind of practice</h2></div>
-      <div class="grid grid-2">
-        {specialties.map((s) => (
-          <article class="card spec reveal" id={slug(s.name)}>
-            <div class="spec__head"><span class="icon-badge"><Icon name={s.icon} /></span><h3>{s.name}</h3></div>
-            <p>{detail[s.name]?.focus}</p>
-            <ul class="checks">{detail[s.name]?.wins.map((w) => <li>{w}</li>)}</ul>
-          </article>
-        ))}
+  {industryGroups.map((g, gi) => (
+    <section class:list={['section', { 'section--surface': gi % 2 === 1 }]} id={slug(g.title)}>
+      <div class="wrap">
+        <div class="head"><span class="eyebrow">Industries</span><h2>{g.title}</h2></div>
+        <div class="grid grid-3">
+          {g.items.map((s) => (
+            <article class="card spec reveal" id={slug(s.name)}>
+              <div class="spec__head"><span class="icon-badge"><Icon name={s.icon} /></span><h3>{s.name}</h3></div>
+              <p>{s.focus}</p>
+              {s.sub && <ul class="chips chips--sm">{s.sub.map((x) => <li>{x}</li>)}</ul>}
+            </article>
+          ))}
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  ))}
 
-  <section class="section section--surface" id="locations">
+  <section class="section" id="locations">
     <div class="wrap locals">
       <div class="reveal">
         <span class="eyebrow">Philippines & worldwide</span>
@@ -90,10 +76,12 @@ const detail: Record<string, { focus: string; wins: string[] }> = {
   .spec__head .icon-badge { margin: 0; flex: none; }
   .spec__head h3 { margin: 0; }
   .spec .checks { font-size: 0.95rem; }
-  #specialties, #locations { scroll-margin-top: 70px; }
+  section[id] { scroll-margin-top: 70px; }
   .locals { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
   @media (max-width: 860px) { .locals { grid-template-columns: 1fr; } }
   .locals .card h3 { font-size: 1.05rem; }
+  .chips--sm { margin: 4px 0 0 !important; }
+  .chips--sm li { padding: 4px 10px !important; font-size: 0.8rem !important; }
   .chips { list-style: none; margin: 0 0 24px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
   .chips li { padding: 8px 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: 0.92rem; color: var(--ink); }
 </style>

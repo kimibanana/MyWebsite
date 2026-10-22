@@ -4,10 +4,11 @@ import PageHero from '../../components/PageHero.astro';
 import Icon from '../../components/Icon.astro';
 import CtaBand from '../../components/CtaBand.astro';
 import { services } from '../../data/services';
+import { capabilityGroups } from '../../data/content';
 ---
 <Base
-  title="Medical Marketing Services | SEO, Websites, Google Ads & LSA | Web Frontier"
-  description="Medical SEO, practice website design, Google Ads, Local Services Ads and website maintenance for clinics, hospitals and practices in the Philippines and worldwide. Fixed-price 30-day sprints."
+  title="Healthcare Marketing Services | SEO, Websites, Google & Meta Ads | Web Frontier"
+  description="Medical SEO, website design, landing pages, Google Ads, Meta Ads, CRO, Local Services Ads and more for clinics, hospitals and practices in the Philippines and worldwide. Fixed-price 30-day sprints."
 >
   <PageHero
     eyebrow="Services"
@@ -36,11 +37,38 @@ import { services } from '../../data/services';
       ))}
     </div>
   </section>
+  <section class="section section--surface" id="all">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Full capabilities</span><h2>Everything we do for healthcare</h2><p class="lead">Beyond our core services, we handle the rest of your marketing too. Ask us to add any of these to a sprint.</p></div>
+      <div class="caps">
+        {capabilityGroups.map((g) => (
+          <div class="card reveal">
+            <div class="caps__head"><span class="icon-badge"><Icon name={g.icon} /></span><h3>{g.title}</h3></div>
+            <dl>
+              {g.items.map((c) => (
+                <div><dt>{c.href ? <a href={c.href}>{c.name}</a> : c.name}</dt><dd>{c.body}</dd></div>
+              ))}
+            </dl>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
   <CtaBand title="Not sure which service you need?" text="Tell us your goals and market, and we’ll recommend the simplest set of sprints to get you there. Free, no obligation." />
 </Base>
 
 <style>
   .list { display: grid; gap: 20px; }
+  #all { scroll-margin-top: 70px; }
+  .caps { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  @media (max-width: 760px) { .caps { grid-template-columns: 1fr; } }
+  .caps__head { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .caps__head .icon-badge { margin: 0; flex: none; }
+  .caps__head h3 { margin: 0; }
+  .caps dl { margin: 0; display: grid; gap: 12px; }
+  .caps dt { font-weight: 700; color: var(--ink); }
+  .caps dt a { color: var(--brand-text); }
+  .caps dd { margin: 2px 0 0; font-size: 0.93rem; color: var(--muted); }
   .row { display: grid; grid-template-columns: auto 1fr auto; gap: 28px; padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
   .row h2 { font-size: 1.5rem; }
   .row .checks { grid-template-columns: 1fr 1fr; font-size: 0.95rem; }

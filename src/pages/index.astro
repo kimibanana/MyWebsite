@@ -9,7 +9,7 @@ import SprintCycle from '../components/SprintCycle.astro';
 import Dashboard from '../components/Dashboard.astro';
 import { site } from '../data/site';
 import {
-  homeFaqs, pains, framework, specialties, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
+  homeFaqs, pains, framework, specialties, industryGroups, capabilityGroups, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
 } from '../data/content';
 
 const stats = site.stats.filter((s) => s.value);
@@ -57,7 +57,7 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   <section class="strip" aria-label="Specialties we serve">
     <div class="wrap strip__in">
       <span>Built for</span>
-      <ul>{specialties.map((s) => <li>{s.name}</li>)}</ul>
+      <ul>{['GP clinics', 'Hospitals', 'Allied health', 'Dental', 'Aesthetics', 'Cosmetic surgery', 'Dermatology', 'Fertility & IVF', 'Diagnostics', 'Aged care', 'Pharmacy', 'Veterinary'].map((n) => <li>{n}</li>)}</ul>
     </div>
   </section>
 
@@ -138,6 +138,28 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
     </div>
   </section>
 
+  <!-- Full capabilities -->
+  <section class="section">
+    <div class="wrap">
+      <div class="head head--center">
+        <span class="eyebrow">Full-service healthcare marketing</span>
+        <h2>Everything your clinic needs, under one roof</h2>
+        <p class="lead">Start with one channel or bring it all together. Every service runs in the same fixed-scope 30-day sprints.</p>
+      </div>
+      <div class="caps">
+        {capabilityGroups.map((g) => (
+          <div class="card caps__col reveal">
+            <div class="caps__head"><span class="icon-badge"><Icon name={g.icon} /></span><h3>{g.title}</h3></div>
+            <ul>
+              {g.items.map((c) => <li>{c.href ? <a href={c.href}>{c.name}</a> : c.name}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+      <div class="center"><a class="btn btn--secondary" href="/services">See all services <Icon name="arrow" /></a></div>
+    </div>
+  </section>
+
   <!-- Results -->
   <section class="section section--surface">
     <div class="wrap">
@@ -159,13 +181,16 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
         <h2>Built for every corner of healthcare</h2>
         <p class="lead">Every specialty has different patients, search behavior and rules. Our process adapts to yours, from single-doctor clinics to hospitals.</p>
       </div>
-      <div class="specs">
-        {specialties.map((s) => (
-          <a class="spec reveal" href={`/who-we-serve#${slug(s.name)}`}>
-            <span class="spec__icon"><Icon name={s.icon} /></span>
-            {s.name}
-            <Icon name="arrow" class="spec__arrow" />
-          </a>
+      <div class="ind">
+        {industryGroups.map((g) => (
+          <div class="ind__col reveal">
+            <h3>{g.title}</h3>
+            <ul>
+              {g.items.map((s) => (
+                <li><a href={`/who-we-serve#${slug(s.name)}`}><Icon name={s.icon} />{s.name}</a></li>
+              ))}
+            </ul>
+          </div>
         ))}
       </div>
       <div class="center"><a class="btn btn--primary" href="#growth-audit">Help me get more patients <Icon name="arrow" /></a></div>
@@ -350,6 +375,23 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   .pillar__more { display: inline-flex; align-items: center; gap: 6px; color: #5fd3cf; font-weight: 700; font-size: 0.92rem; }
   .pillar__more :global(svg) { width: 16px; height: 16px; }
 
+  .ind { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1080px) { .ind { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .ind { grid-template-columns: 1fr; } }
+  .ind__col { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
+  .ind__col h3 { font-size: 1.05rem; margin-bottom: 12px; }
+  .ind__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+  .ind__col a { display: flex; align-items: center; gap: 10px; padding: 7px 0; color: var(--ink); text-decoration: none; font-size: 0.94rem; font-weight: 500; }
+  .ind__col a:hover { color: var(--brand-text); }
+  .ind__col :global(svg) { width: 16px; height: 16px; color: var(--brand-text); flex: none; }
+  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 1080px) { .caps { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .caps { grid-template-columns: 1fr; } }
+  .caps__head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+  .caps__head .icon-badge { margin: 0; flex: none; }
+  .caps__head h3 { margin: 0; font-size: 1.1rem; }
+  .caps__col ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 0.94rem; color: var(--ink); }
+  .caps__col a { color: var(--brand-text); font-weight: 600; }
   .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
   @media (max-width: 960px) { .specs { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 520px) { .specs { grid-template-columns: 1fr; } }
