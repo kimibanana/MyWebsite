@@ -362,10 +362,10 @@ export const complianceSteps = [
 ];
 
 export const whyUs = [
-  { icon: 'heart', title: '100% healthcare', body: 'We only work with clinics, hospitals and practices, so we know how patients choose a provider and the rules that come with it.' },
-  { icon: 'clock', title: 'A decade of experience', body: '10+ years of SEO, web and ads work, with a team that already speaks your specialty’s language.' },
-  { icon: 'file', title: 'Fixed-scope sprints', body: 'Every 30-day sprint has a written scope, fixed price and delivery report. No black-box retainers.' },
-  { icon: 'users', title: 'Direct access', body: 'Talk to the specialists doing the work, with regular calls to review progress and results.' },
+  { icon: 'heart', title: 'Only healthcare', body: 'We know how patients choose care, and the rules that protect them.' },
+  { icon: 'shield', title: 'Compliance built in', body: 'Every page and ad is checked against your country’s health advertising rules.' },
+  { icon: 'file', title: 'Clear 30-day sprints', body: 'A written plan, a fixed price and a report you can actually read.' },
+  { icon: 'users', title: 'Real people', body: 'Talk directly to the specialists doing the work.' },
 ];
 
 export const consultation = [
@@ -424,10 +424,9 @@ export const sprintCycle = [
 ];
 
 export const pains = [
-  { icon: 'eye-off', title: 'Invisible on Google Maps', body: 'Patients nearby search every day and book with the three practices on the map instead of you.' },
-  { icon: 'wallet', title: 'Dependent on directories', body: 'Insurance directories and referral sites control your patient flow, and your competitors are listed right beside you.' },
-  { icon: 'question', title: 'Retainers with no visibility', body: 'You pay every month, get a vague report, and can’t tell what was actually done.' },
-  { icon: 'hourglass', title: 'A website that doesn’t book', body: 'It looks fine, but patients still call to ask basic questions, or don’t call at all.' },
+  { icon: 'eye-off', title: 'Hard to find', body: 'Patients nearby search, but book with the clinics they see first.' },
+  { icon: 'question', title: 'Unclear marketing', body: 'You pay every month and still can’t tell what was done.' },
+  { icon: 'hourglass', title: 'A site that doesn’t book', body: 'Visitors leave with questions instead of appointments.' },
 ];
 
 export const promises = [

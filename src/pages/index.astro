@@ -3,28 +3,23 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import LeadForm from '../components/LeadForm.astro';
 import Faq from '../components/Faq.astro';
-import CtaBand from '../components/CtaBand.astro';
 import CaseStudies from '../components/CaseStudies.astro';
 import SprintCycle from '../components/SprintCycle.astro';
-import Dashboard from '../components/Dashboard.astro';
+import HeroSlideshow from '../components/HeroSlideshow.astro';
+import ResourceCard from '../components/ResourceCard.astro';
 import { site } from '../data/site';
 import { priceHtml } from '../lib/price';
-import ResourceCard from '../components/ResourceCard.astro';
 import { getResources } from '../lib/resources';
-import {
-  homeFaqs, pains, framework, specialties, industryGroups, capabilityGroups, whyUs, consultation, testimonials, complianceFrameworks, complianceSteps,
-} from '../data/content';
+import { homeFaqs, pains, framework, whyUs, consultation } from '../data/content';
 
-const stats = site.stats.filter((s) => s.value);
+const faqs = homeFaqs.slice(0, 5);
 const latestGuides = (await getResources()).slice(0, 3);
-const intlMarkets = site.markets.filter((m) => m !== 'Philippines');
-const featured = testimonials[0];
 const faqSchema = {
   '@context': 'https://schema.org',
   '@type': 'FAQPage',
-  mainEntity: homeFaqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  mainEntity: faqs.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
 };
-const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+const builtFor = ['Clinics', 'Hospitals', 'Dental', 'Aesthetics', 'Allied health', 'Diagnostics', 'Fertility', 'Aged care'];
 ---
 <Base
   title="Medical Marketing Agency Philippines & Worldwide | Healthcare SEO, Websites & Ads | Web Frontier"
@@ -35,297 +30,137 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   <section class="hero pattern">
     <div class="wrap hero__in">
       <div class="hero__copy">
-        <span class="eyebrow">Medical marketing agency · Philippines & worldwide</span>
-        <h1>More patients. More calls. <span class="hl">More bookings.</span></h1>
-        <p class="lead">A healthcare-only marketing agency for clinics, hospitals and practices in the Philippines and around the world. We bring in patients with medical SEO, websites and Google Ads, delivered in fixed-price 30‑day sprints.</p>
+        <span class="eyebrow">Healthcare marketing · Philippines & worldwide</span>
+        <h1>Helping more patients find the care they need</h1>
+        <p class="lead">We help clinics and hospitals get found, trusted and booked online, so you can spend your time on patients, not marketing.</p>
         <div class="btn-row hero__ctas">
-          <a class="btn btn--primary" href="#growth-audit">Get my free growth audit <Icon name="arrow" /></a>
-          <a class="btn btn--secondary" href="/pricing">What to expect</a>
+          <a class="btn btn--primary" href="#growth-audit">Get a free growth audit <Icon name="arrow" /></a>
+          <a class="btn btn--secondary" href="/services">How we help</a>
         </div>
         <ul class="hero__points">
-          <li><Icon name="check" />No long-term contracts</li>
-          <li><Icon name="check" />Healthcare compliance built in</li>
-          <li><Icon name="check" />You own every account</li>
+          <li><Icon name="heart" />100% healthcare</li>
+          <li><Icon name="shield" />Compliance built in</li>
+          <li><Icon name="unlock" />No long contracts</li>
         </ul>
-        <dl class="hero__stats">
-          <div><dt>100%</dt><dd>Healthcare focus</dd></div>
-          <div><dt>{site.experience}</dt><dd>In SEO, web & ads</dd></div>
-          <div><dt>30 days</dt><dd>Per fixed-scope sprint</dd></div>
-          {stats.map((s) => <div><dt>{s.value}</dt><dd>{s.label}</dd></div>)}
-        </dl>
       </div>
-      <Dashboard />
+      <HeroSlideshow />
     </div>
   </section>
 
-  <section class="strip" aria-label="Specialties we serve">
+  <section class="strip" aria-label="Who we help">
     <div class="wrap strip__in">
       <span>Built for</span>
-      <ul>{['GP clinics', 'Hospitals', 'Allied health', 'Dental', 'Aesthetics', 'Cosmetic surgery', 'Dermatology', 'Fertility & IVF', 'Diagnostics', 'Aged care', 'Pharmacy', 'Veterinary'].map((n) => <li>{n}</li>)}</ul>
+      <ul>{builtFor.map((n) => <li>{n}</li>)}</ul>
     </div>
   </section>
 
-  <!-- Problem -->
+  <!-- Empathy -->
   <section class="section">
-    <div class="wrap problem">
-      <div class="reveal">
-        <span class="eyebrow">The landscape has changed</span>
-        <h2>Is your practice keeping up with how patients choose a provider?</h2>
-        <p>Patients don’t start with a referral list anymore. They search Google, compare the three practices on the map, read reviews, and book with whoever looks most trustworthy and easiest to reach.</p>
-        <p>Most agencies respond with a vague monthly retainer and a report full of numbers that never become patients. Healthcare adds another layer: ad policies, privacy rules and content standards most generalists don’t understand.</p>
-        <p>We built Web Frontier to fix that: one connected system for getting found, chosen, booked and trusted, delivered in sprints you can actually see.</p>
-        <a class="btn btn--primary" href="#growth-audit">Book a free consultation <Icon name="arrow" /></a>
+    <div class="wrap">
+      <div class="head head--center reveal">
+        <span class="eyebrow">We understand</span>
+        <h2>Your days are full of patients. Marketing shouldn’t add to the load.</h2>
+        <p class="lead">Most clinics we meet are doing great work that patients simply can’t find. We fix that, calmly and clearly.</p>
       </div>
-      <div class="pains reveal">
+      <div class="grid grid-3">
         {pains.map((p) => (
-          <div class="pain">
-            <span class="pain__icon"><Icon name={p.icon} /></span>
-            <div><h3>{p.title}</h3><p>{p.body}</p></div>
+          <div class="soft reveal">
+            <span class="soft__icon"><Icon name={p.icon} /></span>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Specialist, not generalist -->
+  <!-- How we help -->
   <section class="section section--surface">
-    <div class="wrap specialist">
-      <div class="reveal">
-        <span class="eyebrow">Specialist, not generalist</span>
-        <h2>We only do healthcare. That’s the point.</h2>
-        <p class="lead">A generalist agency learns medical marketing on your budget. Ads get disapproved, treatment claims cross regulator lines, and patient data ends up in the wrong tools.</p>
-        <p>We work only with clinics, hospitals and practices. We already know how patients search for your treatments, what Google and Meta will and won’t approve, and what the FDA, DOH and regulators abroad expect from health advertising.</p>
-      </div>
-      <ul class="vs reveal">
-        <li class="vs__row vs__head"><span></span><strong>Generalist agency</strong><strong>Web Frontier</strong></li>
-        <li class="vs__row"><span>Knows your specialty</span><span>Learns as it goes</span><span><Icon name="check" />From day one</span></li>
-        <li class="vs__row"><span>Healthcare ad policies</span><span>Disapprovals and appeals</span><span><Icon name="check" />Built to pass</span></li>
-        <li class="vs__row"><span>Treatment claims</span><span>Copied from competitors</span><span><Icon name="check" />Reviewed for compliance</span></li>
-        <li class="vs__row"><span>Patient privacy</span><span>Standard tracking</span><span><Icon name="check" />Health data kept out</span></li>
-        <li class="vs__row"><span>What you pay for</span><span>Open-ended retainer</span><span><Icon name="check" />Fixed-scope sprints</span></li>
-      </ul>
-    </div>
-  </section>
-
-  <!-- Featured testimonial -->
-  <section class="section--tight quote-band">
-    <div class="wrap">
-      <figure class="bigquote reveal">
-        <blockquote>“{featured.quote}”</blockquote>
-        <figcaption>
-          <strong>{featured.name}</strong>, {featured.role}
-          {featured.placeholder && <span class="tag tag--sample">Sample</span>}
-        </figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- Framework -->
-  <section class="section section--night">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Our framework</span>
-        <h2>The Patient Growth Framework</h2>
-        <p class="lead"><strong>Four channels, one system.</strong> Most practices pay for one channel and wonder why it stalls. We connect all four so each makes the others work harder.</p>
-      </div>
-      <div class="grid grid-4">
-        {framework.map((f, i) => (
-          <a class="pillar reveal" href={f.href}>
-            <span class="pillar__n">0{i + 1}</span>
-            <span class="pillar__icon"><Icon name={f.icon} /></span>
-            <h3>{f.title}</h3>
-            <p>{f.body}</p>
-            <span class="pillar__more">Learn more <Icon name="arrow" /></span>
-          </a>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Full capabilities -->
-  <section class="section">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">Full-service healthcare marketing</span>
-        <h2>Everything your clinic needs, under one roof</h2>
-        <p class="lead">Start with one channel or bring it all together. Every service runs in the same fixed-scope 30-day sprints.</p>
+        <span class="eyebrow">How we help</span>
+        <h2>One simple path from search to booking</h2>
       </div>
-      <div class="caps">
-        {capabilityGroups.map((g) => (
-          <div class="card caps__col reveal">
-            <div class="caps__head"><span class="icon-badge"><Icon name={g.icon} /></span><h3>{g.title}</h3></div>
-            <ul>
-              {g.items.map((c) => <li>{c.href ? <a href={c.href}>{c.name}</a> : c.name}</li>)}
-            </ul>
-          </div>
+      <ol class="path">
+        {framework.map((f, i) => (
+          <li class="reveal">
+            <span class="path__n">{i + 1}</span>
+            <h3>{f.title}</h3>
+            <p>{f.body}</p>
+            <a href={f.href} aria-label={`Learn more: ${f.title}`}>Learn more <Icon name="arrow" /></a>
+          </li>
         ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- Why us -->
+  <section class="section">
+    <div class="wrap why">
+      <div class="reveal">
+        <span class="eyebrow">Why clinics choose us</span>
+        <h2>Specialists in healthcare, and only healthcare</h2>
+        <p class="lead">We work with {site.experience} of experience across clinics in the Philippines, the US, the UK, Australia and beyond.</p>
+        <a class="btn btn--secondary" href="/about">Meet the team <Icon name="arrow" /></a>
       </div>
-      <div class="center"><a class="btn btn--secondary" href="/services">See all services <Icon name="arrow" /></a></div>
+      <ul class="why__list">
+        {whyUs.map((w) => (
+          <li class="reveal">
+            <span class="soft__icon"><Icon name={w.icon} /></span>
+            <div><h3>{w.title}</h3><p>{w.body}</p></div>
+          </li>
+        ))}
+      </ul>
     </div>
   </section>
 
   <!-- Results -->
   <section class="section section--surface">
     <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Real results</span>
+      <div class="head head--center">
+        <span class="eyebrow">Results</span>
         <h2>Measured in patients, not page views</h2>
-        <p class="lead">We report on new-patient calls, bookings and cost per patient, because that’s what grows a practice.</p>
       </div>
       <CaseStudies />
       <div class="center"><a class="btn btn--secondary" href="/work">See more results <Icon name="arrow" /></a></div>
     </div>
   </section>
 
-  <!-- Specialties -->
-  <section class="section">
-    <div class="wrap">
-      <div class="head head--center">
-        <span class="eyebrow">Specialties</span>
-        <h2>Built for every corner of healthcare</h2>
-        <p class="lead">Every specialty has different patients, search behavior and rules. Our process adapts to yours, from single-doctor clinics to hospitals.</p>
-      </div>
-      <div class="ind">
-        {industryGroups.map((g) => (
-          <div class="ind__col reveal">
-            <h3>{g.title}</h3>
-            <ul>
-              {g.items.map((s) => (
-                <li><a href={`/who-we-serve#${slug(s.name)}`}><Icon name={s.icon} />{s.name}</a></li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-      <div class="center"><a class="btn btn--primary" href="#growth-audit">Help me get more patients <Icon name="arrow" /></a></div>
-    </div>
-  </section>
-
-  <!-- Why us -->
-  <section class="section section--surface">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Why Web Frontier?</span>
-        <h2>Marketing built for practices, not for agency reports</h2>
-        <p class="lead">You’re busy treating patients. We focus on the one number that matters to you: new patients booked, at a cost that makes sense.</p>
-      </div>
-      <div class="grid grid-4">
-        {whyUs.map((w) => (
-          <div class="card reveal">
-            <div class="icon-badge"><Icon name={w.icon} /></div>
-            <h3>{w.title}</h3>
-            <p>{w.body}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Sprints -->
+  <!-- How we work -->
   <section class="section">
     <div class="wrap">
       <div class="head head--center">
         <span class="eyebrow">How we work</span>
-        <h2>30-day sprints instead of black-box retainers</h2>
-        <p class="lead" set:html={priceHtml('Start with a one-time Foundation Sprint ($997), then stack monthly sprints from $650.') + ` Every sprint has a written scope, a fixed price and a delivery report. Partner with us for 12 months and save 15% on every monthly sprint.`} />
+        <h2>Calm, clear 30-day sprints</h2>
+        <p class="lead" set:html={priceHtml('Start with a Foundation Sprint, then add monthly sprints from $650. No long contracts.')} />
       </div>
       <SprintCycle />
-      <div class="center"><a class="btn btn--secondary" href="/pricing">See sprints & pricing <Icon name="arrow" /></a></div>
-    </div>
-  </section>
-
-  <!-- Compliance -->
-  <section class="section section--night">
-    <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Healthcare compliance</span>
-        <h2>Medical marketing that understands the rules</h2>
-        <p class="lead">Health advertising is regulated differently in every country. Every sprint runs through our compliance review before anything goes live.</p>
-      </div>
-      <div class="comp">
-        <ol class="comp__steps">
-          {complianceSteps.map((c, i) => (
-            <li class="reveal"><span class="comp__n">{i + 1}</span><div><h3>{c.title}</h3><p>{c.body}</p></div></li>
-          ))}
-        </ol>
-        <div class="comp__rules reveal">
-          <h3>Rules we work with</h3>
-          <p class="comp__label">Philippines</p>
-          <ul>{complianceFrameworks.philippines.map((r) => <li>{r}</li>)}</ul>
-          <p class="comp__label">International</p>
-          <ul>{complianceFrameworks.global.map((r) => <li>{r}</li>)}</ul>
-          <p class="comp__note">We’re marketers, not lawyers. Your practice gives final approval on all clinical claims.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Location -->
-  <section class="section">
-    <div class="wrap where">
-      <div class="reveal">
-        <span class="eyebrow">Where we work</span>
-        <h2>Medical marketing agency in the Philippines, working worldwide</h2>
-        <p class="lead">Based in {site.map.label}, we help clinics and hospitals across the country win on Google Maps and search, and we serve practices abroad on their own time zone.</p>
-        <a class="btn btn--secondary" href="/contact">Book a call, wherever you are <Icon name="arrow" /></a>
-      </div>
-      <div class="where__lists reveal">
-        <div class="card">
-          <h3><Icon name="pin" />Across the Philippines</h3>
-          <ul class="chips">{site.phCities.map((c) => <li>{c}</li>)}</ul>
-        </div>
-        <div class="card">
-          <h3><Icon name="globe" />Around the world</h3>
-          <ul class="chips">{intlMarkets.map((m) => <li>{m}</li>)}</ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Let's work together -->
-  <section class="section section--surface" id="growth-audit">
-    <div class="wrap together">
-      <div class="reveal">
-        <span class="eyebrow">Free growth audit</span>
-        <h2>Let’s work together</h2>
-        <p class="lead">In a free consultation, we’ll review how patients find you today, where you’re losing them, and what to fix first.</p>
-        <ul class="benefits">
-          {consultation.map((c) => (
-            <li><Icon name="check" /><span><strong>{c.title}.</strong> {c.body}</span></li>
-          ))}
-        </ul>
-        <p class="together__note"><Icon name="whatsapp" />Prefer to chat? <a href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a>.</p>
-      </div>
-      <LeadForm id="home" title="Book your free growth audit" button="Book my free audit" compact />
+      <div class="center"><a class="btn btn--secondary" href="/pricing">See pricing <Icon name="arrow" /></a></div>
     </div>
   </section>
 
   <!-- Founder -->
-  <section class="section">
+  <section class="section section--surface">
     <div class="wrap founder">
       <div class="founder__photo" aria-hidden="true">{site.founder.initials}</div>
       <div class="reveal">
-        <span class="eyebrow">A message from our founder</span>
-        <!-- TODO: founder photo; confirm wording -->
-        <h2>Why we only do healthcare</h2>
-        <p>I’ve spent more than a decade in SEO, web design and paid search. The clients who needed good marketing most, and were served worst by it, were clinics: sold rankings and reports instead of patients, by agencies that didn’t understand medical ads or patient privacy.</p>
-        <p>So we stopped doing everything and chose one thing. Web Frontier only works with healthcare, in the Philippines and around the world. We tell you exactly what we’ll do, do it in 30 days, and show you the results in patients, not page views.</p>
-        <p class="founder__sign"><strong>{site.founder.name}</strong>, {site.founder.role}, Web Frontier</p>
-        <a class="btn btn--primary" href="#growth-audit">Let’s work together <Icon name="arrow" /></a>
+        <span class="eyebrow">From our founder</span>
+        <!-- TODO: founder photo -->
+        <blockquote>“Clinics do some of the most important work there is. We’re here to make sure the patients who need you can find you.”</blockquote>
+        <p class="founder__sign"><strong>{site.founder.name}</strong> · {site.founder.role}</p>
       </div>
     </div>
   </section>
 
-  <!-- Latest guides -->
+  <!-- Guides -->
   <section class="section">
     <div class="wrap">
-      <div class="head">
-        <span class="eyebrow">Resources</span>
-        <h2>Free guides for clinics</h2>
-        <p class="lead">How to rank in Google Maps, get cited by AI search and turn ads into booked patients.</p>
+      <div class="head head--center">
+        <span class="eyebrow">Free guides</span>
+        <h2>Learn at your own pace</h2>
       </div>
       <div class="grid grid-3">{latestGuides.map((r) => <ResourceCard r={r} />)}</div>
-      <div class="center"><a class="btn btn--secondary" href="/resources">See all guides <Icon name="arrow" /></a></div>
+      <div class="center"><a class="btn btn--secondary" href="/resources">All guides <Icon name="arrow" /></a></div>
     </div>
   </section>
 
@@ -333,142 +168,91 @@ const slug = (s: string) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0
   <section class="section section--surface">
     <div class="wrap">
       <div class="head head--center">
-        <span class="eyebrow">FAQ</span>
-        <h2>Questions practices ask us</h2>
+        <span class="eyebrow">Questions</span>
+        <h2>Good to know</h2>
       </div>
-      <Faq items={homeFaqs} />
+      <Faq items={faqs} />
     </div>
   </section>
 
-  <CtaBand title="Find out why patients are choosing your competitors" text="Get a free growth audit of your website, Google Business Profile and competitors. We’ll show you the 3 biggest fixes, whether you hire us or not." />
+  <!-- Free audit -->
+  <section class="section" id="growth-audit">
+    <div class="wrap together">
+      <div class="reveal">
+        <span class="eyebrow">Free growth audit</span>
+        <h2>Let’s see how patients find you today</h2>
+        <p class="lead">A friendly review of your online presence, with the three changes that would help most. No obligation.</p>
+        <ul class="benefits">
+          {consultation.slice(0, 3).map((c) => (
+            <li><Icon name="check" /><span>{c.title}</span></li>
+          ))}
+        </ul>
+        <p class="together__note"><Icon name="whatsapp" />Prefer to chat? <a href={site.whatsapp} target="_blank" rel="noopener">Message us on WhatsApp</a></p>
+      </div>
+      <LeadForm id="home" title="Book your free growth audit" button="Book my free audit" compact />
+    </div>
+  </section>
 </Base>
 
 <style>
-  .hero { padding: clamp(40px, 6vw, 80px) 0 clamp(48px, 7vw, 96px); background:
-    radial-gradient(60% 80% at 100% 0%, var(--brand-tint) 0%, transparent 70%),
-    linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%); }
-  .hero__in { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 5vw, 64px); align-items: center; }
-  .hero h1 { font-size: clamp(2.3rem, 5.4vw, 3.8rem); }
-  .hero h1 .hl { color: var(--brand-text); }
-  .hero__ctas { margin: 28px 0 22px; }
-  .hero__points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 8px 20px; }
-  .hero__points li { display: flex; gap: 8px; align-items: center; font-weight: 500; color: var(--ink); font-size: 0.95rem; }
-  .hero__points :global(svg) { width: 18px; height: 18px; color: var(--success); flex: none; }
-  .hero__stats { display: flex; flex-wrap: wrap; gap: 32px; margin: 32px 0 0; }
-  .hero__stats dt { font-family: var(--font-display); font-size: 1.9rem; font-weight: 800; color: var(--ink); }
-  .hero__stats dd { margin: 0; font-size: 0.88rem; color: var(--muted); }
-  @media (max-width: 960px) { .hero__in { grid-template-columns: 1fr; } }
+  .hero { padding: clamp(40px, 6vw, 88px) 0 clamp(56px, 7vw, 104px); background: radial-gradient(70% 90% at 100% 0%, var(--sage) 0%, transparent 70%), var(--bg); }
+  .hero__in { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(36px, 6vw, 80px); align-items: center; }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); max-width: 15ch; }
+  .hero .lead { max-width: 46ch; }
+  .hero__ctas { margin: 30px 0 26px; }
+  .hero__points { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero__points li { display: inline-flex; gap: 8px; align-items: center; padding: 7px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-size: 0.9rem; font-weight: 500; color: var(--ink); }
+  .hero__points :global(svg) { width: 16px; height: 16px; color: var(--brand-text); flex: none; }
+  @media (max-width: 960px) { .hero__in { grid-template-columns: 1fr; } .hero h1 { max-width: none; } }
 
-  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: var(--card); }
-  .strip__in { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; padding-top: 20px; padding-bottom: 20px; }
-  .strip span { font-size: 0.82rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); }
-  .strip ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 0; padding: 0; }
-  .strip li { font-family: var(--font-display); font-weight: 700; color: var(--muted-2); font-size: 1.02rem; }
+  .strip { border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .strip__in { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px 28px; padding-top: 22px; padding-bottom: 22px; }
+  .strip span { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted-2); }
+  .strip ul { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 26px; margin: 0; padding: 0; }
+  .strip li { font-family: var(--font-display); font-weight: 600; color: var(--muted); }
 
-  .problem { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-  .problem p { font-size: 1.06rem; }
-  .problem .btn { margin-top: 8px; }
-  @media (max-width: 960px) { .problem { grid-template-columns: 1fr; } }
-  .pains { display: grid; gap: 14px; }
-  .pain { display: flex; gap: 16px; padding: 20px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--card); }
-  .pain h3 { font-size: 1.08rem; margin-bottom: 4px; }
-  .pain p { margin: 0; font-size: 0.97rem; }
-  .pain__icon { flex: none; width: 42px; height: 42px; border-radius: 12px; background: var(--warn-icon-bg); color: var(--warn-fg); display: grid; place-items: center; }
-  .pain__icon :global(svg) { width: 20px; height: 20px; }
+  .soft { text-align: center; padding: 8px 12px; }
+  .soft h3 { margin: 18px 0 6px; }
+  .soft p { color: var(--muted); margin: 0 auto; max-width: 30ch; }
+  .soft__icon { width: 60px; height: 60px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-text); display: inline-grid; place-items: center; flex: none; }
+  .soft__icon :global(svg) { width: 26px; height: 26px; }
 
-  .quote-band { background: var(--brand); padding: clamp(40px, 6vw, 72px) 0; }
-  .bigquote { margin: 0 auto; max-width: 900px; text-align: center; color: #e6f4f3; }
-  .bigquote blockquote { margin: 0 0 18px; font-family: var(--font-display); font-weight: 700; font-size: clamp(1.3rem, 2.6vw, 1.9rem); line-height: 1.35; color: #fff; letter-spacing: -0.01em; }
-  .bigquote figcaption { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; }
-  .bigquote strong { color: #fff; }
+  .path { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; counter-reset: p; }
+  @media (max-width: 960px) { .path { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 560px) { .path { grid-template-columns: 1fr; } }
+  .path li { background: var(--card); border-radius: var(--radius-lg); padding: 30px 26px; display: flex; flex-direction: column; }
+  .path__n { width: 36px; height: 36px; border-radius: 50%; background: var(--brand); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-weight: 700; margin-bottom: 18px; }
+  .path h3 { margin-bottom: 6px; }
+  .path p { color: var(--muted); font-size: 0.98rem; flex: 1; }
+  .path a { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 0.95rem; text-decoration: none; }
+  .path a :global(svg) { width: 16px; height: 16px; }
 
-  .pillar { position: relative; display: flex; flex-direction: column; padding: 28px 24px; border-radius: var(--radius-lg); border: 1px solid rgb(255 255 255 / 0.1); background: var(--night-2); text-decoration: none; color: #a9b8c5; transition: border-color .15s ease; }
-  .pillar:hover { border-color: #5fd3cf; color: #a9b8c5; }
-  .pillar h3 { color: #fff; margin: 0 0 6px; }
-  .pillar p { flex: 1; font-size: 0.97rem; }
-  .pillar__n { position: absolute; top: 22px; right: 24px; font-family: var(--font-display); font-weight: 800; color: rgb(255 255 255 / 0.18); font-size: 1.4rem; }
-  .pillar__icon { width: 46px; height: 46px; border-radius: 12px; background: rgb(95 211 207 / 0.12); color: #5fd3cf; display: grid; place-items: center; margin-bottom: 18px; }
-  .pillar__icon :global(svg) { width: 22px; height: 22px; }
-  .pillar__more { display: inline-flex; align-items: center; gap: 6px; color: #5fd3cf; font-weight: 700; font-size: 0.92rem; }
-  .pillar__more :global(svg) { width: 16px; height: 16px; }
+  .why { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: clamp(36px, 6vw, 88px); align-items: center; }
+  @media (max-width: 960px) { .why { grid-template-columns: 1fr; } }
+  .why .btn { margin-top: 8px; }
+  .why__list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px 28px; }
+  @media (max-width: 560px) { .why__list { grid-template-columns: 1fr; } }
+  .why__list li { display: flex; gap: 16px; align-items: flex-start; }
+  .why__list .soft__icon { width: 48px; height: 48px; }
+  .why__list .soft__icon :global(svg) { width: 22px; height: 22px; }
+  .why__list h3 { font-size: 1.1rem; margin-bottom: 4px; }
+  .why__list p { margin: 0; color: var(--muted); font-size: 0.98rem; }
 
-  .ind { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  @media (max-width: 1080px) { .ind { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .ind { grid-template-columns: 1fr; } }
-  .ind__col { padding: 24px; border: 1px solid var(--line); border-radius: var(--radius-lg); background: var(--card); }
-  .ind__col h3 { font-size: 1.05rem; margin-bottom: 12px; }
-  .ind__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
-  .ind__col a { display: flex; align-items: center; gap: 10px; padding: 7px 0; color: var(--ink); text-decoration: none; font-size: 0.94rem; font-weight: 500; }
-  .ind__col a:hover { color: var(--brand-text); }
-  .ind__col :global(svg) { width: 16px; height: 16px; color: var(--brand-text); flex: none; }
-  .caps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-  @media (max-width: 1080px) { .caps { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 560px) { .caps { grid-template-columns: 1fr; } }
-  .caps__head { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
-  .caps__head .icon-badge { margin: 0; flex: none; }
-  .caps__head h3 { margin: 0; font-size: 1.1rem; }
-  .caps__col ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 0.94rem; color: var(--ink); }
-  .caps__col a { color: var(--brand-text); font-weight: 600; }
-  .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
-  @media (max-width: 960px) { .specs { grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 520px) { .specs { grid-template-columns: 1fr; } }
-  .spec { display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); text-decoration: none; color: var(--ink); font-weight: 600; background: var(--card); }
-  .spec:hover { border-color: var(--brand); color: var(--ink); }
-  .spec__icon { flex: none; width: 36px; height: 36px; border-radius: 10px; background: var(--brand-tint); color: var(--brand-text); display: grid; place-items: center; }
-  .spec__icon :global(svg) { width: 18px; height: 18px; }
-  .spec :global(.spec__arrow) { width: 16px; height: 16px; margin-left: auto; color: var(--brand-text); flex: none; }
-  .specialist { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-  @media (max-width: 960px) { .specialist { grid-template-columns: 1fr; } }
-  .vs { list-style: none; margin: 0; padding: 8px; border-radius: var(--radius-lg); background: var(--card); border: 1px solid var(--line); box-shadow: var(--shadow); }
-  .vs__row { display: grid; grid-template-columns: 1.1fr 1fr 1fr; gap: 12px; padding: 14px 16px; font-size: 0.93rem; color: var(--muted); border-bottom: 1px solid var(--line); align-items: center; }
-  .vs__row:last-child { border-bottom: 0; }
-  .vs__row > span:first-child { font-weight: 600; color: var(--ink); }
-  .vs__row > span:last-child { display: flex; gap: 6px; align-items: center; color: var(--ink); font-weight: 600; }
-  .vs__row :global(svg) { width: 16px; height: 16px; color: var(--success); flex: none; }
-  .vs__head strong { font-family: var(--font-display); font-size: 0.85rem; color: var(--muted); }
-  .vs__head strong:last-child { color: var(--brand-text); }
-  @media (max-width: 520px) { .vs__row { grid-template-columns: 1fr 1fr; } .vs__row > span:first-child, .vs__head span { grid-column: 1 / -1; } .vs__head span { display: none; } }
+  .center { text-align: center; margin-top: 44px; }
 
-  .comp { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: clamp(28px, 5vw, 56px); align-items: start; }
-  @media (max-width: 960px) { .comp { grid-template-columns: 1fr; } }
-  .comp__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
-  .comp__steps li { display: flex; gap: 16px; padding: 18px 20px; border-radius: var(--radius); background: var(--night-2); border: 1px solid rgb(255 255 255 / 0.08); }
-  .comp__steps h3 { color: #fff; font-size: 1.05rem; margin: 0 0 4px; }
-  .comp__steps p { margin: 0; color: #a9b8c5; font-size: 0.95rem; }
-  .comp__n { flex: none; width: 34px; height: 34px; border-radius: 50%; background: rgb(95 211 207 / 0.14); color: #5fd3cf; display: grid; place-items: center; font-weight: 800; font-family: var(--font-display); }
-  .comp__rules { padding: 26px; border-radius: var(--radius-lg); background: var(--night-2); border: 1px solid rgb(255 255 255 / 0.08); color: #a9b8c5; }
-  .comp__rules h3 { color: #fff; }
-  .comp__label { margin: 16px 0 8px; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #5fd3cf; }
-  .comp__rules ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 0.95rem; color: #dbe4ec; }
-  .comp__note { margin: 20px 0 0; font-size: 0.85rem; }
+  .founder { display: grid; grid-template-columns: 160px 1fr; gap: clamp(28px, 5vw, 56px); align-items: center; max-width: 900px; }
+  .founder__photo { width: 160px; height: 160px; border-radius: 50%; background: linear-gradient(135deg, var(--brand), #5fa9a0); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 3rem; font-weight: 700; }
+  .founder blockquote { margin: 0 0 16px; font-family: var(--font-display); font-weight: 600; font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.4; color: var(--ink); }
+  .founder__sign { color: var(--muted); margin: 0; }
+  .founder__sign strong { color: var(--ink); }
+  @media (max-width: 640px) { .founder { grid-template-columns: 1fr; text-align: center; } .founder__photo { width: 110px; height: 110px; font-size: 2rem; margin: 0 auto; } }
 
-  .where { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; }
-  @media (max-width: 960px) { .where { grid-template-columns: 1fr; } }
-  .where__lists { display: grid; gap: 16px; }
-  .where__lists h3 { display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
-  .where__lists h3 :global(svg) { width: 20px; height: 20px; color: var(--brand-text); }
-  .others { margin-top: 32px; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 32px; align-items: center; padding: clamp(24px, 4vw, 40px); border-radius: var(--radius-lg); background: var(--surface); }
-  .others h3 { font-size: 1.5rem; }
-  @media (max-width: 860px) { .others { grid-template-columns: 1fr; } }
-  .chips { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
-  .chips li { padding: 8px 14px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); font-weight: 600; font-size: 0.92rem; color: var(--ink); }
-
-  .center { text-align: center; margin-top: 40px; }
-
-  .together { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 72px); align-items: center; scroll-margin-top: 80px; }
+  .together { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(32px, 6vw, 80px); align-items: center; }
   @media (max-width: 960px) { .together { grid-template-columns: 1fr; } }
   #growth-audit { scroll-margin-top: 70px; }
-  .benefits { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 14px; }
-  .benefits li { display: flex; gap: 12px; }
-  .benefits :global(svg) { width: 22px; height: 22px; padding: 3px; border-radius: 50%; background: var(--brand); color: #fff; flex: none; margin-top: 2px; }
-  .benefits strong { color: var(--ink); }
+  .benefits { list-style: none; padding: 0; margin: 24px 0; display: grid; gap: 12px; }
+  .benefits li { display: flex; gap: 12px; align-items: center; color: var(--ink); font-weight: 500; }
+  .benefits :global(svg) { width: 22px; height: 22px; padding: 4px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-text); flex: none; }
   .together__note { display: flex; align-items: center; gap: 8px; color: var(--muted); }
   .together__note :global(svg) { width: 18px; height: 18px; color: var(--brand-text); }
-
-  .founder { display: grid; grid-template-columns: 240px 1fr; gap: clamp(28px, 5vw, 64px); align-items: center; max-width: 1000px; }
-  .founder__photo { width: 240px; height: 240px; border-radius: 28px; background: linear-gradient(135deg, var(--brand), var(--night)); color: #fff; display: grid; place-items: center; font-family: var(--font-display); font-size: 4rem; font-weight: 800; }
-  .founder p { font-size: 1.06rem; }
-  .founder__sign { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; color: var(--muted); }
-  .founder__sign strong { color: var(--ink); }
-  @media (max-width: 760px) { .founder { grid-template-columns: 1fr; } .founder__photo { width: 120px; height: 120px; font-size: 2.2rem; border-radius: 20px; } }
 </style>
